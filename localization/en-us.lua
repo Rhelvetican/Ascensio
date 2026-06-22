@@ -1551,6 +1551,13 @@ return {
                 },
             },
 
+            j_asc_demicolon = {
+                name = "Coactio Divina",
+                text = {
+                    "{C:attention}Force-trigger{} all jokers to the {C:attention}right{} of itself",
+                },
+            },
+
             -----Cryptid Mortals-----
 
             j_asc_copy_cat = {

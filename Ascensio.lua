@@ -282,6 +282,7 @@ AscensionInternal({ source = Source.Cryptid, from = "j_cry_CodeJoker", to_exotic
 AscensionInternal({ source = Source.Cryptid, from = "j_cry_circus", to_exotic = "j_asc_circus" })
 AscensionInternal({ source = Source.Cryptid, from = "j_cry_krustytheclown", to_exotic = "j_asc_krusty" })
 AscensionInternal({ source = Source.Cryptid, from = "j_cry_the", to_exotic = "j_asc_the" })
+AscensionInternal({ source = Source.Cryptid, from = "j_cry_demicolon", to_exotic = "j_asc_demicolon" })
 AscensionInternal({ source = Source.Cryptid, from = "j_cry_negative", to_exotic = "j_cry_tenebris", source_file = "skip", to_entropic = "j_entr_akyros", entropic_file = "skip" })
 
 -- Mortals for Cryptid Exotics
@@ -305,7 +306,6 @@ if next(SMODS.find_mod("Astronomica")) then
     AscensionInternal({ source = Source.Astronomica, from = "j_ast_stopwatch", to_exotic = "j_asc_stopwatch" })
 end
 
----@diagnostic disable-next-line: undefined-global
 ----------------Colours------------------
 ---------Special Thanks Colours----------
 loc_colour("inactive")
