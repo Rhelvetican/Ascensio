@@ -15,7 +15,7 @@ if Spectrallib then
     end
 else
     forcetrigger = function(_, card, ctx)
-        return Cryptid.forcetrigger(card, ctx)
+        Cryptid.forcetrigger(card, ctx)
     end
 end
 
