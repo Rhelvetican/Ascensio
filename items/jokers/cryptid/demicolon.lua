@@ -19,14 +19,33 @@ else
     end
 end
 
+SMODS.Atlas({
+    key = "demicolon",
+    path = "jokers/cryptid/demicolon.png",
+    px = 71,
+    py = 95,
+})
+
 SMODS.Joker({
     key = "demicolon",
     rarity = "cry_exotic",
-    atlas = "c_atlas_1",
+    atlas = "demicolon",
     blueprint_compat = true,
     demicoloncompat = true,
-    pos = { x = 6, y = 5 },
+
+    pos = { x = 0, y = 0 },
     soul_pos = { x = 8, y = 5, extra = { x = 7, y = 5 } },
+
+    animation = {
+        macro = {
+            type = "skim",
+
+            pos = { include = { { x1 = 0, y1 = 0, x2 = 14, y2 = 4 } } },
+            soul_pos = { include = { { x1 = 0, y1 = 10, x2 = 14, y2 = 14 } } },
+            soul_pos_extra = { include = { { x1 = 0, y1 = 5, x2 = 14, y2 = 9 } } },
+        },
+    },
+
     immutable = true,
 
     config = { check = nil },

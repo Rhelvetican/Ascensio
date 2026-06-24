@@ -16,7 +16,7 @@ SMODS.Joker({
     soul_pos = { x = 0, y = 0, extra = { x = 0, y = 3 } },
     cost = 50,
     order = 1,
-    loc_vars = function(self, info_queue, card)
+    loc_vars = function(_, info_queue, card)
         info_queue[#info_queue + 1] = { key = "e_negative_consumable", set = "Edition", config = { extra = 1 } }
         return {
             vars = {
