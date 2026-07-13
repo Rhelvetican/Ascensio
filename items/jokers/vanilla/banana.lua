@@ -33,8 +33,10 @@ SMODS.Joker({
             }
         end
 
+        ---@diagnostic disable-next-line: unnecessary-if
         if (context.end_of_round and context.main_eval and not (context.individual or context.repetition or context.blueprint)) or context.forcetrigger then
             if
+                ---@diagnostic disable-next-line: unnecessary-if
                 (
                     SMODS.pseudorandom_probability(card, "OOOOOOH BANANA", 1, card.ability.extra.odds, "Exotic Banana")
                     and #G.jokers.cards
