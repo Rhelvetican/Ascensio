@@ -890,6 +890,20 @@ return {
                 },
             },
 
+            j_asc_lucky_cat = {
+                name = "Feles Fati",
+                text = {
+                    {
+                        "{C:attention}Played{} cards become {C:attention}Lucky{} cards.",
+                    },
+                    {
+                        "This Joker gains {X:asc_emult,C:white}^#1#{} Mult whenever",
+                        "a {C:attention}Lucky{} card {C:green}successfully{} triggers",
+                        "{C:inactive}(Currently {}{X:asc_emult,C:white}^#2#{}{C:inactive} Mult){}",
+                    },
+                },
+            },
+
             j_asc_baseball_card = {
                 name = "Una Quaedam",
                 text = {
