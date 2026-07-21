@@ -209,6 +209,7 @@ AscensionInternal({ source = Source.Vanilla, from = "j_gros_michel", to_exotic =
 AscensionInternal({ source = Source.Vanilla, from = "j_even_steven", to_exotic = "j_asc_even_steven" })
 AscensionInternal({ source = Source.Vanilla, from = "j_odd_todd", to_exotic = "j_asc_odd_todd" })
 AscensionInternal({ source = Source.Vanilla, from = "j_space", to_exotic = "j_asc_space" })
+AscensionInternal({ source = Source.Vanilla, from = "j_burglar", to_exotic = "j_asc_burglar" })
 AscensionInternal({ source = Source.Vanilla, from = "j_egg", to_exotic = "j_asc_egg" })
 AscensionInternal({ source = Source.Vanilla, from = "j_scary_face", to_exotic = "j_asc_scary" })
 AscensionInternal({ source = Source.Vanilla, from = "j_abstract", to_exotic = "j_asc_abstract" })

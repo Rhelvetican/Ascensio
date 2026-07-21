@@ -1,4 +1,4 @@
-local lost = 1
+local lost = 0.0
 
 SMODS.Joker({
     key = "burglar",
@@ -11,7 +11,7 @@ SMODS.Joker({
     cost = 50,
     order = 1,
 
-    config = { extra = { emult_multiplier = 0.2 } },
+    config = { extra = { emult_multiplier = 0.2, hand_multiplier = 3 } },
 
     blueprint_compat = true,
     demicoloncompat = true,
@@ -21,8 +21,33 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, ctx)
-        if ctx.joker_main or ctx.blueprint or ctx.forcetrigger then
-            return { emult = 1 + card.ability.extra.emult_multiplier }
+        if ctx.setting_blind or ctx.forcetrigger then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    if G.GAME.current_round.discards_left >= 0 then
+                        lost = G.GAME.current_round.discards_left
+                        ease_discard(-lost, nil, true)
+                    end
+
+                    ease_hands_played(lost * card.ability.extra.hand_multiplier)
+
+                    SMODS.calculate_effect({
+                        message = localize({ type = "variable", key = "a_hands", vars = { card.ability.extra.hand_multiplier * lost } }),
+                    }, ctx.card)
+
+                    return true
+                end,
+            }))
+
+            return nil, true
+        end
+
+        if ctx.joker_main or ctx.forcetrigger then
+            return { emult = 1 + card.ability.extra.emult_multiplier * lost }
+        end
+
+        if ctx.blind_defeated then
+            lost = 0
         end
     end,
 })

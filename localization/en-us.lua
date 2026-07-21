@@ -655,6 +655,17 @@ return {
                 },
             },
 
+            j_asc_burglar = {
+                name = "Rex Furum",
+                text = {
+                    "On {C:attention}Blind{} is selected, {C:attention}lose all discards{}",
+                    "and for every {C:red}discard{} lost this way",
+                    "gain {X:asc_emult,C:white}^#1#{} Mult and {C:blue}+#2#{} hands.",
+                    "{C:inactive}(Currently {X:asc_emult,C:white}^#3#{} Mult){}",
+                    "{C:inactive}(Reset {X:asc_emult,C:white}^Mult{} on blind defeat){}",
+                },
+            },
+
             j_asc_blackboard = {
                 name = "Tabula Lapidea",
                 text = {
