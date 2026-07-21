@@ -670,6 +670,15 @@ return {
                 },
             },
 
+            j_asc_runner = {
+                name = "Velocitas",
+                text = {
+                    "{X:asc_echips,C:white}^#1#{} Chips if played hand",
+                    "contains a {C:attention}Straight{}",
+                    "{C:inactive}(Currently {X:asc_echips,C:white}#2#{C:inactive} Chips){}",
+                },
+            },
+
             j_asc_ice_cream = {
                 name = "Glacies Cremoris",
                 text = {
