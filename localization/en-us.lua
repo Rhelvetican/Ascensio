@@ -662,7 +662,7 @@ return {
                     "and for every {C:red}discard{} lost this way",
                     "gain {X:asc_emult,C:white}^#1#{} Mult and {C:blue}+#2#{} hands.",
                     "{C:inactive}(Currently {X:asc_emult,C:white}^#3#{} Mult){}",
-                    "{C:inactive}(Reset {X:asc_emult,C:white}^Mult{} on blind defeat){}",
+                    "{C:inactive}(Reset {X:asc_emult,C:white}^Mult{C:inactive} on blind defeat){}",
                 },
             },
 
