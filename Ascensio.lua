@@ -209,12 +209,14 @@ AscensionInternal({ source = Source.Vanilla, from = "j_gros_michel", to_exotic =
 AscensionInternal({ source = Source.Vanilla, from = "j_even_steven", to_exotic = "j_asc_even_steven" })
 AscensionInternal({ source = Source.Vanilla, from = "j_odd_todd", to_exotic = "j_asc_odd_todd" })
 AscensionInternal({ source = Source.Vanilla, from = "j_space", to_exotic = "j_asc_space" })
+AscensionInternal({ source = Source.Vanilla, from = "j_burglar", to_exotic = "j_asc_burglar" })
 AscensionInternal({ source = Source.Vanilla, from = "j_egg", to_exotic = "j_asc_egg" })
 AscensionInternal({ source = Source.Vanilla, from = "j_scary_face", to_exotic = "j_asc_scary" })
 AscensionInternal({ source = Source.Vanilla, from = "j_abstract", to_exotic = "j_asc_abstract" })
 AscensionInternal({ source = Source.Vanilla, from = "j_delayed_grat", to_exotic = "j_asc_delayed_grat" })
 AscensionInternal({ source = Source.Vanilla, from = "j_hack", to_exotic = "j_asc_hack" })
 AscensionInternal({ source = Source.Vanilla, from = "j_blackboard", to_exotic = "j_asc_blackboard" })
+AscensionInternal({ source = Source.Vanilla, from = "j_runner", to_exotic = "j_asc_runner" })
 AscensionInternal({ source = Source.Vanilla, from = "j_ice_cream", to_exotic = "j_asc_ice_cream" })
 AscensionInternal({ source = Source.Vanilla, from = "j_dna", to_exotic = "j_asc_dna" })
 AscensionInternal({ source = Source.Vanilla, from = "j_splash", to_exotic = "j_asc_splash" })
@@ -234,6 +236,7 @@ AscensionInternal({ source = Source.Vanilla, from = "j_mail", to_exotic = "j_asc
 AscensionInternal({ source = Source.Vanilla, from = "j_photograph", to_exotic = "j_asc_photograph" })
 AscensionInternal({ source = Source.Vanilla, from = "j_to_the_moon", to_exotic = "j_asc_to_the_moon" })
 AscensionInternal({ source = Source.Vanilla, from = "j_golden", to_exotic = "j_asc_golden" })
+AscensionInternal({ source = Source.Vanilla, from = "j_lucky_cat", to_exotic = "j_asc_lucky_cat" })
 AscensionInternal({ source = Source.Vanilla, from = "j_baseball", to_exotic = "j_asc_baseball_card" })
 AscensionInternal({ source = Source.Vanilla, from = "j_bull", to_exotic = "j_asc_bull" })
 AscensionInternal({ source = Source.Vanilla, from = "j_trading", to_exotic = "j_asc_trading" })
@@ -282,6 +285,7 @@ AscensionInternal({ source = Source.Cryptid, from = "j_cry_CodeJoker", to_exotic
 AscensionInternal({ source = Source.Cryptid, from = "j_cry_circus", to_exotic = "j_asc_circus" })
 AscensionInternal({ source = Source.Cryptid, from = "j_cry_krustytheclown", to_exotic = "j_asc_krusty" })
 AscensionInternal({ source = Source.Cryptid, from = "j_cry_the", to_exotic = "j_asc_the" })
+AscensionInternal({ source = Source.Cryptid, from = "j_cry_demicolon", to_exotic = "j_asc_demicolon" })
 AscensionInternal({ source = Source.Cryptid, from = "j_cry_negative", to_exotic = "j_cry_tenebris", source_file = "skip", to_entropic = "j_entr_akyros", entropic_file = "skip" })
 
 -- Mortals for Cryptid Exotics
@@ -305,7 +309,6 @@ if next(SMODS.find_mod("Astronomica")) then
     AscensionInternal({ source = Source.Astronomica, from = "j_ast_stopwatch", to_exotic = "j_asc_stopwatch" })
 end
 
----@diagnostic disable-next-line: undefined-global
 ----------------Colours------------------
 ---------Special Thanks Colours----------
 loc_colour("inactive")

@@ -40,7 +40,6 @@ SMODS.Joker({
                             end,
                         }))
                     end
-                    local enhancement = "cry_astral"
                     if _card.ability.effect ~= "Astral" then
                         _card:set_edition({ cry_astral = true })
                     end

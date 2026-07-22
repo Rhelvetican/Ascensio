@@ -655,6 +655,17 @@ return {
                 },
             },
 
+            j_asc_burglar = {
+                name = "Rex Furum",
+                text = {
+                    "On {C:attention}Blind{} is selected, {C:attention}lose all discards{}",
+                    "and for every {C:red}discard{} lost this way",
+                    "gain {X:asc_emult,C:white}^#1#{} Mult and {C:blue}+#2#{} hands.",
+                    "{C:inactive}(Currently {X:asc_emult,C:white}^#3#{} Mult){}",
+                    "{C:inactive}(Reset {X:asc_emult,C:white}^Mult{C:inactive} on blind defeat){}",
+                },
+            },
+
             j_asc_blackboard = {
                 name = "Tabula Lapidea",
                 text = {
@@ -667,6 +678,15 @@ return {
                         "Instead gains {X:mult,C:white}X#2#{} Mult per card",
                         "if all cards are {C:spade}Spades{} or {C:club}Clubs{}",
                     },
+                },
+            },
+
+            j_asc_runner = {
+                name = "Velocitas",
+                text = {
+                    "{X:asc_echips,C:white}^#1#{} Chips if played hand",
+                    "contains a {C:attention}Straight{}",
+                    "{C:inactive}(Currently {X:asc_echips,C:white}#2#{C:inactive} Chips){}",
                 },
             },
 
@@ -887,6 +907,20 @@ return {
                     "{X:money,C:white}X#2#{} total money at end of round,",
                     "{C:green}#1# in #4#{} chance to increase ",
                     "multiplier by {X:money,C:white}X#3#{} each payout", -- hello everybody my name is multiplier
+                },
+            },
+
+            j_asc_lucky_cat = {
+                name = "Feles Fati",
+                text = {
+                    {
+                        "{C:attention}Played{} cards become {C:attention}Lucky{} cards.",
+                    },
+                    {
+                        "This Joker gains {X:asc_emult,C:white}^#1#{} Mult whenever",
+                        "a {C:attention}Lucky{} card {C:green}successfully{} triggers",
+                        "{C:inactive}(Currently {}{X:asc_emult,C:white}^#2#{}{C:inactive} Mult){}",
+                    },
                 },
             },
 
@@ -1548,6 +1582,13 @@ return {
                     "and gain {X:asc_emult,C:white}^#2#{} Mult",
                     "for each {C:attention}destroyed{} card",
                     "{C:inactive}(Currently {X:asc_emult,C:white}^#1#{} {C:inactive}Mult){}",
+                },
+            },
+
+            j_asc_demicolon = {
+                name = "Coactio Divina",
+                text = {
+                    "{C:attention}Force-trigger{} all jokers to the {C:attention}right{} of itself",
                 },
             },
 

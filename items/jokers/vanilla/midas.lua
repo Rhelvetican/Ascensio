@@ -9,12 +9,14 @@ SMODS.Joker({
     soul_pos = { x = 8, y = 0, extra = { x = 7, y = 0 } },
     cost = 50,
     order = 76,
-    loc_vars = function(self, info_queue, card)
+
+    loc_vars = function(_, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_gold
         info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_gold
         return { vars = { card and lenient_bignum(card.ability.extra.power) } }
     end,
-    calculate = function(self, card, context)
+
+    calculate = function(_, card, context)
         if context.cardarea == G.jokers and context.before and not context.blueprint_card and not context.retrigger_joker then
             local converted
 
@@ -25,7 +27,6 @@ SMODS.Joker({
                 if _card.ability.effect ~= "Gold Card" then
                     _card:set_ability(G.P_CENTERS[enhancement], nil, true)
                 end
-                local enhancement = "cry_golden"
                 if _card.ability.effect ~= "Golden" then
                     _card:set_edition({ cry_gold = true })
                 end

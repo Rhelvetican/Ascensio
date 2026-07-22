@@ -40,6 +40,25 @@ function table.contains(tbl, item, cmp)
     return false
 end
 
+--- @generic T
+---
+--- Filter outs elements in array that satisfies a given predicate.
+---
+--- @param tbl T[] Array of items.
+--- @param predicate fun(T): boolean Predicate.
+--- @return T[]
+function table.filter(tbl, predicate)
+    local accum = {}
+
+    for _, item in ipairs(tbl) do
+        if predicate(item) then
+            accum[#accum + 1] = item
+        end
+    end
+
+    return accum
+end
+
 --- @generic K, V
 --- @param tbl table<K, V>?
 --- @param key K
@@ -119,6 +138,9 @@ local function ease_playing_card_selection_limit(mod, stroverride)
     end
 end
 
+-- This is also ripped off Entropy.
+-- Original by LordRuby
+
 ---@param mod integer
 ---@param stroverride? string
 local function ease_discard_selection_limit(mod, stroverride)
@@ -126,17 +148,6 @@ local function ease_discard_selection_limit(mod, stroverride)
     G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
     local str = stroverride or G.GAME.starting_params.discard_limit or ""
     SMODS.hand_limit_strings.discard = G.GAME.starting_params.discard_limit ~= 5 and localize("b_limit") .. str or ""
-end
-
----@param mod integer
----@param stroverride? string
-ease_selection_limit = function(mod, stroverride)
-    if not SMODS.hand_limit_strings then
-        SMODS.hand_limit_strings = {}
-    end
-
-    ease_playing_card_selection_limit(mod, stroverride)
-    ease_discard_selection_limit(mod, stroverride)
 end
 
 ---@param to integer
@@ -161,9 +172,20 @@ local function set_discard_selection_limit(to, stroverride)
     SMODS.hand_limit_strings.discard = G.GAME.starting_params.discard_limit ~= 5 and localize("b_limit") .. str or ""
 end
 
+---@param mod integer
+---@param stroverride? string
+function ease_selection_limit(mod, stroverride)
+    if not SMODS.hand_limit_strings then
+        SMODS.hand_limit_strings = {}
+    end
+
+    ease_playing_card_selection_limit(mod, stroverride)
+    ease_discard_selection_limit(mod, stroverride)
+end
+
 ---@param to integer
 ---@param stroverride? string
-set_selection_limit = function(to, stroverride)
+function set_selection_limit(to, stroverride)
     if not SMODS.hand_limit_strings then
         SMODS.hand_limit_strings = {}
     end
@@ -186,7 +208,7 @@ Ascensio.Credit = setmetatable({}, {
 })
 
 ---@param num number
----@param range { min?: number, max?: number }
+---@param range { min: number }|{ max: number }|{ min: number, max: number }
 ---@return boolean
 function Ascensio.isInRange(num, range)
     range.min = range.min or -math.huge
