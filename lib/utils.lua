@@ -75,7 +75,7 @@ function ease_joker_slot(amount)
 end
 
 --- @param amount number|table?
---- @param instant any?
+--- @param instant boolean|any?
 function ease_dollars_mult(amount, instant) --By Omega. Pretty much thunk's ease dollars but with mutiplication
     local function __inner(__inner_amount)
         local one = 1
@@ -206,6 +206,9 @@ Ascensio.Credit = setmetatable({}, {
         return this
     end,
 })
+
+---@class (partial) SMODS.Joker
+---@field asc_credits AscensioCredits
 
 ---@param num number
 ---@param range { min: number }|{ max: number }|{ min: number, max: number }

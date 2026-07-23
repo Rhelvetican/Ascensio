@@ -89,9 +89,6 @@ Ascensio.Ascension = setmetatable({}, {
 ---@param o table<AscensionSource, table<string, Ascension>>
 local function ascensioRegisterInternal(o)
     for source, ascensionEntries in pairs(o) do
-        ---@diagnostic disable-next-line: redefined-local
-        ---@type string
-        local source = source
         for mortal, ascensions in pairs(ascensionEntries) do
             ---@diagnostic disable-next-line: redefined-local
             ---@type string, Ascension
@@ -107,7 +104,7 @@ local function ascensioRegisterInternal(o)
             if Ascensio.Apothable and ascensions.entropic ~= nil then
                 if ascensions.entropic_file ~= "skip" then
                     local entr_src = ascensions.entropic_file or get_source_file(ascensions.entropic)
-                    loadFile(string.format("items/jokers/%s/entr/%s.lua"))
+                    loadFile(string.format("items/jokers/%s/entr/%s.lua", source, entr_src))
                 end
 
                 Ascensio.Apothable[mortal] = ascensions.entropic

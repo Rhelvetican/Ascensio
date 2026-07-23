@@ -31,4 +31,10 @@ SMODS.Joker({
             return { echip = card.ability.extra.echip }
         end
     end,
+
+    asc_credits = {
+        idea = { "Rhelvetican" },
+        art = {},
+        code = { "Rhelvetican" },
+    },
 })
