@@ -1,3 +1,6 @@
+---@class (partial) CalcContext
+---@field forcetrigger? bool
+
 ---@param path string Path to the file
 ---@param id? string Mod ID. Defaults to `SMODS.current_mod`.
 ---@return any?
@@ -172,6 +175,7 @@ local AscensionInternal = setmetatable({}, {
 -- todo: port this whole mess to the newer api i js wrote above
 -- Vanilla Ascensions
 AscensionInternal({ source = Source.Vanilla, from = "j_joker", to_exotic = "j_asc_jimbo", to_entropic = "j_asc_jimbo_entr" })
+AscensionInternal({ source = Source.Vanilla, from = "j_erosion", to_exotic = "j_asc_erosion" })
 AscensionInternal({ source = Source.Vanilla, from = "j_greedy_joker", to_exotic = "j_asc_greedy" })
 AscensionInternal({ source = Source.Vanilla, from = "j_lusty_joker", to_exotic = "j_asc_lusty" })
 AscensionInternal({ source = Source.Vanilla, from = "j_wrathful_joker", to_exotic = "j_asc_wrathful" })
