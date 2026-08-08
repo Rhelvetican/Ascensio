@@ -156,16 +156,18 @@ local AscensionInternal = setmetatable({}, {
         Ascensio.Ascensionable[asc.from] = asc.to_exotic
         Ascensio.Descensions[asc.to_exotic] = asc.from
 
-        if Ascensio.Apothable and asc.to_entropic ~= nil then
-            local entr_source_file = asc.entropic_file or get_source_file(asc.to_exotic)
-            if entr_source_file ~= "skip" then
-                loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua")
+        if Entropy then
+            if Ascensio.Apothable and asc.to_entropic ~= nil then
+                local entr_source_file = asc.entropic_file or get_source_file(asc.to_exotic)
+                if entr_source_file ~= "skip" then
+                    loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua")
+                end
+
+                Ascensio.Apothable[asc.from] = asc.to_entropic
+                Ascensio.Apothable[asc.to_exotic] = asc.to_entropic
+
+                Ascensio.Descensions[asc.to_entropic] = asc.from
             end
-
-            Ascensio.Apothable[asc.from] = asc.to_entropic
-            Ascensio.Apothable[asc.to_exotic] = asc.to_entropic
-
-            Ascensio.Descensions[asc.to_entropic] = asc.from
         end
 
         return asc
