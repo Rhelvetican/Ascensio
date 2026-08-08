@@ -147,6 +147,7 @@ end
 ---@overload fun(o: AscensionInternal): AscensionInternal
 local AscensionInternal = setmetatable({}, {
     ---@param asc AscensionInternal
+    ---@return AscensionInternal
     __call = function(_, asc)
         local source_file = asc.source_file or get_source_file(asc.to_exotic)
         if source_file ~= "skip" then
@@ -177,7 +178,6 @@ local AscensionInternal = setmetatable({}, {
 -- todo: port this whole mess to the newer api i js wrote above
 -- Vanilla Ascensions
 AscensionInternal({ source = Source.Vanilla, from = "j_joker", to_exotic = "j_asc_jimbo", to_entropic = "j_asc_jimbo_entr" })
-AscensionInternal({ source = Source.Vanilla, from = "j_erosion", to_exotic = "j_asc_erosion" })
 AscensionInternal({ source = Source.Vanilla, from = "j_greedy_joker", to_exotic = "j_asc_greedy" })
 AscensionInternal({ source = Source.Vanilla, from = "j_lusty_joker", to_exotic = "j_asc_lusty" })
 AscensionInternal({ source = Source.Vanilla, from = "j_wrathful_joker", to_exotic = "j_asc_wrathful" })
@@ -237,6 +237,7 @@ AscensionInternal({ source = Source.Vanilla, from = "j_obelisk", to_exotic = "j_
 AscensionInternal({ source = Source.Vanilla, from = "j_midas_mask", to_exotic = "j_asc_midas" })
 AscensionInternal({ source = Source.Vanilla, from = "j_mail", to_exotic = "j_asc_mail" })
 AscensionInternal({ source = Source.Vanilla, from = "j_photograph", to_exotic = "j_asc_photograph" })
+AscensionInternal({ source = Source.Vanilla, from = "j_erosion", to_exotic = "j_asc_erosion" })
 AscensionInternal({ source = Source.Vanilla, from = "j_to_the_moon", to_exotic = "j_asc_to_the_moon" })
 AscensionInternal({ source = Source.Vanilla, from = "j_golden", to_exotic = "j_asc_golden" })
 AscensionInternal({ source = Source.Vanilla, from = "j_lucky_cat", to_exotic = "j_asc_lucky_cat" })

@@ -10,18 +10,10 @@ SMODS.Joker({
     cost = 50,
     order = 255,
 
-    config = {
-        extra = {
-            xmult = 0,
-        },
-    },
+    config = { extra = { xmult = 1 } },
 
     loc_vars = function(_, _, card)
-        return {
-            vars = {
-                card.ability.extra.xmult,
-            },
-        }
+        return { vars = { card.ability.extra.xmult } }
     end,
 
     calculate = function(_, card, context)
@@ -41,14 +33,8 @@ SMODS.Joker({
     end,
 
     asc_credits = {
-        idea = {
-            "Rhelvetican",
-        },
-        art = {
-            "Tatteredlurker",
-        },
-        code = {
-            "Rhelvetican",
-        },
+        idea = { "Rhelvetican" },
+        art = { "Tatteredlurker" },
+        code = { "Rhelvetican" },
     },
 })
