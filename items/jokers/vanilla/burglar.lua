@@ -50,4 +50,10 @@ SMODS.Joker({
             lost = 0
         end
     end,
+
+    asc_credits = {
+        idea = { "Rhelvetican" },
+        art = {},
+        code = { "Rhelvetican" },
+    },
 })

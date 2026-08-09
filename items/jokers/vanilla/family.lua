@@ -9,10 +9,10 @@ SMODS.Joker({
     soul_pos = { x = 5, y = 1, extra = { x = 4, y = 1 } },
     cost = 50,
     order = 133,
-    loc_vars = function(self, info_queue, card)
+    loc_vars = function(_, info_queue, card)
         return { vars = { card and lenient_bignum(card.ability.extra.power) } }
     end,
-    calculate = function(self, card, context)
+    calculate = function(_, card, context)
         if --The card transformation apspect of this was taken and modifed in part from the Waterfall Joker from the Celesete Card Collection
             context.before
             and context.poker_hands ~= nil

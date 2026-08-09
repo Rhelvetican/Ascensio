@@ -875,6 +875,17 @@ return {
                 },
             },
 
+            j_asc_erosion = {
+                name = "Desertum Erosum",
+                text = {
+                    "For each card below",
+                    "{C:attention}#1#{} in your",
+                    "full deck, gain {X:mult,C:white}X#2#{} Mult",
+                    "at the {C:attention}end of round{}",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult){}",
+                },
+            },
+
             j_asc_photograph = {
                 name = "Charta Memoria",
                 text = {

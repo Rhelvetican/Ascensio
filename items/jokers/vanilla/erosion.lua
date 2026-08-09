@@ -1,5 +1,10 @@
+---@return number
+local function getCardsBelowFullDeck()
+    return G.GAME.starting_deck_size - #G.playing_cards
+end
+
 SMODS.Joker({
-    key = "runner",
+    key = "erosion",
     rarity = "cry_exotic",
     atlas = "v_atlas_2",
 
@@ -9,26 +14,27 @@ SMODS.Joker({
     cost = 50,
     order = 1,
 
-    config = { extra = { echip_gain = 0.15, echip = 1.0 } },
+    config = { extra = { xmult = 1, xmult_gain = 3 } },
 
     blueprint_compat = true,
     demicoloncompat = true,
 
     loc_vars = function(_, _, card)
-        return { vars = { card.ability.extra.echip_gain, card.ability.extra.echip } }
+        return { vars = { G.GAME.starting_deck_size, card.ability.extra.xmult_gain, card.ability.extra.xmult } }
     end,
 
     calculate = function(_, card, ctx)
-        if (ctx.before and not ctx.blueprint and next(ctx.poker_hands["Straight"])) or ctx.forcetrigger then
+        if ctx.end_of_round or ctx.forcetrigger then
             return SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
-                ref_value = "echip",
-                scalar_value = "echip_gain",
+                ref_value = "xmult",
+                scalar_value = "gain",
+                scalar_table = { gain = math.max(0, getCardsBelowFullDeck() * card.ability.extra.xmult_gain) },
             })
         end
 
         if ctx.joker_main then
-            return { echip = card.ability.extra.echip }
+            return { xmult = card.ability.extra.xmult }
         end
     end,
 

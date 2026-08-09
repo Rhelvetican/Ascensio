@@ -1,3 +1,6 @@
+---@class (partial) CalcContext
+---@field forcetrigger? bool
+
 ---@param path string Path to the file
 ---@param id? string Mod ID. Defaults to `SMODS.current_mod`.
 ---@return any?
@@ -89,9 +92,6 @@ Ascensio.Ascension = setmetatable({}, {
 ---@param o table<AscensionSource, table<string, Ascension>>
 local function ascensioRegisterInternal(o)
     for source, ascensionEntries in pairs(o) do
-        ---@diagnostic disable-next-line: redefined-local
-        ---@type string
-        local source = source
         for mortal, ascensions in pairs(ascensionEntries) do
             ---@diagnostic disable-next-line: redefined-local
             ---@type string, Ascension
@@ -107,7 +107,7 @@ local function ascensioRegisterInternal(o)
             if Ascensio.Apothable and ascensions.entropic ~= nil then
                 if ascensions.entropic_file ~= "skip" then
                     local entr_src = ascensions.entropic_file or get_source_file(ascensions.entropic)
-                    loadFile(string.format("items/jokers/%s/entr/%s.lua"))
+                    loadFile(string.format("items/jokers/%s/entr/%s.lua", source, entr_src))
                 end
 
                 Ascensio.Apothable[mortal] = ascensions.entropic
@@ -147,6 +147,7 @@ end
 ---@overload fun(o: AscensionInternal): AscensionInternal
 local AscensionInternal = setmetatable({}, {
     ---@param asc AscensionInternal
+    ---@return AscensionInternal
     __call = function(_, asc)
         local source_file = asc.source_file or get_source_file(asc.to_exotic)
         if source_file ~= "skip" then
@@ -156,16 +157,18 @@ local AscensionInternal = setmetatable({}, {
         Ascensio.Ascensionable[asc.from] = asc.to_exotic
         Ascensio.Descensions[asc.to_exotic] = asc.from
 
-        if Ascensio.Apothable and asc.to_entropic ~= nil then
-            local entr_source_file = asc.entropic_file or get_source_file(asc.to_exotic)
-            if entr_source_file ~= "skip" then
-                loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua")
+        if Entropy then
+            if Ascensio.Apothable and asc.to_entropic ~= nil then
+                local entr_source_file = asc.entropic_file or get_source_file(asc.to_exotic)
+                if entr_source_file ~= "skip" then
+                    loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua")
+                end
+
+                Ascensio.Apothable[asc.from] = asc.to_entropic
+                Ascensio.Apothable[asc.to_exotic] = asc.to_entropic
+
+                Ascensio.Descensions[asc.to_entropic] = asc.from
             end
-
-            Ascensio.Apothable[asc.from] = asc.to_entropic
-            Ascensio.Apothable[asc.to_exotic] = asc.to_entropic
-
-            Ascensio.Descensions[asc.to_entropic] = asc.from
         end
 
         return asc
@@ -234,6 +237,7 @@ AscensionInternal({ source = Source.Vanilla, from = "j_obelisk", to_exotic = "j_
 AscensionInternal({ source = Source.Vanilla, from = "j_midas_mask", to_exotic = "j_asc_midas" })
 AscensionInternal({ source = Source.Vanilla, from = "j_mail", to_exotic = "j_asc_mail" })
 AscensionInternal({ source = Source.Vanilla, from = "j_photograph", to_exotic = "j_asc_photograph" })
+AscensionInternal({ source = Source.Vanilla, from = "j_erosion", to_exotic = "j_asc_erosion" })
 AscensionInternal({ source = Source.Vanilla, from = "j_to_the_moon", to_exotic = "j_asc_to_the_moon" })
 AscensionInternal({ source = Source.Vanilla, from = "j_golden", to_exotic = "j_asc_golden" })
 AscensionInternal({ source = Source.Vanilla, from = "j_lucky_cat", to_exotic = "j_asc_lucky_cat" })
