@@ -46,4 +46,8 @@ SMODS.Joker({
             }
         end
     end,
+
+    asc_credits = {
+        code = { "Rhelvetican" },
+    },
 })

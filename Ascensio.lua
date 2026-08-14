@@ -56,7 +56,7 @@ loadFile("items/decks/ascensio/starlight.lua")
 
 -- Define crossmods.
 ---@enum Source
-local Source = {
+Ascensio.Source = setmetatable({
     Vanilla = "vanilla/",
     Cryptid = "cryptid/",
     Entropy = "entropy/",
@@ -64,8 +64,23 @@ local Source = {
     Cryptposting = "cryptposting/",
 
     MortalCryptid = "cryptid/mortal/",
-    Other = "",
-}
+}, {
+    ---@param self Source
+    ---@param variant string|number
+    ---@return string
+    __index = function(self, variant)
+        ---@diagnostic disable-next-line: undefined-field
+        local _res = self[variant]
+        if _res ~= nil then
+            return _res
+        else
+            return ""
+        end
+    end,
+
+    -- Does nothing.
+    __newindex = function(_, _, _) end,
+})
 
 ---@param key string
 ---@return string
@@ -126,7 +141,7 @@ end
 --- - `mortal_key` is the key of the mortal Joker.
 --- - `ascended_key` is the key of the ascended Joker.
 --- - `entropic_key` is the key of the apotheosis Joker.    (Require Entropy).
----@param o  table<string, Ascension>
+---@param o table<string, Ascension>
 function Ascensio.register(o)
     local processed = {}
 
@@ -175,6 +190,7 @@ local AscensionInternal = setmetatable({}, {
     end,
 })
 
+local Source = Ascensio.Source
 -- todo: port this whole mess to the newer api i js wrote above
 -- Vanilla Ascensions
 AscensionInternal({ source = Source.Vanilla, from = "j_joker", to_exotic = "j_asc_jimbo", to_entropic = "j_asc_jimbo_entr" })

@@ -34,15 +34,9 @@ SMODS.Joker({
         SMODS.set_scoring_calculation("multiply")
     end,
 
-    ascxentr_credits = {
-        idea = {
-            "Rhelvetican",
-        },
-        art = {
-            "Lil Mr. Slipstream",
-        },
-        code = {
-            "Rhelvetican",
-        },
+    asc_credits = {
+        idea = { "Rhelvetican" },
+        art = { "Lil Mr. Slipstream" },
+        code = { "Rhelvetican" },
     },
 })
