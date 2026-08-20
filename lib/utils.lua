@@ -69,6 +69,31 @@ function table.safe_get(tbl, key)
     end
 end
 
+---@generic T
+---@param tbl table
+---@param key string
+---@return T?
+function table.safe_nav(tbl, key)
+    local buf = "tbl"
+
+    for subkey in string.gmatch(key, "[^%.]+") do
+        buf = string.format("%s[%s]", buf, subkey)
+    end
+
+    local ok, val = pcall(function()
+        local chunk, err = load(buf)
+        if err then
+            return false, nil
+        else
+            return chunk()
+        end
+    end)
+
+    if ok then
+        return val
+    end
+end
+
 --- @param amount number
 function ease_joker_slot(amount)
     G.jokers.config.card_limit = G.jokers.config.card_limit + amount

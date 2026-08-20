@@ -36,7 +36,7 @@ SMODS.Consumable({
                 end
             end
 
-            local _first_dissolve = nil
+            local _first_dissolve = false
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
                 delay = 0.75,

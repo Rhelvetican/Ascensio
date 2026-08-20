@@ -1,11 +1,14 @@
 ---@class (partial) CalcContext
 ---@field forcetrigger? bool
 
----@param path string Path to the file
+Ascensio = {}
+
+---@param path string Path of the source file to load. Relative from project root.
 ---@param id? string Mod ID. Defaults to `SMODS.current_mod`.
----@return any?
-local function loadFile(path, id)
+---@return string?
+function Ascensio.loadFile(path, id)
     local chunk, err = SMODS.load_file(path, id)
+
     if err ~= nil or chunk == nil then
         return err
     end
@@ -16,8 +19,7 @@ end
 -- Compability
 Cryptid.mod_whitelist["Ascensio"] = true
 
-Ascensio = {}
-loadFile("lib/core.lua")
+Ascensio.loadFile("lib/core.lua")
 
 Ascensio.Ascensionable = {}
 
@@ -28,31 +30,31 @@ end
 Ascensio.Descensions = {}
 
 -- Load Atlases.
-loadFile("atlas.lua")
+Ascensio.loadFile("atlas.lua")
 
 -- Load Gradients.
-loadFile("Palette.lua")
+Ascensio.loadFile("Palette.lua")
 
 if next(SMODS.find_mod("DebugPlus")) then
-    loadFile("lib/debug.lua")
+    Ascensio.loadFile("lib/debug.lua")
 end
 
 -- Load libraries.
-loadFile("lib/utils.lua")
-loadFile("lib/cardanim.lua")
-loadFile("lib/number.lua")
-loadFile("lib/hooks.lua")
+Ascensio.loadFile("lib/utils.lua")
+Ascensio.loadFile("lib/cardanim.lua")
+Ascensio.loadFile("lib/number.lua")
+Ascensio.loadFile("lib/hooks.lua")
 
 -- Load consumable.
-loadFile("items/consumables/ascensio/ascension.lua")
-loadFile("items/consumables/ascensio/numina.lua")
+Ascensio.loadFile("items/consumables/ascensio/ascension.lua")
+Ascensio.loadFile("items/consumables/ascensio/numina.lua")
 
 if Entropy then
-    loadFile("items/consumables/entropy/apotheosis.lua")
+    Ascensio.loadFile("items/consumables/entropy/apotheosis.lua")
 end
 
 -- Load deck.
-loadFile("items/decks/ascensio/starlight.lua")
+Ascensio.loadFile("items/decks/ascensio/starlight.lua")
 
 -- Define crossmods.
 ---@enum Source
@@ -113,7 +115,7 @@ local function ascensioRegisterInternal(o)
             local mortal, ascensions = mortal, ascensions
             if ascensions.exotic_file ~= "skip" then
                 local source_file = ascensions.exotic_file or get_source_file(ascensions.exotic)
-                loadFile(string.format("items/jokers/%s/%s.lua", source, source_file))
+                Ascensio.loadFile(string.format("items/jokers/%s/%s.lua", source, source_file))
             end
 
             Ascensio.Ascensionable[mortal] = ascensions.exotic
@@ -122,7 +124,7 @@ local function ascensioRegisterInternal(o)
             if Ascensio.Apothable and ascensions.entropic ~= nil then
                 if ascensions.entropic_file ~= "skip" then
                     local entr_src = ascensions.entropic_file or get_source_file(ascensions.entropic)
-                    loadFile(string.format("items/jokers/%s/entr/%s.lua", source, entr_src))
+                    Ascensio.loadFile(string.format("items/jokers/%s/entr/%s.lua", source, entr_src))
                 end
 
                 Ascensio.Apothable[mortal] = ascensions.entropic
@@ -166,7 +168,7 @@ local AscensionInternal = setmetatable({}, {
     __call = function(_, asc)
         local source_file = asc.source_file or get_source_file(asc.to_exotic)
         if source_file ~= "skip" then
-            loadFile("items/jokers/" .. asc.source .. source_file .. ".lua")
+            Ascensio.loadFile("items/jokers/" .. asc.source .. source_file .. ".lua")
         end
 
         Ascensio.Ascensionable[asc.from] = asc.to_exotic
@@ -176,7 +178,7 @@ local AscensionInternal = setmetatable({}, {
             if Ascensio.Apothable and asc.to_entropic ~= nil then
                 local entr_source_file = asc.entropic_file or get_source_file(asc.to_exotic)
                 if entr_source_file ~= "skip" then
-                    loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua")
+                    Ascensio.loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua")
                 end
 
                 Ascensio.Apothable[asc.from] = asc.to_entropic
