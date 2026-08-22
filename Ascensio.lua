@@ -271,6 +271,7 @@ AscensionInternal({ source = Source.Vanilla, from = "j_throwback", to_exotic = "
 AscensionInternal({ source = Source.Vanilla, from = "j_hanging_chad", to_exotic = "j_asc_hanging_chad" })
 AscensionInternal({ source = Source.Vanilla, from = "j_blueprint", to_exotic = "j_asc_blueprint" })
 AscensionInternal({ source = Source.Vanilla, from = "j_mr_bones", to_exotic = "j_asc_mr_bones", source_file = "bones" })
+AscensionInternal({ source = Source.Vanilla, from = "j_acrobat", to_exotic = "j_asc_acrobat" })
 AscensionInternal({ source = Source.Vanilla, from = "j_sock_and_buskin", to_exotic = "j_asc_sock_and_buskin" })
 AscensionInternal({ source = Source.Vanilla, from = "j_swashbuckler", to_exotic = "j_asc_swashbuckler" })
 AscensionInternal({ source = Source.Vanilla, from = "j_smeared", to_exotic = "j_asc_smeared" })

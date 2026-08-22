@@ -1090,6 +1090,22 @@ return {
                 },
             },
 
+            j_asc_acrobat = {
+                name = "???",
+                text = {
+                    {
+                        "Gain {X:asc_emult,C:white}^#2#{} Mult before each",
+                        "hand played this round",
+                        "{C:inactive}(Currently {X:asc_emult,C:white}^#1#{C:inactive} Mult){}",
+                        "{C:inactive}(Reset every round){}",
+                    },
+                    {
+                        "Give {C:attention}X#3#{} the amount of {X:asc_emult,C:white}^Mult{}",
+                        "on {C:attention}final hand{} of round",
+                    },
+                },
+            },
+
             j_asc_sock_and_buskin = {
                 name = "Thalia et Melpomene",
                 text = {

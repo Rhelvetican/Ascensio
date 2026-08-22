@@ -69,6 +69,27 @@ function table.safe_get(tbl, key)
     end
 end
 
+---@generic K, V
+---@overload fun(tbl: table<K, V>, key: K): V?
+---@overload fun(tbl: table<K, V>, key: K[]): V[]
+function table.get(tbl, key)
+    if type(key) == "table" and key[1] ~= nil then
+        local accum = {}
+
+        for _, skey in ipairs(key) do
+            if tbl[skey] ~= nil then
+                accum[#accum + 1] = tbl[skey]
+            else
+                break
+            end
+        end
+
+        return accum
+    else
+        return tbl[key]
+    end
+end
+
 ---@generic T
 ---@param tbl table
 ---@param key string
