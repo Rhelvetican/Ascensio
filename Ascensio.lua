@@ -95,7 +95,7 @@ end
 ---@class Ascension
 ---@field exotic string The key of the Ascended joker.
 ---@field entropic? string The key of the Apotheosis joker.
----@field exotic_file? "skip"|string Where the Joker is defined in. If the source file is `"skip"` then loading will be skipped.
+---@field exotic_file? "skip"|string Where the Joker is defined in. If the value `"skip"` is provided then loading will be skipped.
 ---@field entropic_file? "skip"|string Where the Entropic Joker is defined in. `".lua"` file extension are not to be added. If the source file is `"skip"` then loading will be skipped.
 ---@overload fun(asc: Ascension): Ascension
 Ascensio.Ascension = setmetatable({}, {

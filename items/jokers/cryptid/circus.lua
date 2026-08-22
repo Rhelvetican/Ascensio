@@ -5,11 +5,8 @@ local rarity_mapping = {
     ["cry_epic"] = 4,
     [4] = 5,
     ["cry_exotic"] = 6,
+    ["entr_entropic"] = next(SMODS.find_mod("entr")) and 7 or nil,
 }
-
-if Entropy then
-    rarity_mapping["entr_entropic"] = 7
-end
 
 local function pow(a, b)
     if type(a) == "number" and type(b) == "number" then
@@ -64,6 +61,10 @@ SMODS.Joker({
         end
 
         mult_tbl[#mult_tbl + 1] = card.ability.extra.base_gain
+
+        for key, emult in pairs(mult_tbl) do
+            print(key, emult)
+        end
 
         return {
             vars = mult_tbl,

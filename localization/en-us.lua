@@ -1552,9 +1552,9 @@ return {
                         "{C:common}Common{} Jokers give {X:asc_emult,C:white}^#1#{} Mult",
                         "{C:uncommon}Uncommon{} Jokers give {X:asc_emult,C:white}^#2#{} Mult",
                         "{C:rare}Rare{} Jokers give {X:asc_emult,C:white}^#3#{} Mult",
-                        "{C:cry_epic}Epic{} Jokers give {X:asc_emult,C:white}^#4#{} Mult",
-                        "{C:legendary}Legendary{} Jokers give {X:asc_emult,C:white}^#5#{} Mult",
-                        "{C:cry_exotic}Exotic{} Jokers give {X:asc_emult,C:white}^#6#{} Mult",
+                        "{C:cry_epic}Epic{} Jokers give {X:asc_emult,C:white}^#6#{} Mult",
+                        "{C:legendary}Legendary{} Jokers give {X:asc_emult,C:white}^#4#{} Mult",
+                        "{C:cry_exotic}Exotic{} Jokers give {X:asc_emult,C:white}^#5#{} Mult",
                         Entropy and "{C:entr_entropic}Entropic{} Jokers give {X:asc_emult,C:white}^#7#{} Mult" or nil,
                     },
                     --[[{
@@ -1564,7 +1564,7 @@ return {
                     },
                     ]]
                     {
-                        Entropy and "Increase base {X:asc_emult,C:white}^Mult{} by {X:asc_emult,C:white}^#8#{}" or "Increase base {X:asc_emult,C:white}^Mult{} by {X:asc_emult,C:white}^#7#{}",
+                        string.format("Increase base {X:asc_emult,C:white}^Mult{} by {X:asc_emult,C:white}^#%d#{}", Entropy and 8 or 7),
                         "at the {C:attention}end of round{}",
                     },
                 },
