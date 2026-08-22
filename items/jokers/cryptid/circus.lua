@@ -62,10 +62,6 @@ SMODS.Joker({
 
         mult_tbl[#mult_tbl + 1] = card.ability.extra.base_gain
 
-        for key, emult in pairs(mult_tbl) do
-            print(key, emult)
-        end
-
         return {
             vars = mult_tbl,
         }
