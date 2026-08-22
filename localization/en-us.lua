@@ -1091,7 +1091,7 @@ return {
             },
 
             j_asc_acrobat = {
-                name = "???",
+                name = "Flexibilis",
                 text = {
                     {
                         "Gain {X:asc_emult,C:white}^#2#{} Mult before each",
