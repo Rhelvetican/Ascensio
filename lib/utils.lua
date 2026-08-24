@@ -115,6 +115,70 @@ function table.safe_nav(tbl, key)
     end
 end
 
+---Clones a table, recursively.
+---@generic K, V
+---@param tbl table<K, V>
+---@return table<K, V>
+function table.clone(tbl)
+    local ret = {}
+
+    for k, v in pairs(tbl) do
+        if type(v) == "table" then
+            ret[k] = table.clone(v)
+        else
+            ret[k] = v
+        end
+    end
+
+    return ret
+end
+
+---Merges two or more tables recursively.
+---
+---Only lua-dict tables are merged recursively; lua-list tables are treated as opaque values (overwritten instead of merged).
+---@param behavior "keep"|"force"|"error"
+---@param ... table
+---@return table
+function table.extend(behavior, ...)
+    ---@generic T
+    ---@param v T
+    ---@return T
+    local function clone(v)
+        if type(v) == "table" then
+            return table.clone(v)
+        else
+            return v
+        end
+    end
+
+    ---@param target table
+    ---@param source table
+    local function __extend_deep(target, source)
+        for k, v in pairs(source) do
+            local _target = target[k]
+
+            if _target == nil then
+                target[k] = clone(v)
+            elseif type(_target) == "table" and type(v) == "table" then
+                __extend_deep(_target, v)
+            elseif behavior == "force" then
+                target[k] = clone(v)
+            elseif behavior == "error" then
+                error("Key found in more than one map: " .. k)
+            end
+        end
+    end
+
+    local tbls = { ... }
+    local result = {}
+
+    for _, tbl in ipairs(tbls) do
+        __extend_deep(result, tbl)
+    end
+
+    return result
+end
+
 --- @param amount number
 function ease_joker_slot(amount)
     G.jokers.config.card_limit = G.jokers.config.card_limit + amount
@@ -254,7 +318,7 @@ Ascensio.Credit = setmetatable({}, {
 })
 
 ---@class (partial) SMODS.Joker
----@field asc_credits AscensioCredits
+---@field asc_credits? AscensioCredits
 
 ---@param num number
 ---@param range { min: number }|{ max: number }|{ min: number, max: number }
