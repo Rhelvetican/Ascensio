@@ -1,6 +1,6 @@
 {
     "diagnostics": {
-        "disable": ["need-check-nil", "undefined-global", "undefined-field"]
+        "disable": ["need-check-nil", "undefined-global", "undefined-field", "unnecessary-if"]
     },
     "runtime": {
         "version": "LuaJIT2"

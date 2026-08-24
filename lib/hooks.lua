@@ -1,5 +1,6 @@
 --This was taken and modifed straight from entropy
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
+
 function G.UIDEF.use_and_sell_buttons(card)
     local abc = G_UIDEF_use_and_sell_buttons_ref(card)
     if (card.area == G.jokers and G.jokers and card.config.center.key == "j_asc_marble_entr") and not card.debuff then --Gives buttons to entropic marble Joker
@@ -75,6 +76,7 @@ function G.UIDEF.use_and_sell_buttons(card)
                 },
             },
         }
+
         buyslot = {
             n = G.UIT.C,
             config = { align = "cr" },
@@ -145,6 +147,7 @@ function G.UIDEF.use_and_sell_buttons(card)
                 },
             },
         }
+
         sellslot = {
             n = G.UIT.C,
             config = { align = "cr" },

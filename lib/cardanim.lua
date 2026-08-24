@@ -40,8 +40,8 @@ end
 ---@field soul_pos_extra? CardAnimationSkimMacroSubTable
 
 ---@class CardAnimationSkimMacroSubTable
----@field include (Coords|Rect)[]
----@field exclude? (Coords|Rect)[]
+---@field include (Coords[]|Rect[])
+---@field exclude? (Coords[]|Rect[])
 ---@field timing? integer[]
 ---@field is_periodic? boolean
 ---@field direction? { [1]: GroupType, [2]: IterationType, [3]: IterationType }
@@ -64,6 +64,7 @@ local cardanim_cfg = {
             coords = function(p_center)
                 return p_center.pos
             end,
+
             child = function(children)
                 return children.center
             end,
@@ -72,6 +73,7 @@ local cardanim_cfg = {
             coords = function(p_center)
                 return p_center.soul_pos
             end,
+
             child = function(children)
                 return children.floating_sprite
             end,
@@ -80,6 +82,7 @@ local cardanim_cfg = {
             coords = function(p_center)
                 return p_center.soul_pos and p_center.soul_pos.extra or nil
             end,
+
             child = function(children)
                 return children.floating_sprite2
             end,

@@ -35,7 +35,7 @@ SMODS.Joker({
             end
         end
 
-        if context.before and not context.blueprint or context.forcetrigger then
+        if (context.before and not context.blueprint) or context.forcetrigger then
             for _, scored in ipairs(context.scoring_hand or {}) do
                 if has_any_enhancement(card) then
                     scored:set_ability(G.P_CENTERS.m_wild, nil, true)
