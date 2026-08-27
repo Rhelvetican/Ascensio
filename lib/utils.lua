@@ -14,10 +14,8 @@ function min(a, b)
     return (a < b) and a or b
 end
 
---- @generic T
----
 --- Check if array contains an item
----
+--- @generic T
 --- @param tbl T[] Array of items.
 --- @param item T Item to check.
 --- @param cmp? fun(a: T, b: T): boolean Optional comparator function.
@@ -40,10 +38,8 @@ function table.contains(tbl, item, cmp)
     return false
 end
 
---- @generic T
----
 --- Filter outs elements in array that satisfies a given predicate.
----
+--- @generic T
 --- @param tbl T[] Array of items.
 --- @param predicate fun(T): boolean Predicate.
 --- @return T[]
@@ -195,17 +191,14 @@ function ease_dollars_mult(amount, instant) --By Omega. Pretty much thunk's ease
             local text = "X" .. localize("$")
             local col = G.C.MONEY
 
-            ---@diagnostic disable-next-line: undefined-global
             inc_career_stat("c_dollars_earned", (__inner_amount - one) * G.GAME.dollars)
 
             G.GAME.dollars = G.GAME.dollars * __inner_amount
-            ---@diagnostic disable-next-line: undefined-global
             check_and_set_high_score("most_money", G.GAME.dollars)
             check_for_unlock({ type = "money" })
             ui.config.object:update()
             G.HUD:recalculate()
 
-            ---@diagnostic disable-next-line: undefined-global
             attention_text({
                 text = text .. __inner_amount,
                 scale = 0.8,

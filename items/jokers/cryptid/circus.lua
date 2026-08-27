@@ -5,7 +5,7 @@ local rarity_mapping = {
     ["cry_epic"] = 4,
     [4] = 5,
     ["cry_exotic"] = 6,
-    ["entr_entropic"] = next(SMODS.find_mod("entr")) and 7 or nil,
+    ["entr_entropic"] = next(SMODS.find_mod("Entropy")) and 7 or nil,
 }
 
 local function pow(a, b)
