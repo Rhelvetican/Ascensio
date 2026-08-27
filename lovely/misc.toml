@@ -3,25 +3,25 @@
     priority = -1
     version  = "1.0.0"
 
-#Adds Birthday Cake to cryptid's override file to get it to work like Crustulum
+# Adds Birthday Cake to cryptid's override file to get it to work like Crustulum
 [[patches]]
     [patches.pattern]
         match_indent = true
-        pattern = '''if next(find_joker("cry-crustulum")) or G.GAME.current_round.free_rerolls > 0 then'''
-        payload = '''	if next(find_joker("j_asc_b_cake")) or G.GAME.current_round.free_rerolls > 0 then
+        pattern      = '''if next(find_joker("cry-crustulum")) or G.GAME.current_round.free_rerolls > 0 then'''
+        payload      = '''	if next(find_joker("j_asc_b_cake")) or G.GAME.current_round.free_rerolls > 0 then
 		G.GAME.current_round.reroll_cost = 0
 		return
 	end'''
-        position = "before"
-        target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+        position     = "before"
+        target       = '''=[SMODS Cryptid "lib/overrides.lua"]'''
 
-        #Adds Insanity Mode!!! functionality to cryptid's gateway
+        # Adds Insanity Mode!!! functionality to cryptid's gateway
 
 [[patches]]
     [patches.pattern]
         match_indent = true
-        pattern = '''return #Cryptid.advanced_find_joker(nil, nil, nil, { "eternal" }, true, "j") < G.jokers.config.card_limit'''
-        payload = '''if ( ( not AscConfig["Insanity Mode!!!"] ) or false ) then
+        pattern      = '''return #Cryptid.advanced_find_joker(nil, nil, nil, { "eternal" }, true, "j") < G.jokers.config.card_limit'''
+        payload      = '''if ( ( not AscConfig["Insanity Mode!!!"] ) or false ) then
 				return #Cryptid.advanced_find_joker(nil, nil, nil, { "eternal" }, true, "j")
 					< to_number(G.jokers.config.card_limit)
 			else
@@ -29,8 +29,8 @@
 					< to_number(G.jokers.config.card_limit)
 			end
 		'''
-        position = "at"
-        target = '''=[SMODS Cryptid "items/exotic.lua"]'''
+        position     = "at"
+        target       = '''=[SMODS Cryptid "items/exotic.lua"]'''
 
 [[patches]]
     [patches.pattern]
@@ -40,7 +40,7 @@
         position     = "at"
         target       = '''=[SMODS Cryptid "items/exotic.lua"]'''
 
-#If astronomica is installed
+# If astronomica is installed
 [[patches]]
     [patches.pattern]
         match_indent = true
@@ -49,39 +49,38 @@
         position     = "at"
         target       = '''=[SMODS Astronomica "items/lib.lua"]'''
 
-
-#Adds the Ascensionable tooltip to all ascensionable jokers. Thank you hexacryonic for the code.
+# Adds the Ascensionable tooltip to all ascensionable jokers. Thank you hexacryonic for the code.
 [[patches]]
     [patches.pattern]
         match_indent = true
-        pattern = "for _, v in ipairs(info_queue) do"
-        payload = '''for k, _ in pairs(Ascensio.Ascensionable) do
+        pattern      = "for _, v in ipairs(info_queue) do"
+        payload      = '''for k, _ in pairs(Ascensio.Ascensionable) do
   if _c.key == k then
     info_queue[#info_queue+1] = {key = 'asc_ascensionable', set = 'Other'}
   end
 end
 '''
-        position = "before"
-        target = "functions/common_events.lua"
+        position     = "before"
+        target       = "functions/common_events.lua"
 
-#Adds the Apothable tooltip to all apothable jokers. Thank you hexacryonic for the code.
+# Adds the Apothable tooltip to all apothable jokers. Thank you hexacryonic for the code.
 [[patches]]
     [patches.pattern]
         match_indent = true
-        pattern = "for _, v in ipairs(info_queue) do"
-        payload = '''
-        if Entropy then
+        pattern      = "for _, v in ipairs(info_queue) do"
+        payload      = '''
+        if Entropy and next(SMODS.find_mod("entr")) then
             for k, _ in pairs(Ascensio.Apothable) do
-                if _c.key == k and next(SMODS.find_mod("entr")) then
+                if _c.key == k then
                     info_queue[#info_queue+1] = {key = 'asc_apothable', set = 'Other'}
                 end
             end
         end
 '''
-        position = "before"
-        target = "functions/common_events.lua"
+        position     = "before"
+        target       = "functions/common_events.lua"
 
-#Allows Four finger exotic's extra cards to give ascension power.
+# Allows Four finger exotic's extra cards to give ascension power.
 [[patches]]
     [patches.pattern]
         match_indent = true
