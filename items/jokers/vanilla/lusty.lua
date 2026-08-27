@@ -25,12 +25,8 @@ SMODS.Joker({
             local hearts = {}
             local my_pos
             for i, v in ipairs(context.scoring_hand) do
-                if v == context.other_card then
-                    my_pos = i
-                end
-                if v:is_suit("Hearts") then
-                    hearts[i] = v
-                end
+                if v == context.other_card then my_pos = i end
+                if v:is_suit("Hearts") then hearts[i] = v end
             end
             local first_card = SMODS.pseudorandom_probability(card, "Heartache", 1, card.ability.extra.odds, "Exotic Lusty Joker")
             local second_card = SMODS.pseudorandom_probability(card, "Cardiac Arrest", 1, card.ability.extra.odds, "Exotic Lusty Joker")

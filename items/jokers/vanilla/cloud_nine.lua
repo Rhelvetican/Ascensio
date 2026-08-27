@@ -3,9 +3,7 @@ local function count_nines()
     local nines = 0
     if G.playing_cards then
         for _, card in ipairs(G.playing_cards) do
-            if card:get_id() == 9 then
-                nines = nines + 1
-            end
+            if card:get_id() == 9 then nines = nines + 1 end
         end
     end
 

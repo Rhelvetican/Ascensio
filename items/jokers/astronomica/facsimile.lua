@@ -34,16 +34,12 @@ SMODS.Joker({
         ---@type balatro.Card?
         local other_joker
         for i = 1, #G.jokers.cards do
-            if G.jokers.cards[i] == card then
-                other_joker = G.jokers.cards[i - 1]
-            end
+            if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i - 1] end
         end
         if context.retrigger_joker_check and not context.retrigger_joker and other_joker ~= nil then
             local same_count = 0
             for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i].config.center.key == other_joker.config.center.key then
-                    same_count = same_count + 1
-                end
+                if G.jokers.cards[i].config.center.key == other_joker.config.center.key then same_count = same_count + 1 end
             end
             if context.other_card == other_joker then
                 return {

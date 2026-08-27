@@ -35,9 +35,7 @@ SMODS.Joker({
                     _card:set_edition({
                         negative = true,
                     })
-                    if card.ability.extra.multiuse > 1 then
-                        _card.ability.cry_multiuse = card.ability.extra.multiuse
-                    end
+                    if card.ability.extra.multiuse > 1 then _card.ability.cry_multiuse = card.ability.extra.multiuse end
                     _card:add_to_deck()
                     G.consumeables:emplace(_card)
                     _card:juice_up(0.3, 0.5)
@@ -72,9 +70,7 @@ SMODS.Joker({
                         local _card = create_card("Code", G.consumeables, nil, nil, nil, nil)
                         _card:set_edition({ negative = true })
 
-                        in_pool = function(_, _)
-                            return true, { allow_duplicates = true }
-                        end
+                        in_pool = function(_, _) return true, { allow_duplicates = true } end
 
                         _card:add_to_deck()
                         G.consumeables:emplace(_card)

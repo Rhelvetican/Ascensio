@@ -2,17 +2,13 @@
 --- @param a number
 --- @param b number
 --- @return number max
-function max(a, b)
-    return (a > b) and a or b
-end
+function max(a, b) return (a > b) and a or b end
 
 --- Returns the smaller value of 2 numbers
 --- @param a number
 --- @param b number
 --- @return number max
-function min(a, b)
-    return (a < b) and a or b
-end
+function min(a, b) return (a < b) and a or b end
 
 --- Check if array contains an item
 --- @generic T
@@ -21,17 +17,15 @@ end
 --- @param cmp? fun(a: T, b: T): boolean Optional comparator function.
 --- @return boolean
 function table.contains(tbl, item, cmp)
+    cmp = cmp or function(a, b) return a == b end
+
     if not cmp then
         for _, tbl_item in ipairs(tbl) do
-            if tbl_item == item then
-                return true
-            end
+            if tbl_item == item then return true end
         end
     else
         for _, tbl_item in ipairs(tbl) do
-            if cmp(tbl_item, item) then
-                return true
-            end
+            if cmp(tbl_item, item) then return true end
         end
     end
 
@@ -47,9 +41,7 @@ function table.filter(tbl, predicate)
     local accum = {}
 
     for _, item in ipairs(tbl) do
-        if predicate(item) then
-            accum[#accum + 1] = item
-        end
+        if predicate(item) then accum[#accum + 1] = item end
     end
 
     return accum
@@ -60,9 +52,7 @@ end
 --- @param key K
 --- @return V?
 function table.safe_get(tbl, key)
-    if tbl then
-        return tbl[key]
-    end
+    if tbl then return tbl[key] end
 end
 
 ---@generic K, V
@@ -106,9 +96,7 @@ function table.safe_nav(tbl, key)
         end
     end)
 
-    if ok then
-        return val
-    end
+    if ok then return val end
 end
 
 ---Clones a table, recursively.
@@ -176,9 +164,7 @@ function table.extend(behavior, ...)
 end
 
 --- @param amount number
-function ease_joker_slot(amount)
-    G.jokers.config.card_limit = G.jokers.config.card_limit + amount
-end
+function ease_joker_slot(amount) G.jokers.config.card_limit = G.jokers.config.card_limit + amount end
 
 --- @param amount number|table?
 --- @param instant boolean|any?
@@ -278,9 +264,7 @@ end
 ---@param mod integer
 ---@param stroverride? string
 function ease_selection_limit(mod, stroverride)
-    if not SMODS.hand_limit_strings then
-        SMODS.hand_limit_strings = {}
-    end
+    if not SMODS.hand_limit_strings then SMODS.hand_limit_strings = {} end
 
     ease_playing_card_selection_limit(mod, stroverride)
     ease_discard_selection_limit(mod, stroverride)
@@ -289,9 +273,7 @@ end
 ---@param to integer
 ---@param stroverride? string
 function set_selection_limit(to, stroverride)
-    if not SMODS.hand_limit_strings then
-        SMODS.hand_limit_strings = {}
-    end
+    if not SMODS.hand_limit_strings then SMODS.hand_limit_strings = {} end
 
     set_playing_card_selection_limit(to, stroverride)
     set_discard_selection_limit(to, stroverride)
@@ -305,9 +287,7 @@ end
 Ascensio.Credit = setmetatable({}, {
     ---@param this AscensioCredits
     ---@return AscensioCredits
-    __call = function(_, this)
-        return this
-    end,
+    __call = function(_, this) return this end,
 })
 
 ---@class (partial) SMODS.Joker

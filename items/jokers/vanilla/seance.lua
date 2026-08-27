@@ -55,9 +55,7 @@ SMODS.Joker({
 
     add_to_deck = function(_, card, _)
         for _, v in pairs(G.P_CENTER_POOLS.Consumeables) do
-            if v.hidden and type(v.key) == "string" then
-                table.insert(card.ability.extra.pool, v.key)
-            end
+            if v.hidden and type(v.key) == "string" then table.insert(card.ability.extra.pool, v.key) end
         end
     end,
 
@@ -66,9 +64,7 @@ SMODS.Joker({
             if --SMODS.pseudorandom_probability(card, "future knowledge", 1, card.ability.extra.odds, "Exotic Seance", true) then
                 math.random(1, card.ability.extra.odds) == 1
             then
-                if not context.blueprint then
-                    card.ability.extra.odds = card.ability.extra.immutable.std_odds
-                end
+                if not context.blueprint then card.ability.extra.odds = card.ability.extra.immutable.std_odds end
                 for _ = 1, card.ability.extra.amount do
                     local speccard = pseudorandom_element(card.ability.extra.pool, "j_asc_seance" .. G.SEED)
 
@@ -86,9 +82,7 @@ SMODS.Joker({
                     colour = G.C.SECONDARY_SET.Spectral,
                 }
             else
-                if not context.blueprint then
-                    card.ability.extra.odds = card.ability.extra.odds / 2
-                end
+                if not context.blueprint then card.ability.extra.odds = card.ability.extra.odds / 2 end
                 return {
                     message = localize("asc_seance_msg"),
                     colour = G.C.DARK_EDITION,
@@ -100,9 +94,7 @@ SMODS.Joker({
             local hands = {}
 
             for k, _ in pairs(G.GAME.hands) do
-                if SMODS.is_poker_hand_visible(k) and k ~= card.ability.extra.hand_type then
-                    table.insert(hands, k)
-                end
+                if SMODS.is_poker_hand_visible(k) and k ~= card.ability.extra.hand_type then table.insert(hands, k) end
             end
 
             card.ability.extra.hand_type = pseudorandom_element(hands, "seed_seance" .. G.SEED)
@@ -116,9 +108,7 @@ SMODS.Joker({
     set_ability = function(_, card, _, _) --Taken from vanilla remade to do list
         local poker_hands = {}
         for handname, _ in pairs(G.GAME.hands) do
-            if SMODS.is_poker_hand_visible(handname) and handname ~= card.ability.extra.hand_type then
-                poker_hands[#poker_hands + 1] = handname
-            end
+            if SMODS.is_poker_hand_visible(handname) and handname ~= card.ability.extra.hand_type then poker_hands[#poker_hands + 1] = handname end
         end
         card.ability.extra.hand_type = pseudorandom_element(poker_hands, "the_future_is_now" .. G.SEED)
     end,

@@ -54,11 +54,9 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, context)
-        if context.modify_scoring_hand and not context.blueprint then
-            return {
-                add_to_hand = true,
-            }
-        end
+        if context.modify_scoring_hand and not context.blueprint then return {
+            add_to_hand = true,
+        } end
 
         if context.individual and context.cardarea == G.play then
             if card.ability.extra.card_requirement.current < card.ability.extra.card_requirement.requirement then

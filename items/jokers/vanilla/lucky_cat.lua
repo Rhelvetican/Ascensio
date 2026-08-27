@@ -14,9 +14,7 @@ SMODS.Joker({
     blueprint_compat = true,
     demicoloncompat = true,
 
-    loc_vars = function(_, _, card)
-        return { vars = { card.ability.extra.emult_gain, card.ability.extra.emult } }
-    end,
+    loc_vars = function(_, _, card) return { vars = { card.ability.extra.emult_gain, card.ability.extra.emult } } end,
 
     calculate = function(_, card, ctx)
         if ctx.cardarea == G.jokers and ctx.before and not ctx.blueprint_card and not ctx.retrigger_joker then
@@ -26,14 +24,10 @@ SMODS.Joker({
                 ---@type Card
                 local scard = ctx.scoring_hand[i]
 
-                if scard.ability.effect ~= "Lucky Card" then
-                    scard:set_ability(G.P_CENTERS.m_lucky, nil, true)
-                end
+                if scard.ability.effect ~= "Lucky Card" then scard:set_ability(G.P_CENTERS.m_lucky, nil, true) end
             end
 
-            if conv then
-                return { message = "Lucky!" }
-            end
+            if conv then return { message = "Lucky!" } end
         end
 
         if (ctx.individual and ctx.cardarea == G.play and ctx.other_card.lucky_trigger and not ctx.blueprint) or ctx.forcetrigger then
@@ -44,8 +38,6 @@ SMODS.Joker({
             })
         end
 
-        if ctx.joker_main then
-            return { emult = card.ability.extra.emult }
-        end
+        if ctx.joker_main then return { emult = card.ability.extra.emult } end
     end,
 })

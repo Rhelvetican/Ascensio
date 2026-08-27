@@ -27,21 +27,17 @@ SMODS.Joker({
                 }
             end
         elseif context.individual then
-            if context.cardarea == G.play then
-                return {
-                    mult = card.ability.extra.mult,
-                    colour = G.C.RED,
-                    card = card,
-                }
-            end
-        end
-        if context.forcetrigger then
-            return {
-                mult = card.ability.extra.x_mult,
+            if context.cardarea == G.play then return {
+                mult = card.ability.extra.mult,
                 colour = G.C.RED,
                 card = card,
-            }
+            } end
         end
+        if context.forcetrigger then return {
+            mult = card.ability.extra.x_mult,
+            colour = G.C.RED,
+            card = card,
+        } end
     end,
 
     asc_credits = {

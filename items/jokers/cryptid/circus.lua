@@ -9,17 +9,13 @@ local rarity_mapping = {
 }
 
 local function pow(a, b)
-    if type(a) == "number" and type(b) == "number" then
-        return math.pow(a, b)
-    end
+    if type(a) == "number" and type(b) == "number" then return math.pow(a, b) end
 
     return Big:ensureBig(a):pow(b)
 end
 
 local function add(a, b)
-    if type(a) == "number" and type(b) == "number" then
-        return a + b
-    end
+    if type(a) == "number" and type(b) == "number" then return a + b end
 
     return Big:ensureBig(a):add(b)
 end
@@ -91,9 +87,7 @@ SMODS.Joker({
         if context.other_joker and card ~= context.other_joker and not context.other_joker.debuff then
             local emult = card.ability.immutable[rarity_mapping[context.other_joker.config.center.rarity] or 1] or 1
 
-            if type(emult) == "string" then
-                emult = 1
-            end
+            if type(emult) == "string" then emult = 1 end
 
             if not Talisman.config_file.disable_anims then
                 G.E_MANAGER:add_event(Event({
@@ -115,9 +109,7 @@ SMODS.Joker({
                 ref_value = "base",
                 scalar_value = "base_gain",
 
-                operation = function(ref_table, ref_value, initial, change)
-                    ref_table[ref_value] = add(initial, change)
-                end,
+                operation = function(ref_table, ref_value, initial, change) ref_table[ref_value] = add(initial, change) end,
             })
 
             local mult_tbl = {}
@@ -139,9 +131,7 @@ SMODS.Joker({
             return { emult = x }
         end
 
-        if context.joker_main then
-            return { emult = card.ability.immutable[6] }
-        end
+        if context.joker_main then return { emult = card.ability.immutable[6] } end
     end,
 
     asc_credits = {

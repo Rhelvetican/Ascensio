@@ -42,25 +42,23 @@ SMODS.Joker({
 
     calculate = function(_, card, context)
         if (context.selling_self and (card.ability.extra.rounds.cur >= card.ability.extra.rounds.req) and not context.blueprint) or context.forcetrigger then
-                local i = 0
-                for x, v in ipairs(G.jokers.cards) do
-                    if v == card then
-                        i = x
-                    end
-                end
-                local copied = G.jokers.cards[i + 1]
-                if copied then
-                    if ((#G.jokers.cards < G.jokers.config.card_limit) or (#G.jokers.cards <= G.jokers.config.card_limit and copied.edition and copied.edition.negative)) then
-                        local recopied = copy_card(copied, nil, nil, nil, nil) --copied.edition and copied.edition.negative (Replace last nil woth this if we want non negative copies)
-                        recopied:add_to_deck()
-                        G.jokers:emplace(recopied)
-                    else
-                        return { message = localize("k_no_room_ex") }
-                    end
+            local i = 0
+            for x, v in ipairs(G.jokers.cards) do
+                if v == card then i = x end
+            end
+            local copied = G.jokers.cards[i + 1]
+            if copied then
+                if (#G.jokers.cards < G.jokers.config.card_limit) or (#G.jokers.cards <= G.jokers.config.card_limit and copied.edition and copied.edition.negative) then
+                    local recopied = copy_card(copied, nil, nil, nil, nil) --copied.edition and copied.edition.negative (Replace last nil woth this if we want non negative copies)
+                    recopied:add_to_deck()
+                    G.jokers:emplace(recopied)
                 else
-                    return { message = localize("k_no_other_jokers") }
+                    return { message = localize("k_no_room_ex") }
                 end
-                return { message = localize("k_duplicated_ex") }
+            else
+                return { message = localize("k_no_other_jokers") }
+            end
+            return { message = localize("k_duplicated_ex") }
         end
 
         ---@diagnostic disable-next-line: unnecessary-if
@@ -68,13 +66,10 @@ SMODS.Joker({
             if card.ability.extra.rounds.cur < card.ability.extra.rounds.req then
                 card.ability.extra.rounds.cur = card.ability.extra.rounds.cur + 1
             else
-                juice_card_until(card, function(this)
-                    return not this.REMOVED
-                end, true)
+                juice_card_until(card, function(this) return not this.REMOVED end, true)
             end
         end
     end,
-
 
     remove_from_deck = function(self, card, from_debuff)
         if card.ability.extra.rounds.cur >= card.ability.extra.rounds.req then
@@ -94,7 +89,7 @@ SMODS.Joker({
         },
         code = {
             "Rhelvetican",
-            "MarioFan597"
+            "MarioFan597",
         },
     },
 })

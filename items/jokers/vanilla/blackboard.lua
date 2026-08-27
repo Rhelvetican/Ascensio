@@ -31,9 +31,7 @@ SMODS.Joker({
         if context.before or context.forcetrigger then
             for k, v in ipairs(G.hand.cards) do
                 all_cards = all_cards + 1
-                if v:is_suit("Clubs", nil, true) or v:is_suit("Spades", nil, true) then
-                    black_suits = black_suits + 1
-                end
+                if v:is_suit("Clubs", nil, true) or v:is_suit("Spades", nil, true) then black_suits = black_suits + 1 end
             end
             if black_suits == all_cards and card.ability.extra.mult > 1 then
                 SMODS.scale_card(card, {

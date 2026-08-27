@@ -69,9 +69,7 @@ SMODS.Joker({
             })
 
             if (context.game_over and (to_number(G.GAME.chips) / (to_number(G.GAME.blind.chips)) >= card.ability.extra.percentage / 100) and card.ability.extra.active) or context.forcetrigger then
-                if not context.forcetrigger then
-                    card.ability.extra.immutable.beaten = 0
-                end
+                if not context.forcetrigger then card.ability.extra.immutable.beaten = 0 end
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         G.hand_text_area.blind_chips:juice_up()

@@ -28,9 +28,7 @@ SMODS.Joker({
                 --This part was modified from Cryptid's SUS
                 if #G.hand.cards > 0 then
                     for _, v in ipairs(G.hand.cards) do
-                        if not SMODS.is_eternal(v) and not v:is_suit("Spades") then
-                            table.insert(to_destroy, v)
-                        end
+                        if not SMODS.is_eternal(v) and not v:is_suit("Spades") then table.insert(to_destroy, v) end
                     end
                 end
                 -- Destroy Cards
@@ -44,9 +42,7 @@ SMODS.Joker({
                     func = function()
                         local selected = math.random(#asc_spade_alt_table)
                         local aaa = asc_spade_alt_table[selected]
-                        if aaa == nil then
-                            math.random(#asc_spade_alt_table)
-                        end
+                        if aaa == nil then math.random(#asc_spade_alt_table) end
                         table.remove(asc_spade_alt_table, selected)
                         if aaa ~= nil then
                             SMODS.destroy_cards(aaa)
@@ -73,9 +69,7 @@ SMODS.Joker({
                 colour = G.C.DARK_EDITION,
             }
         end
-        if context.after then
-            flag = true
-        end
+        if context.after then flag = true end
     end,
     asc_credits = {
         idea = {

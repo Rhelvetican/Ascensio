@@ -9,9 +9,7 @@ Ascensio = {}
 function Ascensio.loadFile(path, id)
     local chunk, err = SMODS.load_file(path, id)
 
-    if err ~= nil or chunk == nil then
-        return err
-    end
+    if err ~= nil or chunk == nil then return err end
 
     chunk()
 end
@@ -23,9 +21,7 @@ Ascensio.loadFile("lib/core.lua")
 
 Ascensio.Ascensionable = {}
 
-if Entropy then
-    Ascensio.Apothable = {}
-end
+if Entropy then Ascensio.Apothable = {} end
 
 Ascensio.Descensions = {}
 
@@ -35,9 +31,7 @@ Ascensio.loadFile("atlas.lua")
 -- Load Gradients.
 Ascensio.loadFile("Palette.lua")
 
-if next(SMODS.find_mod("DebugPlus")) then
-    Ascensio.loadFile("lib/debug.lua")
-end
+if next(SMODS.find_mod("DebugPlus")) then Ascensio.loadFile("lib/debug.lua") end
 
 -- Load libraries.
 Ascensio.loadFile("lib/utils.lua")
@@ -49,9 +43,7 @@ Ascensio.loadFile("lib/hooks.lua")
 Ascensio.loadFile("items/consumables/ascensio/ascension.lua")
 Ascensio.loadFile("items/consumables/ascensio/numina.lua")
 
-if Entropy then
-    Ascensio.loadFile("items/consumables/entropy/apotheosis.lua")
-end
+if Entropy then Ascensio.loadFile("items/consumables/entropy/apotheosis.lua") end
 
 -- Load deck.
 Ascensio.loadFile("items/decks/ascensio/starlight.lua")
@@ -86,9 +78,7 @@ Ascensio.Source = setmetatable({
 
 ---@param key string
 ---@return string
-local function get_source_file(key)
-    return string.sub(key, 7)
-end
+local function get_source_file(key) return string.sub(key, 7) end
 
 ---@alias AscensionSource "vanilla"|"cryptid"|"cryptid_mortals"|"entropy"|"astronomica"|string
 
@@ -100,9 +90,7 @@ end
 ---@overload fun(asc: Ascension): Ascension
 Ascensio.Ascension = setmetatable({}, {
     ---@param asc Ascension
-    __call = function(_, asc)
-        return asc
-    end,
+    __call = function(_, asc) return asc end,
 })
 
 --- Register Ascensions. Internal use only
@@ -167,9 +155,7 @@ local AscensionInternal = setmetatable({}, {
     ---@return AscensionInternal
     __call = function(_, asc)
         local source_file = asc.source_file or get_source_file(asc.to_exotic)
-        if source_file ~= "skip" then
-            Ascensio.loadFile("items/jokers/" .. asc.source .. source_file .. ".lua")
-        end
+        if source_file ~= "skip" then Ascensio.loadFile("items/jokers/" .. asc.source .. source_file .. ".lua") end
 
         Ascensio.Ascensionable[asc.from] = asc.to_exotic
         Ascensio.Descensions[asc.to_exotic] = asc.from
@@ -177,9 +163,7 @@ local AscensionInternal = setmetatable({}, {
         if Entropy then
             if Ascensio.Apothable and asc.to_entropic ~= nil then
                 local entr_source_file = asc.entropic_file or get_source_file(asc.to_exotic)
-                if entr_source_file ~= "skip" then
-                    Ascensio.loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua")
-                end
+                if entr_source_file ~= "skip" then Ascensio.loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua") end
 
                 Ascensio.Apothable[asc.from] = asc.to_entropic
                 Ascensio.Apothable[asc.to_exotic] = asc.to_entropic
@@ -433,9 +417,7 @@ function SMODS.create_mod_badges(obj, badges)
             }
             local function eq_col(x, y)
                 for _ = 1, 4 do
-                    if x[1] ~= y[1] then
-                        return false
-                    end
+                    if x[1] ~= y[1] then return false end
                 end
                 return true
             end
@@ -541,9 +523,7 @@ function SMODS.create_mod_badges(obj, badges)
             }
             local function eq_col(x, y)
                 for _ = 1, 4 do
-                    if x[1] ~= y[1] then
-                        return false
-                    end
+                    if x[1] ~= y[1] then return false end
                 end
                 return true
             end
@@ -652,9 +632,7 @@ if next(SMODS.find_mod("Entropy")) then
                 }
                 local function eq_col(x, y)
                     for _ = 1, 4 do
-                        if x[1] ~= y[1] then
-                            return false
-                        end
+                        if x[1] ~= y[1] then return false end
                     end
                     return true
                 end
@@ -674,13 +652,9 @@ end
 SMODS.current_mod = SMODS.current_mod or {}
 
 --#region SMODS UI funcs (additions, config, collection) Taken from Cardsleves to make custom mod background description clear--
-SMODS.current_mod.description_loc_vars = function()
-    return { background_colour = G.C.CLEAR, text_colour = G.C.WHITE, scale = 1.2 }
-end
+SMODS.current_mod.description_loc_vars = function() return { background_colour = G.C.CLEAR, text_colour = G.C.WHITE, scale = 1.2 } end
 
-if SMODS.current_mod.config == nil then
-    SMODS.current_mod.config = { ["Insanity Mode!!!"] = false }
-end
+if SMODS.current_mod.config == nil then SMODS.current_mod.config = { ["Insanity Mode!!!"] = false } end
 
 AscConfig = SMODS.current_mod.config
 

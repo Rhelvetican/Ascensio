@@ -9,9 +9,7 @@ SMODS.Joker({ --Commented out at the moment as it is also increasing hand size a
     cost = 8,
     order = 515,
     loc_vars = function(self, info_queue, card)
-        if next(SMODS.find_mod("Astronomica")) then
-            info_queue[#info_queue + 1] = { key = "asc_astronomica_compat", set = "Other" }
-        end
+        if next(SMODS.find_mod("Astronomica")) then info_queue[#info_queue + 1] = { key = "asc_astronomica_compat", set = "Other" } end
         card.ability.blueprint_compat_ui = card.ability.blueprint_compat_ui or ""
         card.ability.blueprint_compat_check = nil
         return {
@@ -112,9 +110,7 @@ SMODS.Joker({ --Commented out at the moment as it is also increasing hand size a
                 Cryptid.manipulate(G.jokers.cards[1], { value = card2.ability.extra.scale_mult, type = "+" })
                 check = true
             end
-            if check then
-                card_eval_status_text(context.blueprint_card or card2, "extra", nil, nil, nil, { message = localize("k_upgrade_ex"), colour = G.C.GREEN })
-            end
+            if check then card_eval_status_text(context.blueprint_card or card2, "extra", nil, nil, nil, { message = localize("k_upgrade_ex"), colour = G.C.GREEN }) end
             return nil, true
         end
     end,

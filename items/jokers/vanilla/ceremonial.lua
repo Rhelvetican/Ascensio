@@ -27,9 +27,7 @@ SMODS.Joker({
         if context.setting_blind and not card.getting_sliced and not context.blueprint then
             local eligiblejokers = {}
             for k, v in pairs(G.jokers.cards) do
-                if not v.ability.eternal and v ~= card then
-                    table.insert(eligiblejokers, v)
-                end
+                if not v.ability.eternal and v ~= card then table.insert(eligiblejokers, v) end
             end
             local destroyedcount, addedemult = 0, 0
             if SMODS.pseudorandom_probability(card, "Dagger", 1, card.ability.extra.odds, "Exotic Ceremonial Dagger") then
@@ -63,9 +61,7 @@ SMODS.Joker({
                 return nil, true
             end
         end
-        if context.forcetrigger then
-            card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-        end
+        if context.forcetrigger then card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod end
         if context.joker_main or context.forcetrigger then
             return {
                 emult = card.ability.extra.Emult,

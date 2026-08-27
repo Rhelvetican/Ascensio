@@ -40,9 +40,7 @@ SMODS.Joker({
                     scalar_value = "echips_gain",
                 })
 
-                if not context.forcetrigger then
-                    return msg
-                end
+                if not context.forcetrigger then return msg end
             end
 
             if (context.other_card:is_suit("Hearts") or context.other_card:is_suit("Diamonds")) or context.forcetrigger then
@@ -52,18 +50,14 @@ SMODS.Joker({
                     scalar_value = "emult_gain",
                 })
 
-                if not context.forcetrigger then
-                    return msg
-                end
+                if not context.forcetrigger then return msg end
             end
         end
 
-        if context.joker_main or context.forcetrigger then
-            return {
-                echips = card.ability.extra.echips,
-                emult = card.ability.extra.emult,
-            }
-        end
+        if context.joker_main or context.forcetrigger then return {
+            echips = card.ability.extra.echips,
+            emult = card.ability.extra.emult,
+        } end
     end,
 
     asc_credits = {

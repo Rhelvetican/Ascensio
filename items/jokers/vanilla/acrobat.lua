@@ -21,13 +21,11 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, ctx)
-        if ctx.before then
-            return SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "emult",
-                scalar_value = "emult_gain",
-            })
-        end
+        if ctx.before then return SMODS.scale_card(card, {
+            ref_table = card.ability.extra,
+            ref_value = "emult",
+            scalar_value = "emult_gain",
+        }) end
 
         if ctx.setting_blind then
             card.ability.extra.emult = 1
@@ -39,9 +37,7 @@ SMODS.Joker({
         end
 
         if ctx.joker_main or ctx.forcetrigger then
-            if G.GAME.current_round.hands_left == 0 or ctx.forcetrigger then
-                return { emult = card.ability.extra.emult * card.ability.extra.multiplier }
-            end
+            if G.GAME.current_round.hands_left == 0 or ctx.forcetrigger then return { emult = card.ability.extra.emult * card.ability.extra.multiplier } end
 
             return { emult = card.ability.extra.emult }
         end

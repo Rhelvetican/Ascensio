@@ -90,6 +90,7 @@ SMODS.Joker({
                             _card:start_materialize()
                             _card:add_to_deck()
                             G.deck.config.card_limit = G.deck.config.card_limit + 1
+                            ---@cast G.playing_cards balatro.Card[]
                             table.insert(G.playing_cards, _card)
                             G.hand:emplace(_card)
                             playing_card_joker_effects({ _card })
@@ -155,14 +156,8 @@ SMODS.Joker({
     end,
 
     asc_credits = {
-        idea = {
-            "Rhelvetican",
-        },
-        art = {
-            "Tatteredlurker",
-        },
-        code = {
-            "Rhelvetican",
-        },
+        idea = { "Rhelvetican" },
+        art = { "Tatteredlurker" },
+        code = { "Rhelvetican" },
     },
 })

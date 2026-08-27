@@ -9,9 +9,7 @@ SMODS.Joker({
     soul_pos = { x = 11, y = 4, extra = { x = 10, y = 4 } },
     cost = 50,
     order = 5,
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.e_mult } }
-    end,
+    loc_vars = function(self, info_queue, card) return { vars = { card.ability.extra.e_mult } } end,
     calculate = function(self, card, context)
         --[[if context.individual and context.cardarea == G.hand and not context.end_of_round and context.other_card:is_suit("Clubs") then
             if context.other_card.debuff then

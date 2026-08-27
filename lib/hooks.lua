@@ -301,9 +301,7 @@ G.FUNCS.can_sell_stone = function(e)
     local has_stone = false
     if G and G.deck and G.deck.cards then
         for _, c in ipairs(G.deck.cards) do
-            if SMODS.has_enhancement(c, "m_stone") and not SMODS.is_eternal(c) then
-                has_stone = true
-            end
+            if SMODS.has_enhancement(c, "m_stone") and not SMODS.is_eternal(c) then has_stone = true end
         end
     end
     if has_stone and not G.CONTROLLER.locked then
@@ -339,25 +337,17 @@ local calc = SMODS.calculate_individual_effect
 SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
     local ret = calc(effect, scored_card, key, amount, from_edition)
 
-    if ret then
-        return ret
-    end
+    if ret then return ret end
 
     if (key == "xdollars" or key == "Xdollars") and amount ~= 1 then
-        if effect.card then
-            juice_card(effect.card)
-        end
+        if effect.card then juice_card(effect.card) end
 
-        if type(amount) ~= "boolean" then
-            ease_dollars_mult(amount)
-        end
+        if type(amount) ~= "boolean" then ease_dollars_mult(amount) end
         return true
     end
 
     if (key == "csl") and amount ~= 0 then
-        if effect.card then
-            juice_card(effect.card)
-        end
+        if effect.card then juice_card(effect.card) end
 
         ease_selection_limit(lenient_bignum(amount))
         return true

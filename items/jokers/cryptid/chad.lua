@@ -66,15 +66,11 @@ SMODS.Joker({
     end,
 
     add_to_deck = function(_, card, from_debuff)
-        if G.jokers and not from_debuff then
-            G.jokers.config.card_limit = G.jokers.config.card_limit + lenient_bignum(card.ability.extra.immutable.slots)
-        end
+        if G.jokers and not from_debuff then G.jokers.config.card_limit = G.jokers.config.card_limit + lenient_bignum(card.ability.extra.immutable.slots) end
     end,
 
     remove_from_deck = function(_, card, from_debuff)
-        if G.jokers and not from_debuff then
-            G.jokers.config.card_limit = G.jokers.config.card_limit - lenient_bignum(card.ability.extra.immutable.slots)
-        end
+        if G.jokers and not from_debuff then G.jokers.config.card_limit = G.jokers.config.card_limit - lenient_bignum(card.ability.extra.immutable.slots) end
     end,
 
     asc_credits = {

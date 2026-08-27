@@ -82,9 +82,7 @@ SMODS.Joker({
         }
         card.ability.extra.gold_count = 0
         for i, v in pairs(deck_list) do
-            if Cryptid.safe_get(G.PROFILES, G.SETTINGS.profile, "deck_usage", v, "wins", 8) or 0 ~= 0 then
-                card.ability.extra.gold_count = lenient_bignum(card.ability.extra.gold_count) + 1
-            end
+            if Cryptid.safe_get(G.PROFILES, G.SETTINGS.profile, "deck_usage", v, "wins", 8) or 0 ~= 0 then card.ability.extra.gold_count = lenient_bignum(card.ability.extra.gold_count) + 1 end
         end
         card.ability.extra.chip_mod = math.max(lenient_bignum(card.ability.extra.gold_count), 1)
         local time_elapsed = (love.timer.getTime() - AST.start) * lenient_bignum(card.ability.extra.chip_mod)
@@ -103,9 +101,7 @@ SMODS.Joker({
                 colour = G.C.CHIPS,
             }
         end
-        if context.forcetrigger then
-            card.ability.extra.gold_count = lenient_bignum(card.ability.extra.gold_count) + 1
-        end
+        if context.forcetrigger then card.ability.extra.gold_count = lenient_bignum(card.ability.extra.gold_count) + 1 end
     end,
     ascxast_credits = {
         idea = {

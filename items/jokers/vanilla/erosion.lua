@@ -1,7 +1,5 @@
 ---@return number
-local function getCardsBelowFullDeck()
-    return G.GAME.starting_deck_size - #G.playing_cards
-end
+local function getCardsBelowFullDeck() return G.GAME.starting_deck_size - #G.playing_cards end
 
 SMODS.Joker({
     key = "erosion",
@@ -19,9 +17,7 @@ SMODS.Joker({
     blueprint_compat = true,
     demicoloncompat = true,
 
-    loc_vars = function(_, _, card)
-        return { vars = { G.GAME.starting_deck_size, card.ability.extra.xmult_gain, card.ability.extra.xmult } }
-    end,
+    loc_vars = function(_, _, card) return { vars = { G.GAME.starting_deck_size, card.ability.extra.xmult_gain, card.ability.extra.xmult } } end,
 
     calculate = function(_, card, ctx)
         if ctx.end_of_round or ctx.forcetrigger then
@@ -33,9 +29,7 @@ SMODS.Joker({
             })
         end
 
-        if ctx.joker_main then
-            return { xmult = card.ability.extra.xmult }
-        end
+        if ctx.joker_main then return { xmult = card.ability.extra.xmult } end
     end,
 
     asc_credits = {

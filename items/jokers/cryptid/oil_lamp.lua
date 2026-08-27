@@ -23,18 +23,19 @@ SMODS.Joker({
                 if not (G.jokers.cards[i] == card) then
                     if not Card.no(G.jokers.cards[i], "immutable", true) then
                         check = true
-                        Cryptid.with_deck_effects(G.jokers.cards[i], function(cards)
-                            Cryptid.misprintize(cards, {
-                                min = lenient_bignum(card.ability.extra.increase),
-                                max = lenient_bignum(card.ability.extra.increase),
-                            }, nil, true)
-                        end)
+                        Cryptid.with_deck_effects(
+                            G.jokers.cards[i],
+                            function(cards)
+                                Cryptid.misprintize(cards, {
+                                    min = lenient_bignum(card.ability.extra.increase),
+                                    max = lenient_bignum(card.ability.extra.increase),
+                                }, nil, true)
+                            end
+                        )
                     end
                 end
             end
-            if check then
-                card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_upgrade_ex"), colour = G.C.GREEN })
-            end
+            if check then card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_upgrade_ex"), colour = G.C.GREEN }) end
         end
     end,
     asc_credits = {

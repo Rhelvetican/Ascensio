@@ -3,9 +3,7 @@
 ---@param ctx? CalcContext
 local function uncommons(f, ctx)
     for _, jokers in ipairs(G.jokers.cards) do
-        if jokers.config.center.rarity == 2 or (ctx and ctx.forcetrigger) then
-            f(jokers)
-        end
+        if jokers.config.center.rarity == 2 or (ctx and ctx.forcetrigger) then f(jokers) end
     end
 end
 
@@ -40,15 +38,11 @@ SMODS.Joker({
 
     calculate = function(_, card, ctx)
         if ctx.other_joker then
-            if ctx.other_joker.config.center.rarity == 2 or ctx.forcetrigger then
-                return { emult = card.ability.extra.emult }
-            end
+            if ctx.other_joker.config.center.rarity == 2 or ctx.forcetrigger then return { emult = card.ability.extra.emult } end
         end
 
         if (ctx.beat_boss and ctx.main_eval) or ctx.forcetrigger then
-            uncommons(function(jkr)
-                Cryptid.manipulate(jkr, { value = card.ability.extra.xval })
-            end, ctx)
+            uncommons(function(jkr) Cryptid.manipulate(jkr, { value = card.ability.extra.xval }) end, ctx)
 
             return {
                 message = "Upgraded!",

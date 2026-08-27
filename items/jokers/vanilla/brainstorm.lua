@@ -37,9 +37,7 @@ SMODS.Joker({
 
         if context.retrigger_joker_check and not context.retrigger_joker and other_joker ~= nil then
             for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    position = i
-                end
+                if G.jokers.cards[i] == card then position = i end
             end
             if context.other_card == other_joker and position > 0 then
                 return {

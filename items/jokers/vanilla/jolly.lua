@@ -55,9 +55,7 @@ SMODS.Joker({
                             tempcard = v
                         end
                     end
-                    if not tempcard or tempcard.REMOVED then
-                        return nil
-                    end
+                    if not tempcard or tempcard.REMOVED then return nil end
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             G.hand:add_to_highlighted(tempcard)
@@ -75,10 +73,8 @@ SMODS.Joker({
                 end,
             }
         end
-        if context.joker_main and to_big(card.ability.extra.Xmult) > to_big(1) then
-            return {
-                xmult = card.ability.extra.Xmult,
-            }
-        end
+        if context.joker_main and to_big(card.ability.extra.Xmult) > to_big(1) then return {
+            xmult = card.ability.extra.Xmult,
+        } end
     end,
 })

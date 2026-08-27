@@ -40,9 +40,7 @@ SMODS.Joker({
                 local destructable_jokers = {}
 
                 for _, jkr in ipairs(G.jokers.cards) do
-                    if jkr ~= card and SMODS.is_eternal(jkr, card) and not jkr.getting_sliced then
-                        destructable_jokers[#destructable_jokers + 1] = jkr
-                    end
+                    if jkr ~= card and SMODS.is_eternal(jkr, card) and not jkr.getting_sliced then destructable_jokers[#destructable_jokers + 1] = jkr end
                 end
 
                 ---@type Card|nil
@@ -69,9 +67,7 @@ SMODS.Joker({
             end
         end
 
-        if context.joker_main then
-            return { xmult = card.ability.extra.xmult }
-        end
+        if context.joker_main then return { xmult = card.ability.extra.xmult } end
     end,
 
     asc_credits = {

@@ -16,9 +16,7 @@ SMODS.Joker({
     blueprint_compat = true,
     demicoloncompat = true,
 
-    loc_vars = function(_, _, card)
-        return { vars = { card.ability.extra.emult_multiplier, card.ability.extra.hand_multiplier, 1 + card.ability.extra.emult_multiplier * lost } }
-    end,
+    loc_vars = function(_, _, card) return { vars = { card.ability.extra.emult_multiplier, card.ability.extra.hand_multiplier, 1 + card.ability.extra.emult_multiplier * lost } } end,
 
     calculate = function(_, card, ctx)
         if ctx.setting_blind or ctx.forcetrigger then
@@ -42,13 +40,9 @@ SMODS.Joker({
             return nil, true
         end
 
-        if ctx.joker_main or ctx.forcetrigger then
-            return { emult = 1 + card.ability.extra.emult_multiplier * lost }
-        end
+        if ctx.joker_main or ctx.forcetrigger then return { emult = 1 + card.ability.extra.emult_multiplier * lost } end
 
-        if ctx.blind_defeated then
-            lost = 0
-        end
+        if ctx.blind_defeated then lost = 0 end
     end,
 
     asc_credits = {

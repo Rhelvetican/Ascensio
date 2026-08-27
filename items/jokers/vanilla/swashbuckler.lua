@@ -32,9 +32,7 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, context)
-        if context.joker_main and card.ability.extra.xmult > 1 then
-            return { xmult = card.ability.extra.xmult }
-        end
+        if context.joker_main and card.ability.extra.xmult > 1 then return { xmult = card.ability.extra.xmult } end
 
         if context.buying_card and context.card.ability.set == "Joker" then
             SMODS.scale_card(card, {
@@ -56,9 +54,7 @@ SMODS.Joker({
                 ref_value = "xmult",
                 scalar_value = "multiplier",
 
-                operation = function(ref_table, ref_value, initial, change)
-                    ref_table[ref_value] = initial + change * asset
-                end,
+                operation = function(ref_table, ref_value, initial, change) ref_table[ref_value] = initial + change * asset end,
             })
         end
     end,

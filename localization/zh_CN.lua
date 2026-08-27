@@ -10,7 +10,7 @@ return {
                     "{s:1.2} {}",
                     "{s:1.4,C:attention}特别鸣谢：{}",
                     "{s:0.5} ",
-                    "{X:asc_tattered,C:black,s:1.2}Tatteredlurker{}     {X:asc_slipstream,C:black,s:1.2}Lil_Mr._Slipstream{}", 
+                    "{X:asc_tattered,C:black,s:1.2}Tatteredlurker{}     {X:asc_slipstream,C:black,s:1.2}Lil_Mr._Slipstream{}",
                     "{C:asc_tattered,s:0.8}美术                           {C:asc_slipstream,s:0.8}美术   ",
                     "{s:0.2} ",
                     " {X:asc_glitchkat,C:white,s:1.2}Glitchkat10{}       {X:asc_somethingcom515,C:white,s:1.2}Somethingcom515{}",
@@ -401,7 +401,7 @@ return {
             j_asc_misprint = {
                 name = "残缺 (Defectus)",
                 text = {
-                    "", 
+                    "",
                 },
             },
 
@@ -1271,7 +1271,7 @@ return {
             },
 
             j_asc_gardenfork = {
-                name = "反抗世人 (Contra Homo)", 
+                name = "反抗世人 (Contra Homo)",
                 text = {
                     "如果打出的牌型中",
                     "包含 {C:attention}A{} 或 {C:attention}7{}，",
@@ -1280,27 +1280,27 @@ return {
             },
 
             j_asc_nosound = {
-                name = "反抗自我 (Contra Ipsum)", 
+                name = "反抗自我 (Contra Ipsum)",
                 text = {
                     {
                         "将每张打出的 {C:attention}7{}",
                         "额外重新触发 {C:attention}#1#{} 次",
-                        "{C:inactive}(最高{} {C:attention}#2#{} {C:inactive}次重新触发){}"
+                        "{C:inactive}(最高{} {C:attention}#2#{} {C:inactive}次重新触发){}",
                     },
                     {
                         "计分的 {C:attention}7{} 有 {C:green}#3# / #4#{} 的几率",
                         "将随机小丑牌的数值",
                         "{C:attention}乘以{} {C:attention}#5#{}",
-                        "{C:inactive}(包括自身)"
+                        "{C:inactive}(包括自身)",
                     },
                     {
-                        "{C:red}摧毁{} 计分的 {C:attention}7{}"
+                        "{C:red}摧毁{} 计分的 {C:attention}7{}",
                     },
                 },
             },
 
             j_asc_like_antennas_to_heaven = {
-                name = "反抗理智 (Contra Logos)", 
+                name = "反抗理智 (Contra Logos)",
                 text = {
                     "完整手牌中每包含一张",
                     "{C:attention}7{} 或 {C:attention}4{}，此小丑牌",
@@ -1325,7 +1325,7 @@ return {
                     "在回合结束时",
                     "增加所有 {C:attention}小丑牌{} 的",
                     "数值 {C:attention}X#1#{}",
-                    "{C:inactive}(不影响自身)", 
+                    "{C:inactive}(不影响自身)",
                 },
             },
 
@@ -1405,7 +1405,8 @@ return {
                         Entropy and "{C:entr_entropic}熵增{} 小丑牌提供 {X:asc_emult,C:white}^#7#{} 倍率" or nil,
                     },
                     {
-                        Entropy and "在 {C:attention}回合结束时{}，将基础 {X:asc_emult,C:white}^倍率{} 增加 {X:asc_emult,C:white}^#8#{}" or "在 {C:attention}回合结束时{}，将基础 {X:asc_emult,C:white}^倍率{} 增加 {X:asc_emult,C:white}^#7#{}",
+                        Entropy and "在 {C:attention}回合结束时{}，将基础 {X:asc_emult,C:white}^倍率{} 增加 {X:asc_emult,C:white}^#8#{}"
+                            or "在 {C:attention}回合结束时{}，将基础 {X:asc_emult,C:white}^倍率{} 增加 {X:asc_emult,C:white}^#7#{}",
                     },
                 },
             },
@@ -1457,8 +1458,8 @@ return {
                 name = "生日蛋糕",
                 text = {
                     "{C:chips}+#1#{} 筹码",
-                    "每次 {C:attention}重掷{} 减少 {C:chips}-#2#{} 筹码", 
-                    "{C:green}重掷{} 是免费的", 
+                    "每次 {C:attention}重掷{} 减少 {C:chips}-#2#{} 筹码",
+                    "{C:green}重掷{} 是免费的",
                 },
             },
 

@@ -17,9 +17,7 @@ SMODS.Joker({
     blueprint_compat = false,
     demicoloncompat = true,
 
-    loc_vars = function(_, _, card)
-        return { vars = { card.ability.extra.xmult } }
-    end,
+    loc_vars = function(_, _, card) return { vars = { card.ability.extra.xmult } } end,
 
     calculate = function(_, card, ctx)
         if ctx.main_eval and ctx.cardarea == G.play and #ctx.scoring_hand > 2 then

@@ -40,9 +40,7 @@ SMODS.Joker({
                     })
                 else
                     if not Card.no(G.jokers.cards[i], "immutable", true) then
-                        Cryptid.with_deck_effects(G.jokers.cards[i], function(cards)
-                            Cryptid.manipulate(cards, { value = card.ability.extra.manipulate, type = "+" })
-                        end)
+                        Cryptid.with_deck_effects(G.jokers.cards[i], function(cards) Cryptid.manipulate(cards, { value = card.ability.extra.manipulate, type = "+" }) end)
                     end
                 end
             end
@@ -58,9 +56,7 @@ SMODS.Joker({
         end
     end,
 
-    calc_dollar_bonus = function(_, card)
-        return card.ability.extra.money
-    end,
+    calc_dollar_bonus = function(_, card) return card.ability.extra.money end,
 
     asc_credits = {
         idea = {

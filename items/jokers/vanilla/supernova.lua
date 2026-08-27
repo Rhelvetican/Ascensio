@@ -12,9 +12,7 @@ SMODS.Joker({
 
     config = { extra = { xmult = 1 } },
 
-    loc_vars = function(_, _, card)
-        return { vars = { card.ability.extra.xmult } }
-    end,
+    loc_vars = function(_, _, card) return { vars = { card.ability.extra.xmult } } end,
 
     calculate = function(_, card, context)
         if context.before and context.main_eval and not context.blueprint then
@@ -25,11 +23,9 @@ SMODS.Joker({
             })
         end
 
-        if context.joker_main or context.forcetrigger then
-            return {
-                xmult = card.ability.extra.xmult,
-            }
-        end
+        if context.joker_main or context.forcetrigger then return {
+            xmult = card.ability.extra.xmult,
+        } end
     end,
 
     asc_credits = {
