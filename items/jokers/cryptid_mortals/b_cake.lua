@@ -5,7 +5,7 @@ SMODS.Joker({
     atlas = "c_atlas_mortal",
     blueprint_compat = true,
     demicoloncompat = true,
-    pools = { ["Food"] = true },
+    pools = { "Food" },
     pos = { x = 0, y = 0 },
     cost = 8,
     order = 508,

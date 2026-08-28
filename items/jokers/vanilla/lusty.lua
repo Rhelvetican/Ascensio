@@ -8,7 +8,7 @@ SMODS.Joker({
     soul_pos = { x = 5, y = 4, extra = { x = 4, y = 4 } },
     cost = 50,
     order = 3,
-    loc_vars = function(self, info_queue, card)
+    loc_vars = function(_, _, card)
         local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "Exotic Lusty Joker")
         return {
             vars = {

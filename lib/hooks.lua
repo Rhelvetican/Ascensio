@@ -349,7 +349,7 @@ SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, f
     if (key == "csl") and amount ~= 0 then
         if effect.card then juice_card(effect.card) end
 
-        ease_selection_limit(lenient_bignum(amount))
+        Ascensio.SelectionLimit.ease(lenient_bignum(amount))
         return true
     end
 end

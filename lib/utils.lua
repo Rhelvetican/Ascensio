@@ -211,12 +211,13 @@ function ease_dollars_mult(amount, instant) --By Omega. Pretty much thunk's ease
     end
 end
 
--- This is ripped off Entropy.
--- Original by LordRuby
+---These is ripped off Entropy.
+---Original by LordRuby
+Ascensio.SelectionLimit = {}
 
 ---@param mod integer
 ---@param stroverride? string
-local function ease_playing_card_selection_limit(mod, stroverride)
+function Ascensio.SelectionLimit.ease_playing_card(mod, stroverride)
     if SMODS.hand_limit_strings then
         G.GAME.starting_params.play_limit = (G.GAME.starting_params.play_limit or 5) + mod
         G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
@@ -227,12 +228,9 @@ local function ease_playing_card_selection_limit(mod, stroverride)
     end
 end
 
--- This is also ripped off Entropy.
--- Original by LordRuby
-
 ---@param mod integer
 ---@param stroverride? string
-local function ease_discard_selection_limit(mod, stroverride)
+function Ascensio.SelectionLimit.ease_discard(mod, stroverride)
     G.GAME.starting_params.discard_limit = (G.GAME.starting_params.discard_limit or 5) + mod
     G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
     local str = stroverride or G.GAME.starting_params.discard_limit or ""
@@ -241,7 +239,7 @@ end
 
 ---@param to integer
 ---@param stroverride? string
-local function set_playing_card_selection_limit(to, stroverride)
+function Ascensio.SelectionLimit.set_playing_card(to, stroverride)
     if SMODS.hand_limit_strings then
         G.GAME.starting_params.play_limit = to
         G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
@@ -254,7 +252,7 @@ end
 
 ---@param to integer
 ---@param stroverride? string
-local function set_discard_selection_limit(to, stroverride)
+function Ascensio.SelectionLimit.set_discard(to, stroverride)
     G.GAME.starting_params.discard_limit = to
     G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
     local str = stroverride or G.GAME.starting_params.discard_limit or ""
@@ -263,20 +261,20 @@ end
 
 ---@param mod integer
 ---@param stroverride? string
-function ease_selection_limit(mod, stroverride)
+function Ascensio.SelectionLimit.ease(mod, stroverride)
     if not SMODS.hand_limit_strings then SMODS.hand_limit_strings = {} end
 
-    ease_playing_card_selection_limit(mod, stroverride)
-    ease_discard_selection_limit(mod, stroverride)
+    Ascensio.SelectionLimit.ease_playing_card(mod, stroverride)
+    Ascensio.SelectionLimit.ease_discard(mod, stroverride)
 end
 
 ---@param to integer
 ---@param stroverride? string
-function set_selection_limit(to, stroverride)
+function Ascensio.SelectionLimit.set(to, stroverride)
     if not SMODS.hand_limit_strings then SMODS.hand_limit_strings = {} end
 
-    set_playing_card_selection_limit(to, stroverride)
-    set_discard_selection_limit(to, stroverride)
+    Ascensio.SelectionLimit.set_playing_card(to, stroverride)
+    Ascensio.SelectionLimit.set_discard(to, stroverride)
 end
 
 ---@class AscensioCredits
