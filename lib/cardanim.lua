@@ -4,30 +4,32 @@
 ---@class Coords
 ---@field x integer
 ---@field y integer
-
 ---@overload fun(coords: Coords): Coords
----@param coords Coords
----@return Coords
-Coords = function(coords) return coords end
+Coords = setmetatable({}, {
+    ---@param tbl Coords
+    ---@return Coords
+    __call = function(_, tbl) return tbl end,
+})
 
 ---@class Rect
 ---@field x1 integer
 ---@field y1 integer
 ---@field x2 integer
 ---@field y2 integer
-
 ---@overload fun(rect: Rect): Rect
----@param rect Rect
----@return Rect
-Rect = function(rect) return rect end
+Rect = setmetatable({}, {
+    ---@param tbl Rect
+    ---@return Rect
+    __call = function(_, tbl) return tbl end,
+})
 
 ---@class CardAnimationFrames
 ---@field pos? { x: integer, y: integer, t: number }[]
 ---@field soul_pos? { x: integer, y: integer, t: number }[]
 ---@field soul_pos_extra? { x: integer, y: integer, t: number }[]
 
----@alias GroupType "row"|"col"|"r"|"c"
----@alias IterationType "forward"|"backward"|"f"|"b"
+---@alias GroupType "row"|"r"|"col"|"c"
+---@alias IterationType "forward"|"f"|"backward"|"b"
 
 ---@class CardAnimationSkimMacro
 ---@field type "skim"
@@ -58,17 +60,14 @@ local cardanim_cfg = {
         -- child is the child of the card center that has the "set_sprite_pos" method
         pos = {
             coords = function(p_center) return p_center.pos end,
-
             child = function(children) return children.center end,
         },
         soul_pos = {
             coords = function(p_center) return p_center.soul_pos end,
-
             child = function(children) return children.floating_sprite end,
         },
         soul_pos_extra = {
             coords = function(p_center) return p_center.soul_pos and p_center.soul_pos.extra or nil end,
-
             child = function(children) return children.floating_sprite2 end,
         },
     },
