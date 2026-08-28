@@ -8,7 +8,7 @@
 Coords = setmetatable({}, {
     ---@param tbl Coords
     ---@return Coords
-    __call = function(_, tbl) return tbl end,
+    __call = function(_, tbl) return setmetatable(tbl, { __index = Coords }) end,
 })
 
 ---@class Rect
@@ -20,7 +20,7 @@ Coords = setmetatable({}, {
 Rect = setmetatable({}, {
     ---@param tbl Rect
     ---@return Rect
-    __call = function(_, tbl) return tbl end,
+    __call = function(_, tbl) return setmetatable(tbl, { __index = Rect }) end,
 })
 
 ---@class CardAnimationFrames
