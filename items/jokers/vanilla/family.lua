@@ -9,9 +9,7 @@ SMODS.Joker({
     soul_pos = { x = 5, y = 1, extra = { x = 4, y = 1 } },
     cost = 50,
     order = 133,
-    loc_vars = function(_, info_queue, card)
-        return { vars = { card and lenient_bignum(card.ability.extra.power) } }
-    end,
+    loc_vars = function(_, info_queue, card) return { vars = { card and lenient_bignum(card.ability.extra.power) } } end,
     calculate = function(_, card, context)
         if --The card transformation apspect of this was taken and modifed in part from the Waterfall Joker from the Celesete Card Collection
             context.before
@@ -42,7 +40,7 @@ SMODS.Joker({
                         trigger = "immediate",
                         func = function()
                             for i = 1, #G.hand.cards do
-                                SMODS.change_base(G.hand.cards[i], _, rank)
+                                _ = SMODS.change_base(G.hand.cards[i], nil, rank)
                                 G.hand.cards[i]:juice_up()
                                 play_sound("tarot1", 0.8, 0.4)
                             end

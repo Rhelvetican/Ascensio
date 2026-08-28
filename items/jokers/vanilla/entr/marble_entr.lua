@@ -25,9 +25,7 @@ SMODS.Joker({
     },
 
     loc_vars = function(self, info_queue, card)
-        if not card.edition or (card.edition and not card.edition.e_cry_mosaic) then
-            info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_mosaic
-        end
+        if not card.edition or (card.edition and not card.edition.e_cry_mosaic) then info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_mosaic end
         info_queue[#info_queue + 1] = { key = "entr_crimson_seal", set = "Other" }
         info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
         return {
@@ -67,12 +65,8 @@ SMODS.Joker({
         end
 
         if context.setting_blind then
-            if card.ability.extra.retrigger > card.ability.immutable.recap then
-                card.ability.extra.retrigger = card.ability.immutable.recap
-            end
-            if card.ability.extra.create > card.ability.immutable.cacap then
-                card.ability.extra.create = card.ability.immutable.cacap
-            end
+            if card.ability.extra.retrigger > card.ability.immutable.recap then card.ability.extra.retrigger = card.ability.immutable.recap end
+            if card.ability.extra.create > card.ability.immutable.cacap then card.ability.extra.create = card.ability.immutable.cacap end
             local stones = {}
             for _ = 1, to_number(card.ability.extra.create) do
                 local stone = SMODS.create_card({

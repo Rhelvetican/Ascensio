@@ -38,9 +38,7 @@ SMODS.Joker({
 
     calculate = function(_, card, context)
         if context.first_hand_drawn then
-            local eval = function()
-                return G.GAME.current_round.discards_used == 0 and not G.RESET_JIGGLES
-            end
+            local eval = function() return G.GAME.current_round.discards_used == 0 and not G.RESET_JIGGLES end
             ---@diagnostic disable-next-line: undefined-global
             juice_card_until(card, eval, true)
         end
@@ -92,22 +90,16 @@ SMODS.Joker({
                 })
             end
 
-            if not context.forcetrigger then
-                SMODS.destroy_cards(removed)
-            end
+            if not context.forcetrigger then SMODS.destroy_cards(removed) end
         end
 
-        if context.joker_main then
-            return {
-                echips = card.ability.extra.echips,
-                emult = card.ability.extra.emult,
-            }
-        end
+        if context.joker_main then return {
+            echips = card.ability.extra.echips,
+            emult = card.ability.extra.emult,
+        } end
     end,
 
-    calc_dollar_bonus = function(_, card)
-        return card.ability.extra.money
-    end,
+    calc_dollar_bonus = function(_, card) return card.ability.extra.money end,
 
     ---@type CardAnimation
     animation = {

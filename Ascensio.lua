@@ -1,14 +1,15 @@
 ---@class (partial) CalcContext
 ---@field forcetrigger? bool
 
----@param path string Path to the file
+Ascensio = {}
+
+---@param path string Path of the source file to load. Relative from project root.
 ---@param id? string Mod ID. Defaults to `SMODS.current_mod`.
----@return any?
-local function loadFile(path, id)
+---@return string?
+function Ascensio.loadFile(path, id)
     local chunk, err = SMODS.load_file(path, id)
-    if err ~= nil or chunk == nil then
-        return err
-    end
+
+    if err ~= nil or chunk == nil then return err end
 
     chunk()
 end
@@ -16,47 +17,40 @@ end
 -- Compability
 Cryptid.mod_whitelist["Ascensio"] = true
 
-Ascensio = {}
-loadFile("lib/core.lua")
+Ascensio.loadFile("lib/core.lua")
 
 Ascensio.Ascensionable = {}
 
-if Entropy then
-    Ascensio.Apothable = {}
-end
+if Entropy then Ascensio.Apothable = {} end
 
 Ascensio.Descensions = {}
 
 -- Load Atlases.
-loadFile("atlas.lua")
+Ascensio.loadFile("atlas.lua")
 
 -- Load Gradients.
-loadFile("Palette.lua")
+Ascensio.loadFile("Palette.lua")
 
-if next(SMODS.find_mod("DebugPlus")) then
-    loadFile("lib/debug.lua")
-end
+if next(SMODS.find_mod("DebugPlus")) then Ascensio.loadFile("lib/debug.lua") end
 
 -- Load libraries.
-loadFile("lib/utils.lua")
-loadFile("lib/cardanim.lua")
-loadFile("lib/number.lua")
-loadFile("lib/hooks.lua")
+Ascensio.loadFile("lib/utils.lua")
+Ascensio.loadFile("lib/cardanim.lua")
+Ascensio.loadFile("lib/number.lua")
+Ascensio.loadFile("lib/hooks.lua")
 
 -- Load consumable.
-loadFile("items/consumables/ascensio/ascension.lua")
-loadFile("items/consumables/ascensio/numina.lua")
+Ascensio.loadFile("items/consumables/ascensio/ascension.lua")
+Ascensio.loadFile("items/consumables/ascensio/numina.lua")
 
-if Entropy then
-    loadFile("items/consumables/entropy/apotheosis.lua")
-end
+if Entropy then Ascensio.loadFile("items/consumables/entropy/apotheosis.lua") end
 
 -- Load deck.
-loadFile("items/decks/ascensio/starlight.lua")
+Ascensio.loadFile("items/decks/ascensio/starlight.lua")
 
 -- Define crossmods.
 ---@enum Source
-local Source = {
+Ascensio.Source = setmetatable({
     Vanilla = "vanilla/",
     Cryptid = "cryptid/",
     Entropy = "entropy/",
@@ -64,28 +58,39 @@ local Source = {
     Cryptposting = "cryptposting/",
 
     MortalCryptid = "cryptid/mortal/",
-    Other = "",
-}
+}, {
+    ---@param self Source
+    ---@param variant string|number
+    ---@return string
+    __index = function(self, variant)
+        ---@diagnostic disable-next-line: undefined-field
+        local _res = self[variant]
+        if _res ~= nil then
+            return _res
+        else
+            return ""
+        end
+    end,
+
+    -- Does nothing.
+    __newindex = function(_, _, _) end,
+})
 
 ---@param key string
 ---@return string
-local function get_source_file(key)
-    return string.sub(key, 7)
-end
+local function get_source_file(key) return string.sub(key, 7) end
 
 ---@alias AscensionSource "vanilla"|"cryptid"|"cryptid_mortals"|"entropy"|"astronomica"|string
 
 ---@class Ascension
 ---@field exotic string The key of the Ascended joker.
 ---@field entropic? string The key of the Apotheosis joker.
----@field exotic_file? "skip"|string Where the Joker is defined in. If the source file is `"skip"` then loading will be skipped.
+---@field exotic_file? "skip"|string Where the Joker is defined in. If the value `"skip"` is provided then loading will be skipped.
 ---@field entropic_file? "skip"|string Where the Entropic Joker is defined in. `".lua"` file extension are not to be added. If the source file is `"skip"` then loading will be skipped.
 ---@overload fun(asc: Ascension): Ascension
 Ascensio.Ascension = setmetatable({}, {
     ---@param asc Ascension
-    __call = function(_, asc)
-        return asc
-    end,
+    __call = function(_, asc) return asc end,
 })
 
 --- Register Ascensions. Internal use only
@@ -98,7 +103,7 @@ local function ascensioRegisterInternal(o)
             local mortal, ascensions = mortal, ascensions
             if ascensions.exotic_file ~= "skip" then
                 local source_file = ascensions.exotic_file or get_source_file(ascensions.exotic)
-                loadFile(string.format("items/jokers/%s/%s.lua", source, source_file))
+                Ascensio.loadFile(string.format("items/jokers/%s/%s.lua", source, source_file))
             end
 
             Ascensio.Ascensionable[mortal] = ascensions.exotic
@@ -107,7 +112,7 @@ local function ascensioRegisterInternal(o)
             if Ascensio.Apothable and ascensions.entropic ~= nil then
                 if ascensions.entropic_file ~= "skip" then
                     local entr_src = ascensions.entropic_file or get_source_file(ascensions.entropic)
-                    loadFile(string.format("items/jokers/%s/entr/%s.lua", source, entr_src))
+                    Ascensio.loadFile(string.format("items/jokers/%s/entr/%s.lua", source, entr_src))
                 end
 
                 Ascensio.Apothable[mortal] = ascensions.entropic
@@ -126,7 +131,7 @@ end
 --- - `mortal_key` is the key of the mortal Joker.
 --- - `ascended_key` is the key of the ascended Joker.
 --- - `entropic_key` is the key of the apotheosis Joker.    (Require Entropy).
----@param o  table<string, Ascension>
+---@param o table<string, Ascension>
 function Ascensio.register(o)
     local processed = {}
 
@@ -150,9 +155,7 @@ local AscensionInternal = setmetatable({}, {
     ---@return AscensionInternal
     __call = function(_, asc)
         local source_file = asc.source_file or get_source_file(asc.to_exotic)
-        if source_file ~= "skip" then
-            loadFile("items/jokers/" .. asc.source .. source_file .. ".lua")
-        end
+        if source_file ~= "skip" then Ascensio.loadFile("items/jokers/" .. asc.source .. source_file .. ".lua") end
 
         Ascensio.Ascensionable[asc.from] = asc.to_exotic
         Ascensio.Descensions[asc.to_exotic] = asc.from
@@ -160,9 +163,7 @@ local AscensionInternal = setmetatable({}, {
         if Entropy then
             if Ascensio.Apothable and asc.to_entropic ~= nil then
                 local entr_source_file = asc.entropic_file or get_source_file(asc.to_exotic)
-                if entr_source_file ~= "skip" then
-                    loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua")
-                end
+                if entr_source_file ~= "skip" then Ascensio.loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua") end
 
                 Ascensio.Apothable[asc.from] = asc.to_entropic
                 Ascensio.Apothable[asc.to_exotic] = asc.to_entropic
@@ -175,6 +176,7 @@ local AscensionInternal = setmetatable({}, {
     end,
 })
 
+local Source = Ascensio.Source
 -- todo: port this whole mess to the newer api i js wrote above
 -- Vanilla Ascensions
 AscensionInternal({ source = Source.Vanilla, from = "j_joker", to_exotic = "j_asc_jimbo", to_entropic = "j_asc_jimbo_entr" })
@@ -253,6 +255,7 @@ AscensionInternal({ source = Source.Vanilla, from = "j_throwback", to_exotic = "
 AscensionInternal({ source = Source.Vanilla, from = "j_hanging_chad", to_exotic = "j_asc_hanging_chad" })
 AscensionInternal({ source = Source.Vanilla, from = "j_blueprint", to_exotic = "j_asc_blueprint" })
 AscensionInternal({ source = Source.Vanilla, from = "j_mr_bones", to_exotic = "j_asc_mr_bones", source_file = "bones" })
+AscensionInternal({ source = Source.Vanilla, from = "j_acrobat", to_exotic = "j_asc_acrobat" })
 AscensionInternal({ source = Source.Vanilla, from = "j_sock_and_buskin", to_exotic = "j_asc_sock_and_buskin" })
 AscensionInternal({ source = Source.Vanilla, from = "j_swashbuckler", to_exotic = "j_asc_swashbuckler" })
 AscensionInternal({ source = Source.Vanilla, from = "j_smeared", to_exotic = "j_asc_smeared" })
@@ -414,9 +417,7 @@ function SMODS.create_mod_badges(obj, badges)
             }
             local function eq_col(x, y)
                 for _ = 1, 4 do
-                    if x[1] ~= y[1] then
-                        return false
-                    end
+                    if x[1] ~= y[1] then return false end
                 end
                 return true
             end
@@ -449,8 +450,8 @@ function SMODS.create_mod_badges(obj, badges)
                 ---@diagnostic disable-next-line: assign-type-mismatch
                 calced_text_width = calced_text_width + tx / (G.TILESIZE * G.TILESCALE)
             end
-            ---@diagnostic disable-next-line: assign-type-mismatch
-            local scale_fac = calced_text_width > max_text_width and max_text_width / calced_text_width or 1
+
+            local scale_fac = calced_text_width > max_text_width and max_text_width / calced_text_width or 1.0
             return scale_fac
         end
         if obj.ascxast_credits.art or obj.ascxast_credits.code or obj.ascxast_credits.idea or obj.ascxast_credits.name or obj.ascxast_credits.custom then
@@ -522,9 +523,7 @@ function SMODS.create_mod_badges(obj, badges)
             }
             local function eq_col(x, y)
                 for _ = 1, 4 do
-                    if x[1] ~= y[1] then
-                        return false
-                    end
+                    if x[1] ~= y[1] then return false end
                 end
                 return true
             end
@@ -539,108 +538,110 @@ function SMODS.create_mod_badges(obj, badges)
     end
 end
 
--- Ascēnsiō X Entropy Tag
-local smcmb3 = SMODS.create_mod_badges
-function SMODS.create_mod_badges(obj, badges)
-    smcmb3(obj, badges)
-    if not SMODS.config.no_mod_badges and obj and obj.ascxentr_credits then
-        local function calc_scale_fac(text)
-            local size = 0.9
-            local font = G.LANG.font
-            local max_text_width = 2 - 2 * 0.05 - 4 * 0.03 * size - 2 * 0.03
-            local calced_text_width = 0
+if next(SMODS.find_mod("Entropy")) then
+    ---Ascēnsiō X Entropy Tag
+    local smcmb3 = SMODS.create_mod_badges
+    ---@param obj SMODS.GameObject|table
+    ---@param badges table[]
+    function SMODS.create_mod_badges(obj, badges)
+        smcmb3(obj, badges)
+        if not SMODS.config.no_mod_badges and obj and obj.ascxentr_credits then
+            local function calc_scale_fac(text)
+                local size = 0.9
+                local font = G.LANG.font
+                local max_text_width = 2 - 2 * 0.05 - 4 * 0.03 * size - 2 * 0.03
+                local calced_text_width = 0
 
-            ---@diagnostic disable-next-line: access-invisible, undefined-field
-            -- Math reproduced from DynaText:update_text
-            for _, c in utf8.chars(text) do
-                local tx = font.FONT:getWidth(c) * (0.33 * size) * G.TILESCALE * font.FONTSCALE + 2.7 * 1 * G.TILESCALE * font.FONTSCALE
+                ---@diagnostic disable-next-line: access-invisible, undefined-field
+                -- Math reproduced from DynaText:update_text
+                for _, c in utf8.chars(text) do
+                    local tx = font.FONT:getWidth(c) * (0.33 * size) * G.TILESCALE * font.FONTSCALE + 2.7 * 1 * G.TILESCALE * font.FONTSCALE
+                    ---@diagnostic disable-next-line: assign-type-mismatch
+                    calced_text_width = calced_text_width + tx / (G.TILESIZE * G.TILESCALE)
+                end
                 ---@diagnostic disable-next-line: assign-type-mismatch
-                calced_text_width = calced_text_width + tx / (G.TILESIZE * G.TILESCALE)
+                local scale_fac = calced_text_width > max_text_width and max_text_width / calced_text_width or 1
+                return scale_fac
             end
-            ---@diagnostic disable-next-line: assign-type-mismatch
-            local scale_fac = calced_text_width > max_text_width and max_text_width / calced_text_width or 1
-            return scale_fac
-        end
-        if obj.ascxentr_credits.art or obj.ascxentr_credits.code or obj.ascxentr_credits.idea or obj.ascxentr_credits.name or obj.ascxentr_credits.custom then
-            local scale_fac = {}
-            local min_scale_fac = 1
-            local strings = { "Ascēnsiō X Entropy" }
-            for _, v in ipairs({ "name", "idea", "art", "code" }) do
-                if obj.ascxentr_credits[v] then
-                    for i = 1, #obj.ascxentr_credits[v] do
-                        strings[#strings + 1] = localize({ type = "variable", key = "cry_" .. v, vars = { obj.ascxentr_credits[v][i] } })[1]
+            if obj.ascxentr_credits.art or obj.ascxentr_credits.code or obj.ascxentr_credits.idea or obj.ascxentr_credits.name or obj.ascxentr_credits.custom then
+                local scale_fac = {}
+                local min_scale_fac = 1
+                local strings = { "Ascēnsiō X Entropy" }
+                for _, v in ipairs({ "name", "idea", "art", "code" }) do
+                    if obj.ascxentr_credits[v] then
+                        for i = 1, #obj.ascxentr_credits[v] do
+                            strings[#strings + 1] = localize({ type = "variable", key = "cry_" .. v, vars = { obj.ascxentr_credits[v][i] } })[1]
+                        end
                     end
                 end
-            end
-            if obj.ascxentr_credits.custom then
-                strings[#strings + 1] = localize({
-                    type = "variable",
-                    key = obj.ascxentr_credits.custom.key,
-                    vars = { obj.ascxentr_credits.custom.text },
-                })
-            end
-            for i = 1, #strings do
-                scale_fac[i] = calc_scale_fac(strings[i])
-                min_scale_fac = math.min(min_scale_fac, scale_fac[i])
-            end
-            local ct = {}
-            for i = 1, #strings do
-                ct[i] = {
-                    string = strings[i],
-                }
-            end
-            local cry_badge = {
-                n = G.UIT.R,
-                config = { align = "cm" },
-                nodes = {
-                    {
-                        n = G.UIT.R,
-                        config = {
-                            align = "cm",
-                            colour = HEX("912E59"),
-                            r = 0.1,
-                            minw = 2 / min_scale_fac,
-                            minh = 0.36,
-                            emboss = 0.05,
-                            padding = 0.03 * 0.9,
-                        },
-                        nodes = {
-                            { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
-                            {
-                                n = G.UIT.O,
-                                config = {
-                                    object = DynaText({
-                                        string = ct or "ERROR",
-                                        colours = {
-                                            obj.ascxentr_credits and obj.ascxentr_credits.text_colour or G.C.WHITE,
-                                        },
-                                        silent = true,
-                                        float = true,
-                                        shadow = true,
-                                        offset_y = -0.03,
-                                        spacing = 1,
-                                        scale = 0.33 * 0.9,
-                                    }),
-                                },
+                if obj.ascxentr_credits.custom then
+                    strings[#strings + 1] = localize({
+                        type = "variable",
+                        key = obj.ascxentr_credits.custom.key,
+                        vars = { obj.ascxentr_credits.custom.text },
+                    })
+                end
+                for i = 1, #strings do
+                    scale_fac[i] = calc_scale_fac(strings[i])
+                    min_scale_fac = math.min(min_scale_fac, scale_fac[i])
+                end
+                local ct = {}
+                for i = 1, #strings do
+                    ct[i] = {
+                        string = strings[i],
+                    }
+                end
+                local cry_badge = {
+                    n = G.UIT.R,
+                    config = { align = "cm" },
+                    nodes = {
+                        {
+                            n = G.UIT.R,
+                            config = {
+                                align = "cm",
+                                colour = HEX("912E59"),
+                                r = 0.1,
+                                minw = 2 / min_scale_fac,
+                                minh = 0.36,
+                                emboss = 0.05,
+                                padding = 0.03 * 0.9,
                             },
-                            { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+                            nodes = {
+                                { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+                                {
+                                    n = G.UIT.O,
+                                    config = {
+                                        object = DynaText({
+                                            string = ct or "ERROR",
+                                            colours = {
+                                                obj.ascxentr_credits and obj.ascxentr_credits.text_colour or G.C.WHITE,
+                                            },
+                                            silent = true,
+                                            float = true,
+                                            shadow = true,
+                                            offset_y = -0.03,
+                                            spacing = 1,
+                                            scale = 0.33 * 0.9,
+                                        }),
+                                    },
+                                },
+                                { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+                            },
                         },
                     },
-                },
-            }
-            local function eq_col(x, y)
-                for _ = 1, 4 do
-                    if x[1] ~= y[1] then
-                        return false
+                }
+                local function eq_col(x, y)
+                    for _ = 1, 4 do
+                        if x[1] ~= y[1] then return false end
                     end
+                    return true
                 end
-                return true
-            end
-            for i = 1, #badges do
-                if eq_col(badges[i].nodes[1].config.colour, HEX("235bb0")) then
-                    badges[i].nodes[1].nodes[2].config.object:remove()
-                    badges[i] = cry_badge
-                    break
+                for i = 1, #badges do
+                    if eq_col(badges[i].nodes[1].config.colour, HEX("235bb0")) then
+                        badges[i].nodes[1].nodes[2].config.object:remove()
+                        badges[i] = cry_badge
+                        break
+                    end
                 end
             end
         end
@@ -651,13 +652,9 @@ end
 SMODS.current_mod = SMODS.current_mod or {}
 
 --#region SMODS UI funcs (additions, config, collection) Taken from Cardsleves to make custom mod background description clear--
-SMODS.current_mod.description_loc_vars = function()
-    return { background_colour = G.C.CLEAR, text_colour = G.C.WHITE, scale = 1.2 }
-end
+SMODS.current_mod.description_loc_vars = function() return { background_colour = G.C.CLEAR, text_colour = G.C.WHITE, scale = 1.2 } end
 
-if SMODS.current_mod.config == nil then
-    SMODS.current_mod.config = { ["Insanity Mode!!!"] = false }
-end
+if SMODS.current_mod.config == nil then SMODS.current_mod.config = { ["Insanity Mode!!!"] = false } end
 
 AscConfig = SMODS.current_mod.config
 

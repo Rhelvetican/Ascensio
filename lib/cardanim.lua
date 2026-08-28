@@ -8,9 +8,7 @@
 ---@overload fun(coords: Coords): Coords
 ---@param coords Coords
 ---@return Coords
-Coords = function(coords)
-    return coords
-end
+Coords = function(coords) return coords end
 
 ---@class Rect
 ---@field x1 integer
@@ -21,9 +19,7 @@ end
 ---@overload fun(rect: Rect): Rect
 ---@param rect Rect
 ---@return Rect
-Rect = function(rect)
-    return rect
-end
+Rect = function(rect) return rect end
 
 ---@class CardAnimationFrames
 ---@field pos? { x: integer, y: integer, t: number }[]
@@ -40,8 +36,8 @@ end
 ---@field soul_pos_extra? CardAnimationSkimMacroSubTable
 
 ---@class CardAnimationSkimMacroSubTable
----@field include (Coords|Rect)[]
----@field exclude? (Coords|Rect)[]
+---@field include (Coords[]|Rect[])
+---@field exclude? (Coords[]|Rect[])
 ---@field timing? integer[]
 ---@field is_periodic? boolean
 ---@field direction? { [1]: GroupType, [2]: IterationType, [3]: IterationType }
@@ -61,28 +57,19 @@ local cardanim_cfg = {
         -- coords is the part of the card definition that has x-y coords on the atlas
         -- child is the child of the card center that has the "set_sprite_pos" method
         pos = {
-            coords = function(p_center)
-                return p_center.pos
-            end,
-            child = function(children)
-                return children.center
-            end,
+            coords = function(p_center) return p_center.pos end,
+
+            child = function(children) return children.center end,
         },
         soul_pos = {
-            coords = function(p_center)
-                return p_center.soul_pos
-            end,
-            child = function(children)
-                return children.floating_sprite
-            end,
+            coords = function(p_center) return p_center.soul_pos end,
+
+            child = function(children) return children.floating_sprite end,
         },
         soul_pos_extra = {
-            coords = function(p_center)
-                return p_center.soul_pos and p_center.soul_pos.extra or nil
-            end,
-            child = function(children)
-                return children.floating_sprite2
-            end,
+            coords = function(p_center) return p_center.soul_pos and p_center.soul_pos.extra or nil end,
+
+            child = function(children) return children.floating_sprite2 end,
         },
     },
     -- [[ FRAMERATE GRANULARITY]]
@@ -105,9 +92,7 @@ local files = NFS.getDirectoryItems(current_mod_path .. cardanim_cfg.macro_direc
 for _, file_name in ipairs(files) do
     local macro_name = file_name:gsub(".lua", "")
     local f, err = SMODS.load_file(cardanim_cfg.macro_directory .. "/" .. file_name)
-    if err then
-        error(err)
-    end
+    if err then error(err) end
     cardanim_tbl.macro_functions[macro_name] = f()
 end
 
@@ -133,9 +118,7 @@ G.E_MANAGER:add_event(Event({
                 macro_obj.card_key = card_key
 
                 local macro_frames = cardanim_tbl.macro_functions[macro_obj.type](macro_obj)
-                if macro_frames then
-                    card_anim.frames = macro_frames
-                end
+                if macro_frames then card_anim.frames = macro_frames end
             end
 
             anim_details[card_key] = {
@@ -163,9 +146,7 @@ G.E_MANAGER:add_event(Event({
             -- dt accounts for different frame rates,
             -- hence this is required for constant animations across all devices
             sprite_dt = sprite_dt + dt
-            if sprite_dt < sprite_spf then
-                goto skip_update
-            end
+            if sprite_dt < sprite_spf then goto skip_update end
             sprite_dt = sprite_dt - sprite_spf
 
             for card_key, card_anim_d in pairs(anim_details) do
@@ -192,9 +173,7 @@ G.E_MANAGER:add_event(Event({
                         local proper_frame_duration = frame.t * cardanim_cfg.granularity
                         if proper_frame_duration <= frame_duration[layer_name] then
                             frame_id[layer_name] = frame_id[layer_name] + 1 -- increase frame
-                            if frame_id[layer_name] > #frame_sequence[layer_name] then
-                                frame_id[layer_name] = 1
-                            end -- limit range of frames
+                            if frame_id[layer_name] > #frame_sequence[layer_name] then frame_id[layer_name] = 1 end -- limit range of frames
                             frame_duration[layer_name] = 1 -- limit range of duration
                         else
                             frame_duration[layer_name] = frame_duration[layer_name] + 1
@@ -207,15 +186,11 @@ G.E_MANAGER:add_event(Event({
             -- so we need to use set_sprite_pos on each child of the card object thing
             for _, card in pairs(G.I.CARD) do
                 -- Skip cards without centers (I think playing cards?)
-                if not card.config.center then
-                    goto i_card_continue
-                end
+                if not card.config.center then goto i_card_continue end
 
                 local card_key = card.config.center.key
                 -- If the card has no animation, skip
-                if not anim_details[card_key] or card.facing == "back" or not card.config.center.unlocked or not card.config.center.discovered then
-                    goto i_card_continue
-                end
+                if not anim_details[card_key] or card.facing == "back" or not card.config.center.unlocked or not card.config.center.discovered then goto i_card_continue end
 
                 -- Grab card center and its frames
                 local card_def = G.P_CENTERS[card_key]
@@ -223,9 +198,7 @@ G.E_MANAGER:add_event(Event({
 
                 -- Update each layer, but only if frames are defined for that layer
                 for kw, part in pairs(cardanim_cfg.card_layers) do
-                    if frame_sequence[kw] and part.coords(card_def) then
-                        part.child(card.children):set_sprite_pos(part.coords(card_def))
-                    end
+                    if frame_sequence[kw] and part.coords(card_def) then part.child(card.children):set_sprite_pos(part.coords(card_def)) end
                 end
 
                 ::i_card_continue::

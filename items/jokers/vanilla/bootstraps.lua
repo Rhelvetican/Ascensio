@@ -35,9 +35,7 @@ SMODS.Joker({
         end
     end,
     calc_dollar_bonus = function(self, card)
-        if card.ability.extra.income >= 1 then
-            return card.ability.extra.income
-        end
+        if card.ability.extra.income >= 1 then return card.ability.extra.income end
     end,
     asc_credits = {
         idea = {

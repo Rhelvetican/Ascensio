@@ -29,9 +29,7 @@ SMODS.Joker({
                     func = function()
                         cardx:juice_up()
 
-                        if card.ability.eternal then
-                            return true, nil
-                        end
+                        if card.ability.eternal then return true, nil end
 
                         SMODS.scale_card(card, {
                             ref_table = card.ability.extra,
@@ -46,11 +44,9 @@ SMODS.Joker({
             end
         end
 
-        if context.joker_main or context.forcetrigger then
-            return {
-                emult = card.ability.extra.emult,
-            }
-        end
+        if context.joker_main or context.forcetrigger then return {
+            emult = card.ability.extra.emult,
+        } end
     end,
     asc_credits = {
         idea = {

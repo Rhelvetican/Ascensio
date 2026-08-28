@@ -4,17 +4,11 @@ local function count_mod()
     if G and G.deck and G.deck.cards then
         for _, card in ipairs(G.deck.cards) do
             -- edition
-            if card.edition then
-                mod_count = mod_count + 1
-            end
+            if card.edition then mod_count = mod_count + 1 end
             -- seal
-            if card.seal then
-                mod_count = mod_count + 1
-            end
+            if card.seal then mod_count = mod_count + 1 end
             -- enhancement
-            if next(SMODS.get_enhancements(card)) then
-                mod_count = mod_count + 1
-            end
+            if next(SMODS.get_enhancements(card)) then mod_count = mod_count + 1 end
         end
     end
 

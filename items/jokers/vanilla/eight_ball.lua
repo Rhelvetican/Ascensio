@@ -26,11 +26,9 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, ctx)
-        if ctx.joker_main then
-            return {
-                xmult = lenient_bignum(card.ability.extra.xmult),
-            }
-        end
+        if ctx.joker_main then return {
+            xmult = lenient_bignum(card.ability.extra.xmult),
+        } end
 
         if
             (

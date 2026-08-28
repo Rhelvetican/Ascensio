@@ -9,9 +9,7 @@ SMODS.Joker({
     soul_pos = { x = 8, y = 0, extra = { x = 7, y = 0 } },
     cost = 50,
     order = 216,
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card and lenient_bignum(card.ability.extra.money) } }
-    end,
+    loc_vars = function(self, info_queue, card) return { vars = { card and lenient_bignum(card.ability.extra.money) } } end,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.before and context.full_hand then
             local has_ace = false

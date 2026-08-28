@@ -190,13 +190,4 @@ SMODS.Joker({
             "MarioFan597",
         },
     },
-    animation = {
-        macro = {
-            type = "skim",
-            soul_pos_extra = {
-                include = { { x1 = 0, x2 = 5, y1 = 0, y2 = 4 } },
-                exclude = { { x1 = 4, x2 = 5, y1 = 4, y2 = 4 } },
-            },
-        },
-    },
 })

@@ -53,9 +53,7 @@ SMODS.Joker({
                             tempcard = v
                         end
                     end
-                    if not tempcard or tempcard.REMOVED then
-                        return nil
-                    end
+                    if not tempcard or tempcard.REMOVED then return nil end
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             G.hand:add_to_highlighted(tempcard)
@@ -63,7 +61,7 @@ SMODS.Joker({
                         end,
                     }))
                     SMODS.calculate_effect({ message = localize("k_level_up_ex") }, context.blueprint_card or card)
-                    SMODS.smart_level_up_hand(context.blueprint_card or card, card.ability.extra.hand_type, nil, temprank)
+                    SMODS.smart_level_up_hand(context.blueprint_card or card, card.ability.extra.hand_type, false, temprank)
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             G.hand:remove_from_highlighted(tempcard)

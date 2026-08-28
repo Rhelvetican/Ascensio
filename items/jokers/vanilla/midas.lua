@@ -24,12 +24,8 @@ SMODS.Joker({
                 converted = true
                 local _card = context.scoring_hand[i]
                 local enhancement = "m_gold"
-                if _card.ability.effect ~= "Gold Card" then
-                    _card:set_ability(G.P_CENTERS[enhancement], nil, true)
-                end
-                if _card.ability.effect ~= "Golden" then
-                    _card:set_edition({ cry_gold = true })
-                end
+                if _card.ability.effect ~= "Gold Card" then _card:set_ability(G.P_CENTERS[enhancement], nil, true) end
+                if _card.ability.effect ~= "Golden" then _card:set_edition({ cry_gold = true }) end
                 G.E_MANAGER:add_event(Event({
                     delay = 0.6,
                     func = function()
@@ -39,9 +35,7 @@ SMODS.Joker({
                     end,
                 }))
             end
-            if converted then
-                return { message = "Gold!", colour = G.C.GOLD }
-            end
+            if converted then return { message = "Gold!", colour = G.C.GOLD } end
         end
         if (context.individual and context.cardarea == G.hand and context.other_card.ability.effect == "Gold Card" and not context.end_of_round) or context.forcetrigger then
             if context.other_card.debuff then

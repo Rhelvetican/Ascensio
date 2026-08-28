@@ -74,9 +74,7 @@ SMODS.Joker({
             end
         end
 
-        if context.joker_main or context.forcetrigger then
-            return { eemult = card.ability.extra.eemult }
-        end
+        if context.joker_main or context.forcetrigger then return { eemult = card.ability.extra.eemult } end
     end,
 
     asc_credits = {

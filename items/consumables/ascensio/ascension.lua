@@ -9,9 +9,7 @@ SMODS.Consumable({
     hidden = true,
 
     can_use = function(_, _)
-        if #G.jokers.highlighted == 1 and Ascensio.Ascensionable[G.jokers.highlighted[1].config.center.key] then
-            return true
-        end
+        if #G.jokers.highlighted == 1 and Ascensio.Ascensionable[G.jokers.highlighted[1].config.center.key] then return true end
     end,
 
     use = function(_, _, _, _)
@@ -22,29 +20,23 @@ SMODS.Consumable({
             local deletable_jokers = {}
             if type(AscConfig["Insanity Mode!!!"]) == "boolean" and AscConfig["Insanity Mode!!!"] then
                 for _, v in pairs(G.jokers.cards) do
-                    if v == G.jokers.highlighted[1] then
-                        deletable_jokers[#deletable_jokers + 1] = v
-                    end
+                    if v == G.jokers.highlighted[1] then deletable_jokers[#deletable_jokers + 1] = v end
                 end
             else
                 for _, v in pairs(G.jokers.cards) do
                     if not v.ability.eternal then
-                        if Entropy and (Entropy.DeckOrSleeve and not Entropy.DeckOrSleeve("doc") or to_big(G.GAME.entropy or 0) < to_big(100)) then
-                            deletable_jokers[#deletable_jokers + 1] = v
-                        end
+                        if Entropy and (Entropy.DeckOrSleeve and not Entropy.DeckOrSleeve("doc") or to_big(G.GAME.entropy or 0) < to_big(100)) then deletable_jokers[#deletable_jokers + 1] = v end
                     end
                 end
             end
 
-            local _first_dissolve = nil
+            local _first_dissolve = false
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
                 delay = 0.75,
                 func = function()
                     for _, v in pairs(deletable_jokers) do
-                        if v.config.center.rarity == "cry_exotic" then
-                            check_for_unlock({ type = "what_have_you_done" })
-                        end
+                        if v.config.center.rarity == "cry_exotic" then check_for_unlock({ type = "what_have_you_done" }) end
 
                         v:start_dissolve(nil, _first_dissolve)
                         _first_dissolve = true
@@ -70,9 +62,7 @@ SMODS.Consumable({
     in_pool = function()
         if G and G.jokers and G.jokers.cards then
             for _, v in ipairs(G.jokers.cards) do
-                if Ascensio.Ascensionable[v.config.center.key] then
-                    return true
-                end
+                if Ascensio.Ascensionable[v.config.center.key] then return true end
             end
         end
         return false

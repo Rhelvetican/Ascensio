@@ -32,13 +32,9 @@ SMODS.Joker({
         }
     end,
 
-    add_to_deck = function(_, card)
-        ease_selection_limit(card.ability.immutable.csl)
-    end,
+    add_to_deck = function(_, card) Ascensio.SelectionLimit.ease(card.ability.immutable.csl) end,
 
-    remove_from_deck = function(_, card)
-        ease_selection_limit(-card.ability.immutable.csl)
-    end,
+    remove_from_deck = function(_, card) Ascensio.SelectionLimit.ease(-card.ability.immutable.csl) end,
 
     calculate = function(_, card, ctx)
         if ctx.individual and ctx.cardarea == G.play then

@@ -46,9 +46,7 @@ SMODS.Joker({
             local selected_joker = math.random(1, #G.jokers.cards)
             local eligiblejokers = {}
             for k, v in pairs(G.jokers.cards) do
-                if v.ability.set == "Joker" and not v.sticker and v ~= card then
-                    table.insert(eligiblejokers, v)
-                end
+                if v.ability.set == "Joker" and not v.sticker and v ~= card then table.insert(eligiblejokers, v) end
             end
             if #eligiblejokers > 0 then
                 local eligible_card = pseudorandom_element(eligiblejokers, pseudoseed("nevergonnagiveyouupnevergonnaletyoudown"))
@@ -64,9 +62,7 @@ SMODS.Joker({
                 local _card = context.scoring_hand[i]
                 converted = true
                 local enhancement = "cry_rigged"
-                if _card.ability.cry_rigged ~= "Rigged" then
-                    _card.ability.cry_rigged = true
-                end
+                if _card.ability.cry_rigged ~= "Rigged" then _card.ability.cry_rigged = true end
                 G.E_MANAGER:add_event(Event({
                     delay = 0.6,
                     func = function()
@@ -76,9 +72,7 @@ SMODS.Joker({
                     end,
                 }))
             end
-            if converted then
-                return { message = "Rigged!", colour = G.C.GREEN }
-            end
+            if converted then return { message = "Rigged!", colour = G.C.GREEN } end
         end
 
         if context.joker_main and not context.blueprint_card then

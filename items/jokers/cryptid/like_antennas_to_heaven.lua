@@ -42,9 +42,7 @@ SMODS.Joker({
                 local number_count = 0
                 for _, c in pairs(context.full_hand) do
                     local id = c:get_id()
-                    if id == 7 or id == 4 then
-                        number_count = number_count + 1
-                    end
+                    if id == 7 or id == 4 then number_count = number_count + 1 end
                 end
                 if number_count > 0 then
                     SMODS.scale_card(card, {

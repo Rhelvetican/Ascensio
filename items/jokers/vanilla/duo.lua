@@ -21,6 +21,7 @@ SMODS.Joker({
             and next(context.poker_hands["Pair"])
         then
             local rank_count = {}
+
             for _, _card in ipairs(context.scoring_hand) do
                 if rank_count[_card.base.value] == nil then
                     rank_count[_card.base.value] = 1
@@ -28,6 +29,7 @@ SMODS.Joker({
                     rank_count[_card.base.value] = rank_count[_card.base.value] + 1
                 end
             end
+
             if next(rank_count) ~= nil then
                 local rank = next(rank_count)
                 local most = rank_count[rank]
@@ -43,7 +45,7 @@ SMODS.Joker({
                         trigger = "immediate",
                         func = function()
                             for i = 1, #G.hand.cards do
-                                SMODS.change_base(G.hand.cards[i], _, rank)
+                                _ = SMODS.change_base(G.hand.cards[i], nil, rank)
                                 G.hand.cards[i]:juice_up()
                                 play_sound("tarot1", 0.8, 0.4)
                             end
@@ -66,14 +68,8 @@ SMODS.Joker({
         end
     end,
     asc_credits = {
-        idea = {
-            "MarioFan597",
-        },
-        art = {
-            "MarioFan597",
-        },
-        code = {
-            "MarioFan597",
-        },
+        idea = { "MarioFan597" },
+        art = { "MarioFan597" },
+        code = { "MarioFan597" },
     },
 })

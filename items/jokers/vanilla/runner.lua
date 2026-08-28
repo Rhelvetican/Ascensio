@@ -14,9 +14,7 @@ SMODS.Joker({
     blueprint_compat = true,
     demicoloncompat = true,
 
-    loc_vars = function(_, _, card)
-        return { vars = { card.ability.extra.echip_gain, card.ability.extra.echip } }
-    end,
+    loc_vars = function(_, _, card) return { vars = { card.ability.extra.echip_gain, card.ability.extra.echip } } end,
 
     calculate = function(_, card, ctx)
         if (ctx.before and not ctx.blueprint and next(ctx.poker_hands["Straight"])) or ctx.forcetrigger then
@@ -27,9 +25,7 @@ SMODS.Joker({
             })
         end
 
-        if ctx.joker_main then
-            return { echip = card.ability.extra.echip }
-        end
+        if ctx.joker_main then return { echip = card.ability.extra.echip } end
     end,
 
     asc_credits = {

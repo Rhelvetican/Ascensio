@@ -9,9 +9,7 @@ SMODS.Joker({
     soul_pos = { x = 8, y = 1, extra = { x = 7, y = 1 } },
     cost = 50,
     order = 33,
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card and lenient_bignum(card.ability.extra.power) } }
-    end,
+    loc_vars = function(self, info_queue, card) return { vars = { card and lenient_bignum(card.ability.extra.power) } } end,
     calculate = function(self, card, context)
         if (context.cardarea == G.play and context.individual) or context.forcetrigger then
             if (context.other_card:is_face()) or context.forcetrigger then

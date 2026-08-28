@@ -19,13 +19,9 @@ SMODS.Joker({
         }
     end,
 
-    add_to_deck = function(_, card, _)
-        G.GAME.bankrupt_at = G.GAME.bankrupt_at - lenient_bignum(card.ability.extra.debt)
-    end,
+    add_to_deck = function(_, card, _) G.GAME.bankrupt_at = G.GAME.bankrupt_at - lenient_bignum(card.ability.extra.debt) end,
 
-    remove_from_deck = function(_, _, _)
-        G.GAME.bankrupt_at = 0
-    end,
+    remove_from_deck = function(_, _, _) G.GAME.bankrupt_at = 0 end,
 
     calculate = function(self, card, context)
         if context.joker_main or context.forcetrigger then

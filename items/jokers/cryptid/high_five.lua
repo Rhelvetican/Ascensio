@@ -10,9 +10,7 @@ SMODS.Joker({
     cost = 50,
     order = 287,
     loc_vars = function(self, info_queue, card)
-        if not card.edition or (card.edition and not card.edition.e_cry_astral) then
-            info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_astral
-        end
+        if not card.edition or (card.edition and not card.edition.e_cry_astral) then info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_astral end
         return { vars = { card } }
     end,
     calculate = function(self, card, context)
@@ -21,12 +19,11 @@ SMODS.Joker({
             for i = 1, #context.scoring_hand do
                 local _card = context.scoring_hand[i]
                 local rank = _card:get_id()
-                if rank == 5 then
-                    five_count = five_count + 1
-                end
+                if rank == 5 then five_count = five_count + 1 end
             end
 
             if five_count > 0 then
+                local converted = false
                 for i = 1, #context.scoring_hand do
                     local _card = context.scoring_hand[i]
                     converted = true
@@ -40,9 +37,7 @@ SMODS.Joker({
                             end,
                         }))
                     end
-                    if _card.ability.effect ~= "Astral" then
-                        _card:set_edition({ cry_astral = true })
-                    end
+                    if _card.ability.effect ~= "Astral" then _card:set_edition({ cry_astral = true }) end
                     G.E_MANAGER:add_event(Event({
                         delay = 0.6,
                         func = function()
@@ -52,9 +47,7 @@ SMODS.Joker({
                         end,
                     }))
                 end
-                if converted then
-                    return { message = localize("asc_wish_ex"), colour = G.C.PURPLE }
-                end
+                if converted then return { message = localize("asc_wish_ex"), colour = G.C.PURPLE } end
             end
         end
     end,

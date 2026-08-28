@@ -23,9 +23,7 @@ if Entropy then
         soul_rate = 0,
 
         can_use = function(_, _)
-            if #G.jokers.highlighted == 1 and Ascensio.Apothable[G.jokers.highlighted[1].config.center.key] then
-                return true
-            end
+            if #G.jokers.highlighted == 1 and Ascensio.Apothable[G.jokers.highlighted[1].config.center.key] then return true end
 
             return false
         end,
@@ -39,16 +37,12 @@ if Entropy then
 
                 if type(AscConfig["Insanity Mode!!!"]) == "boolean" and AscConfig["Insanity Mode!!!"] then
                     for _, v in pairs(G.jokers.cards) do
-                        if v == G.jokers.highlighted[1] then
-                            deletable_jokers[#deletable_jokers + 1] = v
-                        end
+                        if v == G.jokers.highlighted[1] then deletable_jokers[#deletable_jokers + 1] = v end
                     end
                 else
                     for _, v in pairs(G.jokers.cards) do
                         if not v.ability.eternal then
-                            if not Entropy.DeckOrSleeve("doc") or to_big(G.GAME.entropy or 0) < to_big(100) then
-                                deletable_jokers[#deletable_jokers + 1] = v
-                            end
+                            if not Entropy.DeckOrSleeve("doc") or to_big(G.GAME.entropy or 0) < to_big(100) then deletable_jokers[#deletable_jokers + 1] = v end
                         end
                     end
                 end
@@ -59,9 +53,7 @@ if Entropy then
                     delay = 0.75,
                     func = function()
                         for _, v in pairs(deletable_jokers) do
-                            if v.config.center.rarity == "cry_exotic" then
-                                check_for_unlock({ type = "what_have_you_done" })
-                            end
+                            if v.config.center.rarity == "cry_exotic" then check_for_unlock({ type = "what_have_you_done" }) end
                             v:start_dissolve(nil, _first_dissolve)
                             _first_dissolve = true
                         end
@@ -85,9 +77,7 @@ if Entropy then
         in_pool = function()
             if G and G.jokers and G.jokers.cards then
                 for _, v in ipairs(G.jokers.cards) do
-                    if Ascensio.Apothable[v.config.center.key] then
-                        return true
-                    end
+                    if Ascensio.Apothable[v.config.center.key] then return true end
                 end
             end
             return false

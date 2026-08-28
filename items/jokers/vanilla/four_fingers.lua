@@ -23,8 +23,6 @@ SMODS.Joker({
 
 local oldsmodsfourfingers = SMODS.four_fingers
 function SMODS.four_fingers()
-    if next(SMODS.find_card("j_asc_four_fingers")) then
-        return 2
-    end
+    if next(SMODS.find_card("j_asc_four_fingers")) then return 2 end
     return oldsmodsfourfingers()
 end

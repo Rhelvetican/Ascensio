@@ -9,9 +9,7 @@ SMODS.Joker({
     order = 134,
     blueprint_compat = true,
     demicoloncompat = true,
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card and lenient_bignum(card.ability.extra.power) } }
-    end,
+    loc_vars = function(self, info_queue, card) return { vars = { card and lenient_bignum(card.ability.extra.power) } } end,
     calculate = function(self, card, context)
         if --The card transformation apspect of this was taken and modifed in part from the Waterfall Joker from the Celesete Card Collection
             context.before

@@ -31,11 +31,11 @@ SMODS.Joker({
     calculate = function(_, card, context)
         if (context.individual and context.cardarea == G.hand and not context.end_of_round) or context.forcetrigger then
             local id, mult, this_card = 999, 999, nil
-            for _, card in ipairs(G.hand.cards) do
-                if id > card.base.id and not SMODS.has_no_rank(card) then
-                    id = card.base.id
-                    mult = card.base.nominal
-                    this_card = card
+            for _, _card in ipairs(G.hand.cards) do
+                if id > _card.base.id and not SMODS.has_no_rank(_card) then
+                    id = _card.base.id
+                    mult = _card.base.nominal
+                    this_card = _card
                 end
             end
 
@@ -56,9 +56,7 @@ SMODS.Joker({
             end
         end
 
-        if context.joker_main or context.forcetrigger then
-            return { xmult = card.ability.extra.xmult }
-        end
+        if context.joker_main or context.forcetrigger then return { xmult = card.ability.extra.xmult } end
     end,
 
     asc_credits = {

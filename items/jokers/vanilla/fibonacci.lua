@@ -9,16 +9,12 @@ SMODS.Joker({
     soul_pos = { x = 8, y = 6, extra = { x = 7, y = 6 } },
     cost = 55,
     order = 31,
-    loc_vars = function(self, info_queue, card)
-        return { vars = { lenient_bignum(card.ability.extra.mult), lenient_bignum(card.ability.extra.start_mult) } }
-    end,
+    loc_vars = function(self, info_queue, card) return { vars = { lenient_bignum(card.ability.extra.mult), lenient_bignum(card.ability.extra.start_mult) } } end,
     calculate = function(self, card, context)
         if (context.individual and context.cardarea == G.play) and not context.blueprint then
             local rank = context.other_card:get_id()
             if rank == 14 or rank == 2 or rank == 3 or rank == 5 or rank == 8 then
-                if card.ability.extra.immutable.previous == 0 then
-                    card.ability.extra.immutable.previous = card.ability.extra.start_previous
-                end
+                if card.ability.extra.immutable.previous == 0 then card.ability.extra.immutable.previous = card.ability.extra.start_previous end
                 card.ability.extra.immutable.previous2 = card.ability.extra.immutable.previous
                 card.ability.extra.immutable.previous = card.ability.extra.mult
                 card.ability.extra.mult = (card.ability.extra.immutable.previous2 + card.ability.extra.immutable.previous)
@@ -44,9 +40,7 @@ SMODS.Joker({
         end
 
         if context.forcetrigger then
-            if card.ability.extra.immutable.previous == 0 then
-                card.ability.extra.immutable.previous = card.ability.extra.start_previous
-            end
+            if card.ability.extra.immutable.previous == 0 then card.ability.extra.immutable.previous = card.ability.extra.start_previous end
             card.ability.extra.immutable.previous2 = card.ability.extra.immutable.previous
             card.ability.extra.immutable.previous = card.ability.extra.mult
             SMODS.scale_card(card, {

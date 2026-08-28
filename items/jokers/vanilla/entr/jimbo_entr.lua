@@ -21,28 +21,16 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, context)
-        if context.joker_main then
-            return { mult = card.ability.extra.mult }
-        end
+        if context.joker_main then return { mult = card.ability.extra.mult } end
     end,
 
-    add_to_deck = function(_, _)
-        SMODS.set_scoring_calculation("exponent")
-    end,
+    add_to_deck = function(_, _) SMODS.set_scoring_calculation("exponent") end,
 
-    remove_from_deck = function(_, _, _)
-        SMODS.set_scoring_calculation("multiply")
-    end,
+    remove_from_deck = function(_, _, _) SMODS.set_scoring_calculation("multiply") end,
 
-    ascxentr_credits = {
-        idea = {
-            "Rhelvetican",
-        },
-        art = {
-            "Lil Mr. Slipstream",
-        },
-        code = {
-            "Rhelvetican",
-        },
+    asc_credits = {
+        idea = { "Rhelvetican" },
+        art = { "Lil Mr. Slipstream" },
+        code = { "Rhelvetican" },
     },
 })

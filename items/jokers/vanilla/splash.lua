@@ -42,7 +42,7 @@ SMODS.Joker({
 
     add_to_deck = function(_, card, _)
         card.ability.immutable.oldcsl = G.GAME.starting_params.play_limit
-        ease_selection_limit(card.ability.extra.hand_mod)
+        Ascensio.SelectionLimit.ease(card.ability.extra.hand_mod)
         G.hand:change_size(card.ability.extra.hand_mod)
 
         SMODS.scale_card(card, {
@@ -54,11 +54,7 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, context)
-        if context.modify_scoring_hand and not context.blueprint then
-            return {
-                add_to_hand = true,
-            }
-        end
+        if context.modify_scoring_hand and not context.blueprint then return { add_to_hand = true } end
 
         if context.individual and context.cardarea == G.play then
             if card.ability.extra.card_requirement.current < card.ability.extra.card_requirement.requirement then
@@ -72,7 +68,7 @@ SMODS.Joker({
                 })
             else
                 card.ability.extra.card_requirement.current = 0
-                ease_selection_limit(card.ability.extra.hand_mod)
+                Ascensio.SelectionLimit.ease(card.ability.extra.hand_mod)
                 G.hand:change_size(card.ability.extra.hand_mod)
 
                 SMODS.scale_card(card, {
@@ -86,7 +82,7 @@ SMODS.Joker({
     end,
 
     remove_from_deck = function(_, card, _)
-        set_selection_limit(card.ability.immutable.oldcsl)
+        Ascensio.SelectionLimit.set(card.ability.immutable.oldcsl)
         G.hand:change_size(-card.ability.immutable.total_mod)
     end,
 

@@ -19,9 +19,7 @@ SMODS.Joker({
     end,
     calculate = function(self, card, context)
         if context.first_hand_drawn then
-            local eval = function()
-                return G.GAME.current_round.hands_played == 0
-            end
+            local eval = function() return G.GAME.current_round.hands_played == 0 end
             juice_card_until(card, eval, true)
         end
         if (context.joker_main and G.GAME.current_round.hands_played == 0 and #context.full_hand == 1) or context.forcetrigger then

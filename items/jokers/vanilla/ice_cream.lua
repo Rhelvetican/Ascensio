@@ -20,9 +20,7 @@ SMODS.Joker({
         }
     end,
 
-    add_to_deck = function(self, card, from_debuff)
-        card.ability.immutable.hands = G.GAME.hands_played
-    end,
+    add_to_deck = function(self, card, from_debuff) card.ability.immutable.hands = G.GAME.hands_played end,
 
     calculate = function(self, card, context)
         if context.joker_main and card.ability.extra.chips > 1 then

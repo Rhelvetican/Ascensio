@@ -29,9 +29,7 @@ SMODS.Joker({
             if base > 10 and base < 14 then
                 base = 10
             else
-                if base == 14 then
-                    base = 11
-                end
+                if base == 14 then base = 11 end
             end
 
             local money = base * card.ability.extra.multiplier

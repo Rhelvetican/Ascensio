@@ -25,9 +25,7 @@ SMODS.Joker({
                 ---@cast ctx.other_card Card
                 local id = ctx.other_card:get_id()
 
-                if id < 6 then
-                    return { repetitions = id }
-                end
+                if id < 6 then return { repetitions = id } end
             end
         end
 
@@ -38,9 +36,7 @@ SMODS.Joker({
 
                 ---@cast ctx.scoring_hand Card[]
                 for _, other_card in ipairs(ctx.scoring_hand) do
-                    if other_card:get_id() < 6 then
-                        val = val + 1
-                    end
+                    if other_card:get_id() < 6 then val = val + 1 end
                 end
 
                 SMODS.scale_card(card, {

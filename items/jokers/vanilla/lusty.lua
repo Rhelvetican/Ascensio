@@ -8,7 +8,7 @@ SMODS.Joker({
     soul_pos = { x = 5, y = 4, extra = { x = 4, y = 4 } },
     cost = 50,
     order = 3,
-    loc_vars = function(self, info_queue, card)
+    loc_vars = function(_, _, card)
         local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "Exotic Lusty Joker")
         return {
             vars = {
@@ -25,12 +25,8 @@ SMODS.Joker({
             local hearts = {}
             local my_pos
             for i, v in ipairs(context.scoring_hand) do
-                if v == context.other_card then
-                    my_pos = i
-                end
-                if v:is_suit("Hearts") then
-                    hearts[i] = v
-                end
+                if v == context.other_card then my_pos = i end
+                if v:is_suit("Hearts") then hearts[i] = v end
             end
             local first_card = SMODS.pseudorandom_probability(card, "Heartache", 1, card.ability.extra.odds, "Exotic Lusty Joker")
             local second_card = SMODS.pseudorandom_probability(card, "Cardiac Arrest", 1, card.ability.extra.odds, "Exotic Lusty Joker")

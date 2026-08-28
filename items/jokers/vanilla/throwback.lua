@@ -38,12 +38,10 @@ SMODS.Joker({
                 colour = G.C.RED,
             }
         end
-        if context.skip_blind and not context.blueprint then
-            return {
-                message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.mult } }),
-                colour = G.C.RED,
-            }
-        end
+        if context.skip_blind and not context.blueprint then return {
+            message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.mult } }),
+            colour = G.C.RED,
+        } end
     end,
     animation = {
         macro = {

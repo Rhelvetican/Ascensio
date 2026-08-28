@@ -5,9 +5,7 @@ local total_steel = function(force)
 
     if G.playing_cards then
         for _, card in ipairs(G.playing_cards) do
-            if SMODS.has_enhancement(card, "m_steel") or (force == true) then
-                accum = accum + 1
-            end
+            if SMODS.has_enhancement(card, "m_steel") or (force == true) then accum = accum + 1 end
         end
     end
 
@@ -42,7 +40,7 @@ SMODS.Joker({
         },
     },
 
-     ---@type CardAnimation
+    ---@type CardAnimation
     animation = {
         macro = {
             type = "skim",
@@ -81,11 +79,9 @@ SMODS.Joker({
                 }
             else
                 local steels = total_steel(context.forcetrigger ~= nil)
-                if SMODS.has_enhancement(context.other_card, "m_steel") and steels > 0 then
-                    return {
-                        x_mult = 1 + card.ability.extra.extern_xmult * steels,
-                    }
-                end
+                if SMODS.has_enhancement(context.other_card, "m_steel") and steels > 0 then return {
+                    x_mult = 1 + card.ability.extra.extern_xmult * steels,
+                } end
             end
         end
     end,

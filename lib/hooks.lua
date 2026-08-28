@@ -1,5 +1,6 @@
 --This was taken and modifed straight from entropy
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
+
 function G.UIDEF.use_and_sell_buttons(card)
     local abc = G_UIDEF_use_and_sell_buttons_ref(card)
     if (card.area == G.jokers and G.jokers and card.config.center.key == "j_asc_marble_entr") and not card.debuff then --Gives buttons to entropic marble Joker
@@ -75,6 +76,7 @@ function G.UIDEF.use_and_sell_buttons(card)
                 },
             },
         }
+
         buyslot = {
             n = G.UIT.C,
             config = { align = "cr" },
@@ -145,6 +147,7 @@ function G.UIDEF.use_and_sell_buttons(card)
                 },
             },
         }
+
         sellslot = {
             n = G.UIT.C,
             config = { align = "cr" },
@@ -298,9 +301,7 @@ G.FUNCS.can_sell_stone = function(e)
     local has_stone = false
     if G and G.deck and G.deck.cards then
         for _, c in ipairs(G.deck.cards) do
-            if SMODS.has_enhancement(c, "m_stone") and not SMODS.is_eternal(c) then
-                has_stone = true
-            end
+            if SMODS.has_enhancement(c, "m_stone") and not SMODS.is_eternal(c) then has_stone = true end
         end
     end
     if has_stone and not G.CONTROLLER.locked then
@@ -336,27 +337,19 @@ local calc = SMODS.calculate_individual_effect
 SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
     local ret = calc(effect, scored_card, key, amount, from_edition)
 
-    if ret then
-        return ret
-    end
+    if ret then return ret end
 
     if (key == "xdollars" or key == "Xdollars") and amount ~= 1 then
-        if effect.card then
-            juice_card(effect.card)
-        end
+        if effect.card then juice_card(effect.card) end
 
-        if type(amount) ~= "boolean" then
-            ease_dollars_mult(amount)
-        end
+        if type(amount) ~= "boolean" then ease_dollars_mult(amount) end
         return true
     end
 
     if (key == "csl") and amount ~= 0 then
-        if effect.card then
-            juice_card(effect.card)
-        end
+        if effect.card then juice_card(effect.card) end
 
-        ease_selection_limit(lenient_bignum(amount))
+        Ascensio.SelectionLimit.ease(lenient_bignum(amount))
         return true
     end
 end

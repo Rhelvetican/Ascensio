@@ -1,6 +1,7 @@
-column_width = 225
-indent_type  = "Spaces"
-syntax       = "LuaJIT"
+column_width              = 225
+collapse_simple_statement = "Always"
+indent_type               = "Spaces"
+syntax                    = "LuaJIT"
 
 [sort_requires]
     enabled = true

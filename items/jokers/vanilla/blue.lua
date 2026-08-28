@@ -9,7 +9,8 @@ SMODS.Joker({
     blueprint_compat = true,
     demicoloncompat = true,
     atlas = "v_atlas_1",
-    loc_vars = function(self, info_queue, card)
+
+    loc_vars = function(_, _, card)
         return {
             vars = {
                 lenient_bignum(lenient_bignum(card.ability.extra.x_chips) + ((G.deck and #G.deck.cards or 1) * card.ability.extra.x_chips_mod)),
@@ -18,12 +19,11 @@ SMODS.Joker({
             },
         }
     end,
-    calculate = function(self, card, context)
-        if context.joker_main or context.forcetrigger then
-            return {
-                x_chips = lenient_bignum(#G.deck.cards * card.ability.extra.x_chips_mod),
-            }
-        end
+
+    calculate = function(_, card, context)
+        if context.joker_main or context.forcetrigger then return {
+            x_chips = lenient_bignum(#G.deck.cards * card.ability.extra.x_chips_mod),
+        } end
         if context.playing_card_added and not context.blueprint then
             card.ability.extra.x_chips_mod = card.ability.extra.x_chips_mod + 0.1
             return {

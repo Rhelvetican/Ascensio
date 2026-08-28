@@ -30,16 +30,12 @@ SMODS.Joker({
 
     calculate = function(_, card, context)
         if (context.individual and context.cardarea == G.play) or context.forcetrigger then
-            if (SMODS.has_enhancement(context.other_card, "m_wild")) or context.forcetrigger then
-                return { emult = card.ability.extra.emult }
-            end
+            if (SMODS.has_enhancement(context.other_card, "m_wild")) or context.forcetrigger then return { emult = card.ability.extra.emult } end
         end
 
-        if context.before and not context.blueprint or context.forcetrigger then
+        if (context.before and not context.blueprint) or context.forcetrigger then
             for _, scored in ipairs(context.scoring_hand or {}) do
-                if has_any_enhancement(card) then
-                    scored:set_ability(G.P_CENTERS.m_wild, nil, true)
-                end
+                if has_any_enhancement(card) then scored:set_ability(G.P_CENTERS.m_wild, nil, true) end
             end
         end
     end,
@@ -60,7 +56,5 @@ SMODS.Joker({
 })
 
 SMODS.current_mod.set_debuff = function(card)
-    if next(SMODS.find_card("j_asc_smeared")) and card.playing_card and SMODS.has_enhancement(card, "m_wild") then
-        return "prevent_debuff"
-    end
+    if next(SMODS.find_card("j_asc_smeared")) and card.playing_card and SMODS.has_enhancement(card, "m_wild") then return "prevent_debuff" end
 end

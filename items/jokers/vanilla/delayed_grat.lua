@@ -36,16 +36,14 @@ SMODS.Joker({
             })
         end
 
-        if ctx.blind then
-            ease_discard(card.ability.extra.discard)
-        end
+        if ctx.blind then ease_discard(card.ability.extra.discard) end
 
-        if ctx.joker_main then
-            return { Emult_mod = 1 + (G.GAME.current_round.discards_left * card.ability.extra.emult_scalar) }
-        end
+        if ctx.joker_main then return { Emult_mod = 1 + (G.GAME.current_round.discards_left * card.ability.extra.emult_scalar) } end
     end,
 
-    calc_dollar_bonus = function(_, card)
-        return G.GAME.current_round.discards_used == 0 and G.GAME.current_round.discards_left > 0 and G.GAME.current_round.discards_left * card.ability.extra.dollars or nil
-    end,
+    calc_dollar_bonus = function(_, card) return G.GAME.current_round.discards_used == 0 and G.GAME.current_round.discards_left > 0 and G.GAME.current_round.discards_left * card.ability.extra.dollars or nil end,
+
+    asc_credits = {
+        code = { "Rhelvetican" },
+    },
 })

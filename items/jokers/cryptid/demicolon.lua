@@ -14,9 +14,7 @@ if Spectrallib then
         })
     end
 else
-    forcetrigger = function(_, card, ctx)
-        Cryptid.forcetrigger(card, ctx)
-    end
+    forcetrigger = function(_, card, ctx) Cryptid.forcetrigger(card, ctx) end
 end
 
 SMODS.Atlas({
@@ -58,13 +56,9 @@ SMODS.Joker({
             local ft = {}
 
             for i = 1, #G.jokers.cards do
-                if marker ~= -1 and Cryptid.demicolonGetTriggerable(G.jokers.cards[i])[1] then
-                    ft[#ft + 1] = G.jokers.cards[i]
-                end
+                if marker ~= -1 and Cryptid.demicolonGetTriggerable(G.jokers.cards[i])[1] then ft[#ft + 1] = G.jokers.cards[i] end
 
-                if G.jokers.cards[i] == card then
-                    marker = i
-                end
+                if G.jokers.cards[i] == card then marker = i end
             end
 
             for _, joker in pairs(ft) do

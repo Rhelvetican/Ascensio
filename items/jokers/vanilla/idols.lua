@@ -36,9 +36,7 @@ SMODS.Joker({
 
         if G and G.playing_cards then
             for _, playing_card in ipairs(G.playing_cards) do
-                if not (SMODS.has_no_suit(playing_card) or SMODS.has_no_rank(playing_card)) then
-                    valids[#valids + 1] = playing_card
-                end
+                if not (SMODS.has_no_suit(playing_card) or SMODS.has_no_rank(playing_card)) then valids[#valids + 1] = playing_card end
             end
         end
 
@@ -73,17 +71,11 @@ SMODS.Joker({
             local effect = pseudorandom_element(card.ability.immutable.effects, "what the statue hides" .. G.GAME.round_resets.ante)
             local result = {}
 
-            if (effect == "emult") or context.forcetrigger then
-                result[effect] = card.ability.extra.value
-            end
+            if (effect == "emult") or context.forcetrigger then result[effect] = card.ability.extra.value end
 
-            if (effect == "echips") or context.forcetrigger then
-                result[effect] = card.ability.extra.value
-            end
+            if (effect == "echips") or context.forcetrigger then result[effect] = card.ability.extra.value end
 
-            if (effect == "xdollars") or context.forcetrigger then
-                ease_dollars_mult(card.ability.extra.value)
-            end
+            if (effect == "xdollars") or context.forcetrigger then ease_dollars_mult(card.ability.extra.value) end
 
             if (effect == "gain") or context.forcetrigger then
                 SMODS.scale_card(card, {
@@ -101,9 +93,7 @@ SMODS.Joker({
 
             if G and G.playing_cards then
                 for _, playing_card in ipairs(G.playing_cards) do
-                    if not (SMODS.has_no_suit(playing_card) or SMODS.has_no_rank(playing_card)) then
-                        valids[#valids + 1] = playing_card
-                    end
+                    if not (SMODS.has_no_suit(playing_card) or SMODS.has_no_rank(playing_card)) then valids[#valids + 1] = playing_card end
                 end
             end
 

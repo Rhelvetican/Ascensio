@@ -22,7 +22,6 @@ SMODS.Joker({
     blueprint_compat = false,
     demicoloncompat = true,
 
-    ---@type CardAnimation
     animation = {
         macro = {
             type = "skim",
@@ -53,19 +52,15 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, context)
-        if context.joker_main then
-            return {
-                echips = card.ability.extra.echips,
-                emult = card.ability.extra.emult,
-            }
-        end
+        if context.joker_main then return {
+            echips = card.ability.extra.echips,
+            emult = card.ability.extra.emult,
+        } end
 
-        if context.final_scoring_step then
-            return {
-                balance = true,
-                func = balance_sound,
-            }
-        end
+        if context.final_scoring_step then return {
+            balance = true,
+            func = balance_sound,
+        } end
 
         if context.setting_blind and not context.blueprint then
             G.E_MANAGER:add_event(Event({

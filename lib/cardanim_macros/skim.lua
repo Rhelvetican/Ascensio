@@ -1,7 +1,5 @@
 local error_messages = {}
-function error_messages.skim_invalid_str(key, type, found_string, is_sub)
-    return ('Animation macro "SKIM": Card ' .. key .. " specifies an incorrect " .. type .. ' "' .. found_string .. '"')
-end
+function error_messages.skim_invalid_str(key, type, found_string, is_sub) return ('Animation macro "SKIM": Card ' .. key .. " specifies an incorrect " .. type .. ' "' .. found_string .. '"') end
 local mod_prefix = SMODS.current_mod.prefix
 
 -- Returns all coordinates within a rectangle.
@@ -29,9 +27,7 @@ end
 ---@return boolean
 local function string_any(main, options)
     for _, v in ipairs(options) do
-        if main == v then
-            return true
-        end
+        if main == v then return true end
     end
     return false
 end
@@ -43,9 +39,7 @@ return function(macro_obj)
     local seq = {}
     for layer_name, __ in pairs(G[mod_prefix .. "_cardanim_cfg"].card_layers) do
         -- the "next" function is an emptiness check
-        if (not macro_obj[layer_name]) or next(macro_obj[layer_name]) == nil then
-            goto skimmacrocontinue
-        end
+        if (not macro_obj[layer_name]) or next(macro_obj[layer_name]) == nil then goto skimmacrocontinue end
         seq[layer_name] = {}
 
         local err_msg = error_messages
@@ -69,19 +63,13 @@ return function(macro_obj)
             V row 4    col 1   col 2   col 3   col 4
         ]]
         -- ERROR - Do not accept anything other than col, c, row, or r
-        if not string_any(direction[1], { "col", "c", "row", "r" }) then
-            error(err_msg.skim_invalid_str(card_key, "group type", direction[1], false))
-        end
+        if not string_any(direction[1], { "col", "c", "row", "r" }) then error(err_msg.skim_invalid_str(card_key, "group type", direction[1], false)) end
         -- now determine axis
         local iter_axis = string_any(direction[1], { "col", "c" }) and "x" or "y"
 
         -- ERROR - Do not accept anything other than forward, f, backward, or b
-        if not string_any(direction[2], { "forward", "f", "backward", "b" }) then
-            error(err_msg.skim_invalid_str(card_key, "group direction", direction[2], false))
-        end
-        if not string_any(direction[3], { "forward", "f", "backward", "b" }) then
-            error(err_msg.skim_invalid_str(card_key, "lane direction", direction[3], false))
-        end
+        if not string_any(direction[2], { "forward", "f", "backward", "b" }) then error(err_msg.skim_invalid_str(card_key, "group direction", direction[2], false)) end
+        if not string_any(direction[3], { "forward", "f", "backward", "b" }) then error(err_msg.skim_invalid_str(card_key, "lane direction", direction[3], false)) end
         -- then determine direction
         local iter_direction = string_any(direction[2], { "backward", "b" }) and -1 or 1
         local subiter_direction = string_any(direction[3], { "backward", "b" }) and -1 or 1
@@ -93,14 +81,10 @@ return function(macro_obj)
             local x = coords.x
             local y = coords.y
             if iter_axis == "x" then
-                if not active_area[x] then
-                    active_area[x] = {}
-                end
+                if not active_area[x] then active_area[x] = {} end
                 active_area[x][y] = 1
             elseif iter_axis == "y" then
-                if not active_area[y] then
-                    active_area[y] = {}
-                end
+                if not active_area[y] then active_area[y] = {} end
                 active_area[y][x] = 1
             end
         end
@@ -163,18 +147,12 @@ return function(macro_obj)
         -- Rely on this variable instead of #timing
         local highest_timing = 1
         for k, _ in pairs(timing) do
-            if type(k) == "number" and k > highest_timing then
-                highest_timing = k
-            end
+            if type(k) == "number" and k > highest_timing then highest_timing = k end
         end
 
         -- needed for conditional sorting
-        local function normal_sort_dir(a, b)
-            return a < b
-        end
-        local function reverse_sort_dir(a, b)
-            return a > b
-        end
+        local function normal_sort_dir(a, b) return a < b end
+        local function reverse_sort_dir(a, b) return a > b end
 
         local time_id = 1
 
@@ -204,9 +182,7 @@ return function(macro_obj)
                 end
 
                 -- if is_periodic then loop back to the start
-                if time_id == highest_timing and is_periodic then
-                    time_id = 0
-                end
+                if time_id == highest_timing and is_periodic then time_id = 0 end
                 -- time_id = 0 will change to 1 with this addition
                 time_id = time_id + 1
             end

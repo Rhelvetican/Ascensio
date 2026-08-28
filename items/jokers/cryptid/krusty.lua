@@ -43,9 +43,7 @@ SMODS.Joker({
             })
         end
 
-        if context.joker_main or context.forcetrigger then
-            return { xmult = card.ability.extra.xmult }
-        end
+        if context.joker_main or context.forcetrigger then return { xmult = card.ability.extra.xmult } end
     end,
 
     asc_credits = {

@@ -5,7 +5,7 @@ SMODS.Joker({
     atlas = "c_atlas_mortal",
     blueprint_compat = true,
     demicoloncompat = true,
-    pools = { ["Food"] = true },
+    pools = { "Food" },
     pos = { x = 0, y = 0 },
     cost = 8,
     order = 508,
@@ -76,9 +76,7 @@ SMODS.Joker({
         G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
         calculate_reroll_cost(true)
     end,
-    remove_from_deck = function(self, card, from_debuff)
-        calculate_reroll_cost(true)
-    end,
+    remove_from_deck = function(self, card, from_debuff) calculate_reroll_cost(true) end,
 
     asc_credits = {
         idea = {

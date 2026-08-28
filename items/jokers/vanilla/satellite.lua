@@ -18,9 +18,7 @@ SMODS.Joker({
         local planet_used = 0
 
         for _, v in pairs(G.GAME.consumeable_usage) do
-            if v.set == "Planet" then
-                planet_used = planet_used + v.count
-            end
+            if v.set == "Planet" then planet_used = planet_used + v.count end
         end
 
         return {
@@ -46,9 +44,7 @@ SMODS.Joker({
         local planet_used = 0
 
         for _, v in pairs(G.GAME.consumeable_usage) do
-            if v.set == "Planet" then
-                planet_used = planet_used + v.count
-            end
+            if v.set == "Planet" then planet_used = planet_used + v.count end
         end
 
         return planet_used * card.ability.extra.money

@@ -8,13 +8,8 @@ SMODS.Joker({
     pos = { x = 4, y = 0 },
     cost = 8,
     order = 508,
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {},
-        }
-    end,
 
-    calculate = function(self, card, context) --Mostly taken from formidibus
+    calculate = function(_, card, context) --Mostly taken from formidibus
         if (context.buying_card or context.cry_creating_card) and context.card.ability.set == "Joker" and context.card.config.center.rarity == "cry_cursed" and not context.blueprint and not (context.card == card) then
             G.E_MANAGER:add_event(Event({
                 func = function()
