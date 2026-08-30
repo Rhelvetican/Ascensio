@@ -1,0 +1,26 @@
+[syntax]
+    level = "LuaJIT3"
+
+[layout]
+    max_line_width     = 150
+    table_expand       = "Auto"
+    call_args_expand   = "Auto"
+    func_params_expand = "Auto"
+
+[output]
+    trailing_table_separator = "Multiline"
+    single_arg_call_parens   = "Always"
+
+[comments]
+    align_in_statements   = true
+    align_in_table_fields = true
+    align_in_call_args    = true
+    align_in_params       = true
+    align_same_kind_only  = true
+
+[spacing]
+    space_before_lambda_func_paren = false
+
+[align]
+    continuous_assign_statement = true
+    table_field                 = true
