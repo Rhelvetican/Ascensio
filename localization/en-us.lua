@@ -4,7 +4,7 @@ return {
             Ascensio = {
                 name = "Ascēnsiō",
                 text = {
-                    "{C:cry_exotic,E:1,s:1.6}Exoticfy your Jokers!{}",
+                    "{C:cry_exotic,E:1,s:1.6}Exoticify your Jokers!{}",
                     "{s:1.3}Adds {C:cry_exotic,E:1,s:1.3}Exotic{s:1.3} forms to normal Jokers",
                     "{s:1.3}and vice versa",
                     "{s:1.2} {}",
