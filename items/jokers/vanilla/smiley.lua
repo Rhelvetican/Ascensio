@@ -38,8 +38,7 @@ SMODS.Joker({
             end
         end
 
-        if
-            context.after and not context.blueprint --and card.ability.extra.mult ~= 1
+        if context.after and not context.blueprint -- and card.ability.extra.mult ~= 1
         then
             card.ability.extra.immutable.redo = 0
         end

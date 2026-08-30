@@ -34,16 +34,13 @@ SMODS.Joker({
         end
 
         ---@diagnostic disable-next-line: unnecessary-if
-        if (context.end_of_round and context.main_eval and not (context.individual or context.repetition or context.blueprint)) or context.forcetrigger then
+        if (context.end_of_round and context.main_eval and not (context.individual or context.repetition or context.blueprint))
+            or context.forcetrigger then
             if
-                ---@diagnostic disable-next-line: unnecessary-if
-                (
-                    SMODS.pseudorandom_probability(card, "OOOOOOH BANANA", 1, card.ability.extra.odds, "Exotic Banana")
-                    and #G.jokers.cards
-                    and G.jokers.config.card_limit > Number.toBig(#G.jokers.cards + G.GAME.joker_buffer)
-                    and not (context.blueprint or context.repetition or context.retrigger_joker_check or context.retrigger_joker)
-                ) or context.forcetrigger
-            then
+            ---@diagnostic disable-next-line: unnecessary-if
+            (SMODS.pseudorandom_probability(card, "OOOOOOH BANANA", 1, card.ability.extra.odds, "Exotic Banana") and #G.jokers.cards
+                and G.jokers.config.card_limit > Number.toBig(#G.jokers.cards + G.GAME.joker_buffer) and not (context.blueprint or context.repetition
+                    or context.retrigger_joker_check or context.retrigger_joker)) or context.forcetrigger then
                 local roundcreatejoker = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
                 G.GAME.joker_buffer = G.GAME.joker_buffer + roundcreatejoker
                 card_eval_status_text(card, "extra", nil, nil, nil, {
@@ -51,20 +48,18 @@ SMODS.Joker({
                     colour = G.C.MONEY,
                 })
                 G.E_MANAGER:add_event(Event({
-                    func = function()
-                        local _card = copy_card(card, nil, nil, nil, card.edition and card.edition.negative)
-                        _card:set_edition(card.edition)
-                        _card:add_to_deck()
-                        G.jokers:emplace(_card)
-                        _card:start_materialize()
-                        G.GAME.joker_buffer = 0
-                        return true
-                    end,
-                }))
+                        func = function()
+                            local _card = copy_card(card, nil, nil, nil, card.edition and card.edition.negative)
+                            _card:set_edition(card.edition)
+                            _card:add_to_deck()
+                            G.jokers:emplace(_card)
+                            _card:start_materialize()
+                            G.GAME.joker_buffer = 0
+                            return true
+                        end,
+                    }))
 
-                return {
-                    message = localize("k_duplicated_ex"),
-                }
+                return { message = localize("k_duplicated_ex") }
             else
                 SMODS.scale_card(card, {
                     ref_table = card.ability.extra,
@@ -74,10 +69,7 @@ SMODS.Joker({
                     message_colour = G.C.MULT,
                 })
 
-                return {
-                    message = localize("k_upgrade_ex"),
-                    colour = G.C.MULT,
-                }
+                return { message = localize("k_upgrade_ex"), colour = G.C.MULT }
             end
         end
     end,

@@ -36,7 +36,8 @@ SMODS.Joker({
                 }
             end
         end
-        if (context.ending_shop and not context.individual and not context.repetition and not (context.blueprint_card or card.getting_sliced)) or context.forcetrigger then
+        if (context.ending_shop and not context.individual and not context.repetition and not (context.blueprint_card or card.getting_sliced))
+            or context.forcetrigger then
             local debt = Number.toBig(G.GAME.dollars)
             if debt < Number.bigZero then
                 SMODS.scale_card(card, {

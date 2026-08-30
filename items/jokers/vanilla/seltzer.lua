@@ -31,15 +31,12 @@ SMODS.Joker({
         end
         if context.after and context.cardarea == G.jokers and not context.blueprint then
             if lenient_bignum(card.ability.extra.played_hands) <= 1 then
-                card.ability.extra.retriggers = lenient_bignum(card.ability.extra.retriggers) + 1
+                card.ability.extra.retriggers   = lenient_bignum(card.ability.extra.retriggers) + 1
                 card.ability.extra.played_hands = lenient_bignum(card.ability.extra.goal_hands)
                 card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_upgrade_ex"), colour = G.C.GOLD })
             else
                 card.ability.extra.played_hands = lenient_bignum(card.ability.extra.played_hands) - 1
-                return {
-                    message = card.ability.extra.played_hands .. "",
-                    colour = G.C.FILTER,
-                }
+                return { message = card.ability.extra.played_hands .. "", colour = G.C.FILTER }
             end
         end
     end,

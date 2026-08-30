@@ -26,18 +26,14 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, ctx)
-        if ctx.joker_main then return {
-            xmult = lenient_bignum(card.ability.extra.xmult),
-        } end
+        if ctx.joker_main then
+            return { xmult = lenient_bignum(card.ability.extra.xmult) }
+        end
 
-        if
-            (
-                ctx.individual
-                and ctx.cardarea == G.play
-                and ctx.other_card:get_id() == 8
-                and SMODS.pseudorandom_probability(card, "8 Planets __(subpcall rdx abx ctx)__ // dummy seed", card.ability.extra.prob.num, card.ability.extra.prob.denum)
-            ) or ctx.forcetrigger
-        then
+        if (ctx.individual and ctx.cardarea == G.play and ctx.other_card:get_id() == 8
+            and SMODS.pseudorandom_probability(
+                card, "8 Planets __(subpcall rdx abx ctx)__ // dummy seed", card.ability.extra.prob.num, card.ability.extra.prob.denum
+            )) or ctx.forcetrigger then
             local localized, set = localize("k_plus_tarot"), "Tarot"
             if SMODS.pseudorandom_probability(card, "planet or tarot", 1, 2) then
                 localized, set = localize("k_plus_planet"), "Planet"
@@ -48,12 +44,12 @@ SMODS.Joker({
                     message_card = card,
                     func = function()
                         G.E_MANAGER:add_event(Event({
-                            func = function()
-                                delay(0.2)
-                                SMODS.add_card({ set = set, edition = "e_negative" })
-                                return true
-                            end,
-                        }))
+                                func = function()
+                                    delay(0.2)
+                                    SMODS.add_card({ set = set, edition = "e_negative" })
+                                    return true
+                                end,
+                            }))
                     end,
                 },
             }

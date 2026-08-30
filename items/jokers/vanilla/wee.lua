@@ -35,11 +35,7 @@ SMODS.Joker({
                 operation = "+",
             })
 
-            return {
-                message = localize("k_upgrade_ex"),
-                colour = G.C.CHIPS,
-                message_card = card,
-            }
+            return { message = localize("k_upgrade_ex"), colour = G.C.CHIPS, message_card = card }
         end
 
         if context.joker_main then

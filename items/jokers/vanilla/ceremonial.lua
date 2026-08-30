@@ -32,18 +32,18 @@ SMODS.Joker({
             local destroyedcount, addedemult = 0, 0
             if SMODS.pseudorandom_probability(card, "Dagger", 1, card.ability.extra.odds, "Exotic Ceremonial Dagger") then
                 for k, v in pairs(eligiblejokers) do
-                    destroyedcount = destroyedcount + 1
-                    v.getting_sliced = true
+                    destroyedcount      = destroyedcount + 1
+                    v.getting_sliced    = true
                     G.GAME.joker_buffer = G.GAME.joker_buffer - 1
                     G.E_MANAGER:add_event(Event({
-                        func = function()
-                            G.GAME.joker_buffer = 0
-                            card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-                            card:juice_up(0.8, 0.8)
-                            v:start_dissolve({ HEX("57ECAB") }, nil, 1.6)
-                            return true
-                        end,
-                    }))
+                            func = function()
+                                G.GAME.joker_buffer      = 0
+                                card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
+                                card:juice_up(0.8, 0.8)
+                                v:start_dissolve({ HEX("57ECAB") }, nil, 1.6)
+                                return true
+                            end,
+                        }))
                     addedemult = addedemult + card.ability.extra.Emult_mod
                 end
             end

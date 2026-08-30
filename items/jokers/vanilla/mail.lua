@@ -39,11 +39,11 @@ SMODS.Joker({
                 dollars = money,
                 func = function()
                     G.E_MANAGER:add_event(Event({
-                        func = function()
-                            G.GAME.dollar_buffer = 0
-                            return true
-                        end,
-                    }))
+                            func = function()
+                                G.GAME.dollar_buffer = 0
+                                return true
+                            end,
+                        }))
                 end,
             }
         end

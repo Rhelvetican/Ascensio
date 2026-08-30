@@ -62,12 +62,12 @@ SMODS.Joker({
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card ~= nil then
-            card.ability.extra.card.rank = context.other_card.base.value
-            card.ability.extra.card.suit = context.other_card.base.suit
-            card.ability.extra.card.edition = context.other_card.edition
+            card.ability.extra.card.rank        = context.other_card.base.value
+            card.ability.extra.card.suit        = context.other_card.base.suit
+            card.ability.extra.card.edition     = context.other_card.edition
             card.ability.extra.card.enhancement = context.other_card.config.center.key
-            card.ability.extra.card.seal = context.other_card.seal
-            card.ability.extra.card.has_copy = true
+            card.ability.extra.card.seal        = context.other_card.seal
+            card.ability.extra.card.has_copy    = true
         end
 
         if context.first_hand_drawn then
@@ -75,38 +75,38 @@ SMODS.Joker({
             if card.ability.extra.card.has_copy then
                 for _ = 1, math.min(card.ability.immutable.maxdup, lenient_bignum(card.ability.extra.dup)) do
                     G.E_MANAGER:add_event(Event({
-                        trigger = "before",
-                        delay = 0.4,
-                        func = function()
-                            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-                            local _card = SMODS.create_card({
-                                set = "Base",
-                                rank = card.ability.extra.card.rank,
-                                suit = card.ability.extra.card.suit,
-                                enhancement = card.ability.extra.card.enhancement,
-                                edition = card.ability.extra.card.edition,
-                                seal = card.ability.extra.card.seal,
-                            })
-                            _card:start_materialize()
-                            _card:add_to_deck()
-                            G.deck.config.card_limit = G.deck.config.card_limit + 1
-                            ---@cast G.playing_cards balatro.Card[]
-                            table.insert(G.playing_cards, _card)
-                            G.hand:emplace(_card)
-                            playing_card_joker_effects({ _card })
-                            return true
-                        end,
-                    }))
+                            trigger = "before",
+                            delay = 0.4,
+                            func = function()
+                                G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                                local _card = SMODS.create_card({
+                                    set = "Base",
+                                    rank = card.ability.extra.card.rank,
+                                    suit = card.ability.extra.card.suit,
+                                    enhancement = card.ability.extra.card.enhancement,
+                                    edition = card.ability.extra.card.edition,
+                                    seal = card.ability.extra.card.seal,
+                                })
+                                _card:start_materialize()
+                                _card:add_to_deck()
+                                G.deck.config.card_limit = G.deck.config.card_limit + 1
+                                ---@cast G.playing_cards balatro.Card[]
+                                table.insert(G.playing_cards, _card)
+                                G.hand:emplace(_card)
+                                playing_card_joker_effects({ _card })
+                                return true
+                            end,
+                        }))
                 end
                 return {
                     message = localize("k_duplicated_ex"),
                     func = function()
                         G.E_MANAGER:add_event(Event({
-                            func = function()
-                                SMODS.calculate_context({ playing_card_added = true, cards = cards })
-                                return true
-                            end,
-                        }))
+                                func = function()
+                                    SMODS.calculate_context({ playing_card_added = true, cards = cards })
+                                    return true
+                                end,
+                            }))
                     end,
                 }
             end

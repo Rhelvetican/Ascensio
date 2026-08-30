@@ -27,12 +27,10 @@ SMODS.Joker({
                 card = card,
             }
         end
-        if (context.end_of_round and G.GAME.blind.boss and not context.individual and not context.repetition and not context.blueprint) or context.forcetrigger then
+        if (context.end_of_round and G.GAME.blind.boss and not context.individual and not context.repetition and not context.blueprint)
+            or context.forcetrigger then
             G.hand:change_size(card.ability.extra.hand_gain)
-            return {
-                message = localize({ type = "variable", key = "a_handsize", vars = { card.ability.extra.hand_gain } }),
-                colour = G.C.FILTER,
-            }
+            return { message = localize({ type = "variable", key = "a_handsize", vars = { card.ability.extra.hand_gain } }), colour = G.C.FILTER }
         end
     end,
     asc_credits = {

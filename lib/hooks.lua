@@ -1,9 +1,9 @@
---This was taken and modifed straight from entropy
+-- This was taken and modifed straight from entropy
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
 
 function G.UIDEF.use_and_sell_buttons(card)
     local abc = G_UIDEF_use_and_sell_buttons_ref(card)
-    if (card.area == G.jokers and G.jokers and card.config.center.key == "j_asc_marble_entr") and not card.debuff then --Gives buttons to entropic marble Joker
+    if (card.area == G.jokers and G.jokers and card.config.center.key == "j_asc_marble_entr") and not card.debuff then -- Gives buttons to entropic marble Joker
         sell = {
             n = G.UIT.C,
             config = { align = "cr" },
@@ -226,12 +226,20 @@ function G.UIDEF.use_and_sell_buttons(card)
                     n = G.UIT.C,
                     config = { padding = 0, align = "cl" },
                     nodes = {
-                        { n = G.UIT.R, config = { align = "cl" }, nodes = {
-                            sell,
-                        } },
-                        { n = G.UIT.R, config = { align = "cl" }, nodes = {
-                            buyslot,
-                        } },
+                        {
+                            n = G.UIT.R,
+                            config = { align = "cl" },
+                            nodes = {
+                                sell,
+                            },
+                        },
+                        {
+                            n = G.UIT.R,
+                            config = { align = "cl" },
+                            nodes = {
+                                buyslot,
+                            },
+                        },
                         {
                             n = G.UIT.R,
                             config = { align = "cl" },
@@ -247,10 +255,10 @@ function G.UIDEF.use_and_sell_buttons(card)
     return abc
 end
 
-local is_buying_stone = false
+local is_buying_stone  = false
 local is_selling_stone = false
 
-G.FUNCS.can_buy_stone = function(e)
+G.FUNCS.can_buy_stone = function (e)
     if to_big(G.GAME.dollars - G.GAME.bankrupt_at) >= to_big(e.config.ref_table.ability.buycost) and not is_buying_stone and not G.CONTROLLER.locked then
         e.config.colour = G.C.GREEN
         e.config.button = "buy_stone"
@@ -260,7 +268,7 @@ G.FUNCS.can_buy_stone = function(e)
     end
 end
 
-G.FUNCS.buy_stone = function(e)
+G.FUNCS.buy_stone = function (e)
     is_buying_stone = true
     local ref = e.config.ref_table
     ease_dollars(-ref.ability.buycost)
@@ -273,31 +281,31 @@ G.FUNCS.buy_stone = function(e)
     })
 
     stone:set_edition("e_cry_mosaic", nil, true)
-    G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+    G.playing_card     = (G.playing_card and G.playing_card + 1) or 1
     stone.playing_card = G.playing_card
     table.insert(G.playing_cards, stone)
 
     G.E_MANAGER:add_event(Event({
-        func = function()
-            stone:start_materialize({ G.C.SECONDARY_SET.Enhanced })
-            G.play:emplace(stone)
-            return true
-        end,
-    }))
+            func = function ()
+                stone:start_materialize({ G.C.SECONDARY_SET.Enhanced })
+                G.play:emplace(stone)
+                return true
+            end,
+        }))
 
     G.E_MANAGER:add_event(Event({
-        func = function()
-            G.deck.config.card_limit = G.deck.config.card_limit + 1
-            return true
-        end,
-    }))
+            func = function ()
+                G.deck.config.card_limit = G.deck.config.card_limit + 1
+                return true
+            end,
+        }))
 
     draw_card(G.play, G.deck, 90, "up")
     SMODS.calculate_context({ playing_card_added = true, cards = { stone } })
     is_buying_stone = false
 end
 
-G.FUNCS.can_sell_stone = function(e)
+G.FUNCS.can_sell_stone = function (e)
     local has_stone = false
     if G and G.deck and G.deck.cards then
         for _, c in ipairs(G.deck.cards) do
@@ -313,28 +321,28 @@ G.FUNCS.can_sell_stone = function(e)
     end
 end
 
-G.FUNCS.sell_stone = function(e)
+G.FUNCS.sell_stone = function (e)
     is_selling_stone = true
     G.E_MANAGER:add_event(Event({
-        func = function()
-            if G and G.deck and G.deck.cards then
-                for _, c in ipairs(G.deck.cards) do
-                    if SMODS.has_enhancement(c, "m_stone") then
-                        SMODS.destroy_cards(c)
-                        local c1 = e.config.ref_table
-                        ease_dollars(e.config.ref_table.ability.sellcost)
-                        is_selling_stone = false
-                        return true
+            func = function ()
+                if G and G.deck and G.deck.cards then
+                    for _, c in ipairs(G.deck.cards) do
+                        if SMODS.has_enhancement(c, "m_stone") then
+                            SMODS.destroy_cards(c)
+                            local c1 = e.config.ref_table
+                            ease_dollars(e.config.ref_table.ability.sellcost)
+                            is_selling_stone = false
+                            return true
+                        end
                     end
                 end
-            end
-        end,
-    }))
+            end,
+        }))
 end
 
 local calc = SMODS.calculate_individual_effect
 
-SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
+SMODS.calculate_individual_effect = function (effect, scored_card, key, amount, from_edition)
     local ret = calc(effect, scored_card, key, amount, from_edition)
 
     if ret then return ret end

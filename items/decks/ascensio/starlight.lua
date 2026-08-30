@@ -9,7 +9,8 @@ SMODS.Back({
     init = function(_)
         SMODS.Edition:take_ownership("negative", {
             get_weight = function(self) return self.weight * (G.GAME.modifiers.cry_negative_rate or 1) end,
-        }, true)
+        }, true
+        )
     end,
 })
 
@@ -38,15 +39,15 @@ if CardSleeves then
             if self.config.consumables then
                 delay(0.4)
                 G.E_MANAGER:add_event(Event({
-                    func = function()
-                        for _, v in ipairs(self.config.consumables) do
-                            local card = SMODS.create_card({ key = v })
-                            card:add_to_deck()
-                            G.consumeables:emplace(card)
-                        end
-                        return true
-                    end,
-                }))
+                        func = function()
+                            for _, v in ipairs(self.config.consumables) do
+                                local card = SMODS.create_card({ key = v })
+                                card:add_to_deck()
+                                G.consumeables:emplace(card)
+                            end
+                            return true
+                        end,
+                    }))
             end
         end,
     })

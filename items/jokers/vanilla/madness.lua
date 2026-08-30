@@ -43,7 +43,7 @@ SMODS.Joker({
                     if jkr ~= card and SMODS.is_eternal(jkr, card) and not jkr.getting_sliced then destructable_jokers[#destructable_jokers + 1] = jkr end
                 end
 
-                ---@type Card|nil
+                ---@type Card | nil
                 local joker_to_destroy = pseudorandom_element(destructable_jokers, "the madness of man knows no bound", {})
 
                 if joker_to_destroy then
@@ -57,12 +57,12 @@ SMODS.Joker({
                     })
 
                     G.E_MANAGER:add_event(Event({
-                        func = function()
-                            (context.blueprint_card or card):juice_up(0.8, 0.8)
-                            joker_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
-                            return true
-                        end,
-                    }))
+                            func = function()
+                                (context.blueprint_card or card):juice_up(0.8, 0.8)
+                                joker_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
+                                return true
+                            end,
+                        }))
                 end
             end
         end

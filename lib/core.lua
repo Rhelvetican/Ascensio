@@ -1,5 +1,7 @@
 local pair_ref = pairs
-function pairs(any) return pair_ref(any or {}) end
+function pairs(any)
+    return pair_ref(any or {})
+end
 
 local function add_to_jokers_slots(jkr)
     jkr:add_to_deck()
@@ -9,11 +11,15 @@ end
 
 ---@param jkr Card
 ---@return boolean
-function Ascensio.isAscendable(jkr) return Ascensio.Ascensionable[jkr.config.center.key] and true or false end
+function Ascensio.isAscendable(jkr)
+    return Ascensio.Ascensionable[jkr.config.center.key] and true or false
+end
 
 ---@param jkr Card
 ---@return boolean
-function Ascensio.isApothable(jkr) return Ascensio.Apothable[jkr.config.center.key] and true or false end
+function Ascensio.isApothable(jkr)
+    return Ascensio.Apothable[jkr.config.center.key] and true or false
+end
 
 ---@param jkr Card
 ---@return Card
@@ -70,4 +76,6 @@ function Ascensio.descendJoker(jkr)
 end
 
 ---@param samsara? boolean
-function Card:set_samsara(samsara) self.ability.samsara = samsara end
+function Card:set_samsara(samsara)
+    self.ability.samsara = samsara
+end

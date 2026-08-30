@@ -58,10 +58,7 @@ SMODS.Joker({
 		end
 		]]
         if context.repetition and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, "m_stone") then
-            return {
-                message = localize("k_again_ex"),
-                repetitions = to_number(math.min(card.ability.immutable.recap, card.ability.extra.retrigger)),
-            }
+            return { message = localize("k_again_ex"), repetitions = to_number(math.min(card.ability.immutable.recap, card.ability.extra.retrigger)) }
         end
 
         if context.setting_blind then
@@ -82,17 +79,17 @@ SMODS.Joker({
                     stone:set_edition("e_cry_mosaic", nil, true)
                 end
                 table.insert(stones, stone)
-                --Modifed VanillaRemade Stone Joker for the visual aspect
-                G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                -- Modifed VanillaRemade Stone Joker for the visual aspect
+                G.playing_card     = (G.playing_card and G.playing_card + 1) or 1
                 stone.playing_card = G.playing_card
                 table.insert(G.playing_cards, stone)
                 G.E_MANAGER:add_event(Event({
-                    func = function()
-                        stone:start_materialize({ G.C.SECONDARY_SET.Enhanced })
-                        G.play:emplace(stone)
-                        return true
-                    end,
-                }))
+                        func = function()
+                            stone:start_materialize({ G.C.SECONDARY_SET.Enhanced })
+                            G.play:emplace(stone)
+                            return true
+                        end,
+                    }))
             end
             return {
                 message = "+" .. card.ability.extra.create .. " " .. localize("asc_mossaic_stone_cards"),
@@ -100,11 +97,11 @@ SMODS.Joker({
                 func = function()
                     for _ = 1, to_number(math.min(card.ability.extra.create, card.ability.immutable.cacap)) do
                         G.E_MANAGER:add_event(Event({
-                            func = function()
-                                G.deck.config.card_limit = G.deck.config.card_limit + 1
-                                return true
-                            end,
-                        }))
+                                func = function()
+                                    G.deck.config.card_limit = G.deck.config.card_limit + 1
+                                    return true
+                                end,
+                            }))
                         draw_card(G.play, G.deck, 90, "up")
                         SMODS.calculate_context({ playing_card_added = true, cards = stones })
                     end

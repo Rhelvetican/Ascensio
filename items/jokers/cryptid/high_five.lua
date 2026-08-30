@@ -18,7 +18,7 @@ SMODS.Joker({
             local five_count = 0
             for i = 1, #context.scoring_hand do
                 local _card = context.scoring_hand[i]
-                local rank = _card:get_id()
+                local rank  = _card:get_id()
                 if rank == 5 then five_count = five_count + 1 end
             end
 
@@ -30,22 +30,22 @@ SMODS.Joker({
                     local _card = context.scoring_hand[i]
                     if _card:get_id() ~= 5 and not SMODS.has_no_rank(_card) then
                         G.E_MANAGER:add_event(Event({
-                            func = function()
-                                assert(SMODS.change_base(_card, _, "5"))
-                                _card:juice_up()
-                                return true
-                            end,
-                        }))
+                                func = function()
+                                    assert(SMODS.change_base(_card, _, "5"))
+                                    _card:juice_up()
+                                    return true
+                                end,
+                            }))
                     end
                     if _card.ability.effect ~= "Astral" then _card:set_edition({ cry_astral = true }) end
                     G.E_MANAGER:add_event(Event({
-                        delay = 0.6,
-                        func = function()
-                            _card:juice_up()
-                            play_sound("tarot1")
-                            return true
-                        end,
-                    }))
+                            delay = 0.6,
+                            func = function()
+                                _card:juice_up()
+                                play_sound("tarot1")
+                                return true
+                            end,
+                        }))
                 end
                 if converted then return { message = localize("asc_wish_ex"), colour = G.C.PURPLE } end
             end

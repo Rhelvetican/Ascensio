@@ -36,17 +36,17 @@ SMODS.Joker({
 
             for _, scored in ipairs(context.scoring_hand) do
                 if next(SMODS.get_enhancements(scored)) and not scored.debuff and not scored.vampired then
-                    scalar = scalar + 1
+                    scalar          = scalar + 1
                     scored.vampired = true
                     scored:set_ability("c_base", nil, true)
 
                     G.E_MANAGER:add_event(Event({
-                        func = function()
-                            scored:juice_up()
-                            scored.vampired = nil
-                            return true
-                        end,
-                    }))
+                            func = function()
+                                scored:juice_up()
+                                scored.vampired = nil
+                                return true
+                            end,
+                        }))
                 end
             end
 

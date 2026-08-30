@@ -1,5 +1,7 @@
 ---@return number
-local function getCardsBelowFullDeck() return G.GAME.starting_deck_size - #G.playing_cards end
+local function getCardsBelowFullDeck()
+    return G.GAME.starting_deck_size - #G.playing_cards
+end
 
 SMODS.Joker({
     key = "erosion",

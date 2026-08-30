@@ -35,9 +35,7 @@ SMODS.Joker({
                 scalar_value = "gain",
                 no_message = true,
             })
-            return {
-                extra = { message = localize("k_upgrade_ex"), colour = G.C.DARK_EDITION },
-            }
+            return { extra = { message = localize("k_upgrade_ex"), colour = G.C.DARK_EDITION } }
         end
         if context.joker_main or context.forcetrigger then
             if card.ability.extra.chips > 1 then

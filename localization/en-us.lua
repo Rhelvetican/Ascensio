@@ -10,7 +10,7 @@ return {
                     "{s:1.2} {}",
                     "{s:1.4,C:attention}Special thanks to:{}",
                     "{s:0.5} ",
-                    "{X:asc_tattered,C:black,s:1.2}Tatteredlurker{}     {X:asc_slipstream,C:black,s:1.2}Lil_Mr._Slipstream{}", --I know B: should be used, but it isnt working
+                    "{X:asc_tattered,C:black,s:1.2}Tatteredlurker{}     {X:asc_slipstream,C:black,s:1.2}Lil_Mr._Slipstream{}", -- I know B: should be used, but it isnt working
                     "{C:asc_tattered,s:0.8}Art                           {C:asc_slipstream,s:0.8}Art   ",
                     "{s:0.2} ",
                     " {X:asc_glitchkat,C:white,s:1.2}Glitchkat10{}       {X:asc_somethingcom515,C:white,s:1.2}Somethingcom515{}",
@@ -32,7 +32,7 @@ return {
         Edition = {},
         Enhanced = {},
 
-        ---@type {[string]: { name: string|string[], text: string[]|string[][] }}
+        ---@type { [string]: { name: string | string[], text: string[] | string[][] } }
         Joker = {
             -----Vanilla-----
             j_asc_jimbo = {
@@ -1438,7 +1438,7 @@ return {
             },
 
             j_asc_gardenfork = {
-                name = "Contra Homo", --Against Neighbors
+                name = "Contra Homo", -- Against Neighbors
                 text = {
                     "{X:money,C:white}X#1#{} total money",
                     "if played hand",
@@ -1447,7 +1447,7 @@ return {
             },
 
             j_asc_nosound = {
-                name = "Contra Ipsum", --Against Self
+                name = "Contra Ipsum", -- Against Self
                 text = {
                     {
                         "Retrigger each played {C:attention}7{}",
@@ -1641,7 +1641,7 @@ return {
                 text = {
                     "{C:chips}+#1#{} Chips",
                     "{C:chips}-#2#{} Chips per {C:attention}reroll{}", -- see flash card for {c} formatting on "reroll" when used in reference to gaining/losing values
-                    "{C:green}Rerolls{} are free", -- see choas the clown for {c} formatting on "reroll" when used in reference to free rerolls
+                    "{C:green}Rerolls{} are free",                     -- see choas the clown for {c} formatting on "reroll" when used in reference to free rerolls
                 },
             },
 
@@ -1990,9 +1990,9 @@ return {
     misc = {
         dictionary = {
             asc_banana_ex = "Banana!",
-            asc_inactive = "Inactive", --For exotic Bones
+            asc_inactive = "Inactive", -- For exotic Bones
             asc_saved_by_bones = "Saved by Carcer Animarum",
-            asc_chips = "Chips", --To make hyperoperators work
+            asc_chips = "Chips",       -- To make hyperoperators work
             asc_mult = "Mult",
 
             asc_seance_msg = "The World is not here...",

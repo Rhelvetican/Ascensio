@@ -33,18 +33,15 @@ SMODS.Joker({
             local id, mult, this_card = 999, 999, nil
             for _, _card in ipairs(G.hand.cards) do
                 if id > _card.base.id and not SMODS.has_no_rank(_card) then
-                    id = _card.base.id
-                    mult = _card.base.nominal
+                    id        = _card.base.id
+                    mult      = _card.base.nominal
                     this_card = _card
                 end
             end
 
             if (context.other_card == this_card) or context.forcetrigger then
                 if context.other_card.debuff and not context.forcetrigger then
-                    return {
-                        message = localize("k_debuffed"),
-                        colour = G.C.RED,
-                    }
+                    return { message = localize("k_debuffed"), colour = G.C.RED }
                 else
                     SMODS.scale_card(card, {
                         ref_table = card.ability.extra,

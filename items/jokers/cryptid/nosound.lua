@@ -22,7 +22,7 @@ SMODS.Joker({
         }
     end,
     calculate = function(self, card, context)
-        if context.repetition then --This is the base Joker effect
+        if context.repetition then -- This is the base Joker effect
             if context.cardarea == G.play then
                 if context.other_card:get_id() == 7 then
                     return {
@@ -33,17 +33,18 @@ SMODS.Joker({
                 end
             end
         end
-        local prob --Keeps track of if we hit the probability or not
+        local prob -- Keeps track of if we hit the probability or not
         if context.individual and context.cardarea == G.play then
-            if context.other_card:get_id() == 7 and SMODS.pseudorandom_probability(card, "No Memory of your card", 1, card.ability.extra.odds, "Exotic No Sound") then
+            if context.other_card:get_id() == 7
+                and SMODS.pseudorandom_probability(card, "No Memory of your card", 1, card.ability.extra.odds, "Exotic No Sound") then
                 prob = true
-                local jokers = {} --Select a random Joker
+                local jokers = {} -- Select a random Joker
                 for i = 1, #G.jokers.cards do
                     if not G.jokers.cards[i].debuff then jokers[#jokers + 1] = G.jokers.cards[i] end
                 end
                 local chosen_joker = pseudorandom_element(jokers, pseudoseed("No Memory"))
 
-                local check = false --Modify selected Joker
+                local check = false -- Modify selected Joker
                 if not Card.no(chosen_joker, "immutable", true) then
                     Cryptid.manipulate(chosen_joker, { value = card.ability.immutable.multiplier })
                     check = true

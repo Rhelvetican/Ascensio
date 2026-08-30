@@ -1,23 +1,27 @@
 --- Returns the larger value of 2 numbers
---- @param a number
---- @param b number
---- @return number max
-function max(a, b) return (a > b) and a or b end
+---@param a number
+---@param b number
+---@return number max
+function max(a, b)
+    return (a > b) and a or b
+end
 
 --- Returns the smaller value of 2 numbers
---- @param a number
---- @param b number
---- @return number max
-function min(a, b) return (a < b) and a or b end
+---@param a number
+---@param b number
+---@return number max
+function min(a, b)
+    return (a < b) and a or b
+end
 
 --- Check if array contains an item
---- @generic T
---- @param tbl T[] Array of items.
---- @param item T Item to check.
---- @param cmp? fun(a: T, b: T): boolean Optional comparator function.
---- @return boolean
+---@generic T
+---@param tbl  T[]                      Array of items.
+---@param item T                        Item to check.
+---@param cmp? fun(a: T, b: T): boolean Optional comparator function.
+---@return boolean
 function table.contains(tbl, item, cmp)
-    cmp = cmp or function(a, b) return a == b end
+    cmp = cmp or function (a, b) return a == b end
 
     if not cmp then
         for _, tbl_item in ipairs(tbl) do
@@ -33,10 +37,10 @@ function table.contains(tbl, item, cmp)
 end
 
 --- Filter outs elements in array that satisfies a given predicate.
---- @generic T
---- @param tbl T[] Array of items.
---- @param predicate fun(T): boolean Predicate.
---- @return T[]
+---@generic T
+---@param tbl       T[]             Array of items.
+---@param predicate fun(T): boolean Predicate.
+---@return T[]
 function table.filter(tbl, predicate)
     local accum = {}
 
@@ -47,10 +51,10 @@ function table.filter(tbl, predicate)
     return accum
 end
 
---- @generic K, V
---- @param tbl table<K, V>?
---- @param key K
---- @return V?
+---@generic K, V
+---@param tbl table<K, V>?
+---@param key K
+---@return V?
 function table.safe_get(tbl, key)
     if tbl then return tbl[key] end
 end
@@ -87,7 +91,7 @@ function table.safe_nav(tbl, key)
         buf = string.format("%s[%s]", buf, subkey)
     end
 
-    local ok, val = pcall(function()
+    local ok, val = pcall(function ()
         local chunk, err = load(buf)
         if err then
             return false, nil
@@ -99,7 +103,7 @@ function table.safe_nav(tbl, key)
     if ok then return val end
 end
 
----Clones a table, recursively.
+--- Clones a table, recursively.
 ---@generic K, V
 ---@param tbl table<K, V>
 ---@return table<K, V>
@@ -117,11 +121,11 @@ function table.clone(tbl)
     return ret
 end
 
----Merges two or more tables recursively.
+--- Merges two or more tables recursively.
 ---
----Only lua-dict tables are merged recursively; lua-list tables are treated as opaque values (overwritten instead of merged).
----@param behavior "keep"|"force"|"error"
----@param ... table
+--- Only lua-dict tables are merged recursively; lua-list tables are treated as opaque values (overwritten instead of merged).
+---@param behavior "keep" | "force" | "error"
+---@param ...      table
 ---@return table
 function table.extend(behavior, ...)
     ---@generic T
@@ -153,7 +157,7 @@ function table.extend(behavior, ...)
         end
     end
 
-    local tbls = { ... }
+    local tbls   = { ... }
     local result = {}
 
     for _, tbl in ipairs(tbls) do
@@ -163,19 +167,21 @@ function table.extend(behavior, ...)
     return result
 end
 
---- @param amount number
-function ease_joker_slot(amount) G.jokers.config.card_limit = G.jokers.config.card_limit + amount end
+---@param amount number
+function ease_joker_slot(amount)
+    G.jokers.config.card_limit = G.jokers.config.card_limit + amount
+end
 
---- @param amount number|table?
---- @param instant boolean|any?
-function ease_dollars_mult(amount, instant) --By Omega. Pretty much thunk's ease dollars but with mutiplication
+---@param amount  number | table?
+---@param instant boolean | any?
+function ease_dollars_mult(amount, instant) -- By Omega. Pretty much thunk's ease dollars but with mutiplication
     local function __inner(__inner_amount)
         local one = 1
         __inner_amount = __inner_amount or 1
         if __inner_amount > one then
-            local ui = G.HUD:get_UIE_by_ID("dollar_text_UI")
+            local ui   = G.HUD:get_UIE_by_ID("dollar_text_UI")
             local text = "X" .. localize("$")
-            local col = G.C.MONEY
+            local col  = G.C.MONEY
 
             inc_career_stat("c_dollars_earned", (__inner_amount - one) * G.GAME.dollars)
 
@@ -202,25 +208,25 @@ function ease_dollars_mult(amount, instant) --By Omega. Pretty much thunk's ease
         __inner(amount)
     else
         G.E_MANAGER:add_event(Event({
-            trigger = "immediate",
-            func = function()
-                __inner(amount)
-                return true
-            end,
-        }))
+                trigger = "immediate",
+                func = function ()
+                    __inner(amount)
+                    return true
+                end,
+            }))
     end
 end
 
----These is ripped off Entropy.
----Original by LordRuby
+--- These is ripped off Entropy.
+--- Original by LordRuby
 Ascensio.SelectionLimit = {}
 
----@param mod integer
+---@param mod          integer
 ---@param stroverride? string
 function Ascensio.SelectionLimit.ease_playing_card(mod, stroverride)
     if SMODS.hand_limit_strings then
         G.GAME.starting_params.play_limit = (G.GAME.starting_params.play_limit or 5) + mod
-        G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
+        G.hand.config.highlighted_limit   = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
         local str = stroverride or G.GAME.starting_params.play_limit or ""
         SMODS.hand_limit_strings.play = G.GAME.starting_params.play_limit ~= 5 and localize("b_limit") .. str or ""
     else
@@ -228,21 +234,21 @@ function Ascensio.SelectionLimit.ease_playing_card(mod, stroverride)
     end
 end
 
----@param mod integer
+---@param mod          integer
 ---@param stroverride? string
 function Ascensio.SelectionLimit.ease_discard(mod, stroverride)
     G.GAME.starting_params.discard_limit = (G.GAME.starting_params.discard_limit or 5) + mod
-    G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
+    G.hand.config.highlighted_limit      = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
     local str = stroverride or G.GAME.starting_params.discard_limit or ""
     SMODS.hand_limit_strings.discard = G.GAME.starting_params.discard_limit ~= 5 and localize("b_limit") .. str or ""
 end
 
----@param to integer
+---@param to           integer
 ---@param stroverride? string
 function Ascensio.SelectionLimit.set_playing_card(to, stroverride)
     if SMODS.hand_limit_strings then
         G.GAME.starting_params.play_limit = to
-        G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
+        G.hand.config.highlighted_limit   = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
         local str = stroverride or G.GAME.starting_params.play_limit or ""
         SMODS.hand_limit_strings.play = G.GAME.starting_params.play_limit ~= 5 and localize("b_limit") .. str or ""
     else
@@ -250,28 +256,32 @@ function Ascensio.SelectionLimit.set_playing_card(to, stroverride)
     end
 end
 
----@param to integer
+---@param to           integer
 ---@param stroverride? string
 function Ascensio.SelectionLimit.set_discard(to, stroverride)
     G.GAME.starting_params.discard_limit = to
-    G.hand.config.highlighted_limit = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
+    G.hand.config.highlighted_limit      = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
     local str = stroverride or G.GAME.starting_params.discard_limit or ""
     SMODS.hand_limit_strings.discard = G.GAME.starting_params.discard_limit ~= 5 and localize("b_limit") .. str or ""
 end
 
----@param mod integer
+---@param mod          integer
 ---@param stroverride? string
 function Ascensio.SelectionLimit.ease(mod, stroverride)
-    if not SMODS.hand_limit_strings then SMODS.hand_limit_strings = {} end
+    if not SMODS.hand_limit_strings then
+        SMODS.hand_limit_strings = {}
+    end
 
     Ascensio.SelectionLimit.ease_playing_card(mod, stroverride)
     Ascensio.SelectionLimit.ease_discard(mod, stroverride)
 end
 
----@param to integer
+---@param to           integer
 ---@param stroverride? string
 function Ascensio.SelectionLimit.set(to, stroverride)
-    if not SMODS.hand_limit_strings then SMODS.hand_limit_strings = {} end
+    if not SMODS.hand_limit_strings then
+        SMODS.hand_limit_strings = {}
+    end
 
     Ascensio.SelectionLimit.set_playing_card(to, stroverride)
     Ascensio.SelectionLimit.set_discard(to, stroverride)
@@ -279,20 +289,20 @@ end
 
 ---@class AscensioCredits
 ---@field idea? string[]
----@field art? string[]
+---@field art?  string[]
 ---@field code? string[]
 ---@overload fun(self: AscensioCredits): AscensioCredits
 Ascensio.Credit = setmetatable({}, {
     ---@param this AscensioCredits
     ---@return AscensioCredits
-    __call = function(_, this) return this end,
+    __call = function (_, this) return this end,
 })
 
 ---@class (partial) SMODS.Joker
 ---@field asc_credits? AscensioCredits
 
----@param num number
----@param range { min: number }|{ max: number }|{ min: number, max: number }
+---@param num   number
+---@param range { min: number } | { max: number } | { min: number, max: number }
 ---@return boolean
 function Ascensio.isInRange(num, range)
     range.min = range.min or -math.huge

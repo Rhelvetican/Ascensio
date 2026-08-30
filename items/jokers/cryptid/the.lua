@@ -25,28 +25,28 @@ SMODS.Joker({
         if (context.before and context.scoring_name == "cry_None") or context.forcetrigger then
             for _, cardx in ipairs(G.hand.cards) do
                 G.E_MANAGER:add_event(Event({
-                    trigger = "immediate",
-                    func = function()
-                        cardx:juice_up()
+                        trigger = "immediate",
+                        func = function()
+                            cardx:juice_up()
 
-                        if card.ability.eternal then return true, nil end
+                            if card.ability.eternal then return true, nil end
 
-                        SMODS.scale_card(card, {
-                            ref_table = card.ability.extra,
-                            ref_value = "emult",
-                            scalar_value = "emult_gain",
-                        })
+                            SMODS.scale_card(card, {
+                                ref_table = card.ability.extra,
+                                ref_value = "emult",
+                                scalar_value = "emult_gain",
+                            })
 
-                        cardx:start_dissolve()
-                        return true, nil
-                    end,
-                }))
+                            cardx:start_dissolve()
+                            return true, nil
+                        end,
+                    }))
             end
         end
 
-        if context.joker_main or context.forcetrigger then return {
-            emult = card.ability.extra.emult,
-        } end
+        if context.joker_main or context.forcetrigger then
+            return { emult = card.ability.extra.emult }
+        end
     end,
     asc_credits = {
         idea = {

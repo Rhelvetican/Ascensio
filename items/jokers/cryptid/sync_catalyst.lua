@@ -52,41 +52,35 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, context)
-        if context.joker_main then return {
-            echips = card.ability.extra.echips,
-            emult = card.ability.extra.emult,
-        } end
+        if context.joker_main then
+            return { echips = card.ability.extra.echips, emult = card.ability.extra.emult }
+        end
 
-        if context.final_scoring_step then return {
-            balance = true,
-            func = balance_sound,
-        } end
+        if context.final_scoring_step then
+            return { balance = true, func = balance_sound }
+        end
 
         if context.setting_blind and not context.blueprint then
             G.E_MANAGER:add_event(Event({
-                func = function()
-                    local balans = (G.GAME.current_round.hands_left + G.GAME.current_round.discards_left) / 2
-                    ease_hands_played(-(G.GAME.current_round.hands_left - balans), nil, true)
-                    ease_discard(-(G.GAME.current_round.discards_left - balans), nil, true)
+                    func = function()
+                        local balans = (G.GAME.current_round.hands_left + G.GAME.current_round.discards_left) / 2
+                        ease_hands_played(-(G.GAME.current_round.hands_left - balans), nil, true)
+                        ease_discard(-(G.GAME.current_round.discards_left - balans), nil, true)
 
-                    card_eval_status_text(card, "extra", nil, nil, nil, {
-                        message = "Balanced!",
-                        colour = G.C.DARK_EDITION,
-                        func = balance_sound,
-                    })
-                    return true
-                end,
-            }))
+                        card_eval_status_text(card, "extra", nil, nil, nil, {
+                            message = "Balanced!",
+                            colour = G.C.DARK_EDITION,
+                            func = balance_sound,
+                        })
+                        return true
+                    end,
+                }))
 
             local balans = (card.ability.extra.emult + card.ability.extra.echips) / 2
-            card.ability.extra.emult = balans
+            card.ability.extra.emult  = balans
             card.ability.extra.echips = balans
 
-            return {
-                message = "Balanced!",
-                colour = G.C.DARK_EDITION,
-                func = balance_sound,
-            }
+            return { message = "Balanced!", colour = G.C.DARK_EDITION, func = balance_sound }
         end
 
         if (context.beat_boss and context.main_eval and not context.blueprint) or context.forcetrigger then

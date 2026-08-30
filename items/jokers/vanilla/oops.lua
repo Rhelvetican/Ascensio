@@ -42,7 +42,7 @@ SMODS.Joker({
 
     calculate = function(self, card, context)
         if context.before and not context.blueprint_card and not context.retrigger_joker and not context.repetition then
-            --This is directly borrowed/altered from kalidescope
+            -- This is directly borrowed/altered from kalidescope
             local selected_joker = math.random(1, #G.jokers.cards)
             local eligiblejokers = {}
             for k, v in pairs(G.jokers.cards) do
@@ -50,7 +50,7 @@ SMODS.Joker({
             end
             if #eligiblejokers > 0 then
                 local eligible_card = pseudorandom_element(eligiblejokers, pseudoseed("nevergonnagiveyouupnevergonnaletyoudown"))
-                local sticker = { cry_rigged = true }
+                local sticker       = { cry_rigged = true }
                 eligible_card.ability.cry_rigged = true
                 check_for_unlock({ type = "googol_play_rigged" })
             end
@@ -64,22 +64,23 @@ SMODS.Joker({
                 local enhancement = "cry_rigged"
                 if _card.ability.cry_rigged ~= "Rigged" then _card.ability.cry_rigged = true end
                 G.E_MANAGER:add_event(Event({
-                    delay = 0.6,
-                    func = function()
-                        _card:juice_up()
-                        play_sound("tarot1")
-                        return true
-                    end,
-                }))
+                        delay = 0.6,
+                        func = function()
+                            _card:juice_up()
+                            play_sound("tarot1")
+                            return true
+                        end,
+                    }))
             end
             if converted then return { message = "Rigged!", colour = G.C.GREEN } end
         end
 
         if context.joker_main and not context.blueprint_card then
             if math.random(1, 6) == 1 then
-                --if SMODS.pseudorandom_probability(card, "Issac and his Issac", 1, card.ability.extra.odds, "Exotic Oops", true) then
+                -- if SMODS.pseudorandom_probability(card, "Issac and his Issac", 1, card.ability.extra.odds, "Exotic Oops", true) then
                 if math.random(1, 2) == 1 then
-                    card.ability.extra.immutable.joker_slots = lenient_bignum(card.ability.extra.immutable.joker_slots) + lenient_bignum(card.ability.extra.slot_gain)
+                    card.ability.extra.immutable.joker_slots = lenient_bignum(card.ability.extra.immutable.joker_slots)
+                        + lenient_bignum(card.ability.extra.slot_gain)
                     SMODS.scale_card(card, {
                         ref_table = card.ability.extra.immutable,
                         ref_value = "joker_slots",
@@ -113,14 +114,14 @@ SMODS.Joker({
 
     add_to_deck = function(self, card, from_debuff)
         if G.jokers and not from_debuff then
-            G.jokers.config.card_limit = G.jokers.config.card_limit + lenient_bignum(card.ability.extra.immutable.joker_slots)
+            G.jokers.config.card_limit       = G.jokers.config.card_limit + lenient_bignum(card.ability.extra.immutable.joker_slots)
             G.consumeables.config.card_limit = G.consumeables.config.card_limit + lenient_bignum(card.ability.extra.immutable.consumable_slots)
         end
     end,
 
     remove_from_deck = function(self, card, from_debuff)
         if G.jokers and not from_debuff then
-            G.jokers.config.card_limit = G.jokers.config.card_limit - lenient_bignum(card.ability.extra.immutable.joker_slots)
+            G.jokers.config.card_limit       = G.jokers.config.card_limit - lenient_bignum(card.ability.extra.immutable.joker_slots)
             G.consumeables.config.card_limit = G.consumeables.config.card_limit - lenient_bignum(card.ability.extra.immutable.consumable_slots)
         end
     end,

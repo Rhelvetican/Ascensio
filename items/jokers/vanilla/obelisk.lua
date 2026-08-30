@@ -61,9 +61,7 @@ SMODS.Joker({
 
             if reset and not context.forcetrigger then
                 card.ability.immutable.consecutive = 0
-                return {
-                    message = localize("k_reset"),
-                }
+                return { message = localize("k_reset") }
             else
                 card.ability.extra.immutable.consecutive = card.ability.extra.immutable.consecutive + 1
 
@@ -76,9 +74,9 @@ SMODS.Joker({
             end
         end
 
-        if context.joker_main then return {
-            xmult = card.ability.extra.xmult,
-        } end
+        if context.joker_main then
+            return { xmult = card.ability.extra.xmult }
+        end
     end,
 
     asc_credits = {

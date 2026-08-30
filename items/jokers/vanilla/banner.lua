@@ -42,7 +42,8 @@ SMODS.Joker({
             end
         end
         if context.joker_main or context.forcetrigger then
-            if (lenient_bignum(card.ability.extra.chips) > 1) or (lenient_bignum(card.ability.extra.bonus) > 1 and G.GAME.current_round.discards_left > 0) then
+            if (lenient_bignum(card.ability.extra.chips) > 1)
+                or (lenient_bignum(card.ability.extra.bonus) > 1 and G.GAME.current_round.discards_left > 0) then
                 return {
                     message = localize({
                         type = "variable",

@@ -38,9 +38,9 @@ SMODS.Joker({
 
         if ctx.blind or ctx.forcetrigger then return ease_hands_played(card.ability.extra.hands) end
 
-        if ctx.repetition and ctx.cardarea == G.play then return {
-            repetitions = math.pow(card.ability.extra.retrig_base, G.GAME.current_round.hands_played),
-        } end
+        if ctx.repetition and ctx.cardarea == G.play then
+            return { repetitions = math.pow(card.ability.extra.retrig_base, G.GAME.current_round.hands_played) }
+        end
     end,
 
     asc_credits = {

@@ -34,7 +34,7 @@ function Card:calculate_edition(context)
     if self.edition and context.cardarea == G.hand then
         if next(SMODS.find_card("j_asc_mime")) then
             context.cardarea = G.play
-            g = oldcalcedition(self, context)
+            g                = oldcalcedition(self, context)
             context.cardarea = G.hand
         else
             g = oldcalcedition(self, context)

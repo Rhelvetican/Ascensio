@@ -38,11 +38,11 @@ SMODS.Joker({
     loc_vars = function(_, _, card)
         if type(card.ability.extra.base) == "number" and card.ability.extra.base > 1e40 then
             card.ability.extra.bignum = true
-            card.ability.extra.base = Big:create(card.ability.extra.base)
+            card.ability.extra.base   = Big:create(card.ability.extra.base)
         end
 
         if type(card.ability.extra.base_gain) == "number" and card.ability.extra.base_gain > 1e40 then
-            card.ability.extra.bignum = true
+            card.ability.extra.bignum    = true
             card.ability.extra.base_gain = Big:create(card.ability.extra.base_gain)
         end
 
@@ -58,20 +58,18 @@ SMODS.Joker({
 
         mult_tbl[#mult_tbl + 1] = card.ability.extra.base_gain
 
-        return {
-            vars = mult_tbl,
-        }
+        return { vars = mult_tbl }
     end,
 
     calculate = function(_, card, context)
         if not card.ability.extra.bignum or type(card.ability.extra.base) == "number" then
             if type(card.ability.extra.base) == "number" and card.ability.extra.base > 1e40 then
                 card.ability.extra.bignum = true
-                card.ability.extra.base = Big:create(card.ability.extra.base)
+                card.ability.extra.base   = Big:create(card.ability.extra.base)
             end
 
             if type(card.ability.extra.base_gain) == "number" and card.ability.extra.base_gain > 1e40 then
-                card.ability.extra.bignum = true
+                card.ability.extra.bignum    = true
                 card.ability.extra.base_gain = Big:create(card.ability.extra.base_gain)
             end
 
@@ -91,16 +89,14 @@ SMODS.Joker({
 
             if not Talisman.config_file.disable_anims then
                 G.E_MANAGER:add_event(Event({
-                    func = function()
-                        context.other_joker:juice_up(0.5, 0.5)
-                        return true
-                    end,
-                }))
+                        func = function()
+                            context.other_joker:juice_up(0.5, 0.5)
+                            return true
+                        end,
+                    }))
             end
 
-            return {
-                emult = emult,
-            }
+            return { emult = emult }
         end
 
         if (context.end_of_round and context.main_eval) or context.forcetrigger then

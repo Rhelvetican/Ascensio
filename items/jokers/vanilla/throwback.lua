@@ -25,9 +25,10 @@ SMODS.Joker({
             },
         }
     end,
-    calculate = function(self, card, context) --Most of this is just modified from the original throwback
+    calculate = function(self, card, context)
+        -- Most of this is just modified from the original throwback
         card.ability.extra.rounds = G.GAME.skips
-        card.ability.extra.mult = 1
+        card.ability.extra.mult   = 1
         for i = 1, (card.ability.extra.rounds + 1) do
             card.ability.extra.mult = card.ability.extra.mult + i ^ card.ability.extra.exp
         end
@@ -38,10 +39,9 @@ SMODS.Joker({
                 colour = G.C.RED,
             }
         end
-        if context.skip_blind and not context.blueprint then return {
-            message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.mult } }),
-            colour = G.C.RED,
-        } end
+        if context.skip_blind and not context.blueprint then
+            return { message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.mult } }), colour = G.C.RED }
+        end
     end,
     animation = {
         macro = {

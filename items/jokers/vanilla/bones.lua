@@ -51,7 +51,7 @@ SMODS.Joker({
                 card.ability.extra.immutable.beaten = card.ability.extra.immutable.beaten + 1
             else
                 card.ability.extra.immutable.beaten = card.ability.extra.immutable.beaten + 1
-                card.ability.extra.active = true
+                card.ability.extra.active           = true
             end
         end
 
@@ -68,22 +68,19 @@ SMODS.Joker({
                 colour = G.C.DARK_EDITION,
             })
 
-            if (context.game_over and (to_number(G.GAME.chips) / (to_number(G.GAME.blind.chips)) >= card.ability.extra.percentage / 100) and card.ability.extra.active) or context.forcetrigger then
+            if (context.game_over and (to_number(G.GAME.chips) / (to_number(G.GAME.blind.chips)) >= card.ability.extra.percentage / 100)
+                and card.ability.extra.active) or context.forcetrigger then
                 if not context.forcetrigger then card.ability.extra.immutable.beaten = 0 end
                 G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.hand_text_area.blind_chips:juice_up()
-                        G.hand_text_area.game_chips:juice_up()
-                        play_sound("tarot1")
-                        card.ability.extra.active = false
-                        return true
-                    end,
-                }))
-                return {
-                    message = localize("k_saved_ex"),
-                    saved = "asc_saved_by_bones",
-                    colour = G.C.RED,
-                }
+                        func = function()
+                            G.hand_text_area.blind_chips:juice_up()
+                            G.hand_text_area.game_chips:juice_up()
+                            play_sound("tarot1")
+                            card.ability.extra.active = false
+                            return true
+                        end,
+                    }))
+                return { message = localize("k_saved_ex"), saved = "asc_saved_by_bones", colour = G.C.RED }
             end
         end
     end,

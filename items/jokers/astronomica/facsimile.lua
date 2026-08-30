@@ -42,40 +42,32 @@ SMODS.Joker({
                 if G.jokers.cards[i].config.center.key == other_joker.config.center.key then same_count = same_count + 1 end
             end
             if context.other_card == other_joker then
-                return {
-                    message = localize("k_again_ex"),
-                    repetitions = same_count,
-                    card = card,
-                }
+                return { message = localize("k_again_ex"), repetitions = same_count, card = card }
             else
                 return nil, true
             end
         end
-        --Taken and modifed from Cryptid's smile (:D)
-        if
-            context.ending_shop
-            and not context.individual
-            and not context.repetition
-            and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit
-            and #G.jokers.cards
-            and other_joker ~= nil
-            --and not position == #G.jokers.cards
+        -- Taken and modifed from Cryptid's smile (:D)
+        if context.ending_shop and not context.individual
+            and not context.repetition and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit
+            and #G.jokers.cards and other_joker ~= nil
+        -- and not position == #G.jokers.cards
         then
             local roundcreatejoker = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
             G.GAME.joker_buffer = G.GAME.joker_buffer + roundcreatejoker
             G.E_MANAGER:add_event(Event({
-                func = function()
-                    if roundcreatejoker > 0 then
-                        local _card = copy_card(other_joker, nil, nil, nil, other_joker.edition and other_joker.edition.negative)
-                        _card:set_edition(other_joker.edition)
-                        _card:add_to_deck()
-                        G.jokers:emplace(_card)
-                        _card:start_materialize()
-                        G.GAME.joker_buffer = 0
-                    end
-                    return true
-                end,
-            }))
+                    func = function()
+                        if roundcreatejoker > 0 then
+                            local _card = copy_card(other_joker, nil, nil, nil, other_joker.edition and other_joker.edition.negative)
+                            _card:set_edition(other_joker.edition)
+                            _card:add_to_deck()
+                            G.jokers:emplace(_card)
+                            _card:start_materialize()
+                            G.GAME.joker_buffer = 0
+                        end
+                        return true
+                    end,
+                }))
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_duplicated_ex") })
             return nil, true
         end

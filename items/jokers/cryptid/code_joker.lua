@@ -28,20 +28,20 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.setting_blind and not (context.blueprint_card or self).getting_sliced then
             G.E_MANAGER:add_event(Event({
-                trigger = "after",
-                func = function()
-                    play_sound("timpani")
-                    local _card = create_card("Code", G.consumeables, nil, nil, nil, nil)
-                    _card:set_edition({
-                        negative = true,
-                    })
-                    if card.ability.extra.multiuse > 1 then _card.ability.cry_multiuse = card.ability.extra.multiuse end
-                    _card:add_to_deck()
-                    G.consumeables:emplace(_card)
-                    _card:juice_up(0.3, 0.5)
-                    return true
-                end,
-            }))
+                    trigger = "after",
+                    func = function()
+                        play_sound("timpani")
+                        local _card = create_card("Code", G.consumeables, nil, nil, nil, nil)
+                        _card:set_edition({
+                            negative = true,
+                        })
+                        if card.ability.extra.multiuse > 1 then _card.ability.cry_multiuse = card.ability.extra.multiuse end
+                        _card:add_to_deck()
+                        G.consumeables:emplace(_card)
+                        _card:juice_up(0.3, 0.5)
+                        return true
+                    end,
+                }))
         end
         if (context.end_of_round and G.GAME.blind.boss) and not (context.individual or context.repetition or context.blueprint) then
             card.ability.extra.multiuse = card.ability.extra.multiuse + card.ability.extra.gain
@@ -63,22 +63,24 @@ SMODS.Joker({
                 colour = G.C.CODE,
             })
             G.E_MANAGER:add_event(Event({
-                trigger = "after",
-                func = function()
-                    for i = 1, card.ability.extra.cards do
-                        play_sound("timpani")
-                        local _card = create_card("Code", G.consumeables, nil, nil, nil, nil)
-                        _card:set_edition({ negative = true })
+                    trigger = "after",
+                    func = function()
+                        for i = 1, card.ability.extra.cards do
+                            play_sound("timpani")
+                            local _card = create_card("Code", G.consumeables, nil, nil, nil, nil)
+                            _card:set_edition({ negative = true })
 
-                        in_pool = function(_, _) return true, { allow_duplicates = true } end
+                            in_pool = function(_, _)
+                                return true, { allow_duplicates = true }
+                            end
 
-                        _card:add_to_deck()
-                        G.consumeables:emplace(_card)
-                        _card:juice_up(0.3, 0.5)
-                    end
-                    return true
-                end,
-            }))
+                            _card:add_to_deck()
+                            G.consumeables:emplace(_card)
+                            _card:juice_up(0.3, 0.5)
+                        end
+                        return true
+                    end,
+                }))
         end
     end,
 

@@ -48,13 +48,15 @@ SMODS.Joker({
             end
 
             SMODS.calculate_effect({ message = localize("k_level_up_ex") }, context.blueprint_card or card)
-            SMODS.smart_level_up_hand(context.blueprint_card or card, context.scoring_name, false, card.ability.extra.immutable.hands * card.ability.extra.level_gain)
+            SMODS.smart_level_up_hand(
+                context.blueprint_card or card, context.scoring_name, false, card.ability.extra.immutable.hands * card.ability.extra.level_gain
+            )
         end
 
         if context.beat_boss and context.main_eval and not context.forcetrigger then
             local message = ""
             if card.ability.extra.antes.done > card.ability.extra.antes.req then
-                message = "Incremented!"
+                message                       = "Incremented!"
                 card.ability.extra.antes.done = 0
 
                 SMODS.scale_card(card, {
@@ -77,10 +79,7 @@ SMODS.Joker({
 
             card.ability.extra.immutable.hands = 0
 
-            return {
-                message = message,
-                colour = G.C.FILTER,
-            }
+            return { message = message, colour = G.C.FILTER }
         end
     end,
 

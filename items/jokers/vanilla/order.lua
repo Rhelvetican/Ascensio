@@ -11,23 +11,20 @@ SMODS.Joker({
     demicoloncompat = true,
     loc_vars = function(self, info_queue, card) return { vars = { card and lenient_bignum(card.ability.extra.power) } } end,
     calculate = function(self, card, context)
-        if --The card transformation apspect of this was taken and modifed in part from the Waterfall Joker from the Celesete Card Collection
-            context.before
-            and context.poker_hands ~= nil
-            and next(context.poker_hands["Straight"])
-        then
+        if-- The card transformation apspect of this was taken and modifed in part from the Waterfall Joker from the Celesete Card Collection
+        context.before and context.poker_hands ~= nil and next(context.poker_hands["Straight"]) then
             return {
                 G.E_MANAGER:add_event(Event({
-                    trigger = "immediate",
-                    func = function()
-                        for i = 1, #G.hand.cards do
-                            SMODS.change_base(G.hand.cards[i], _, context.scoring_hand[((i - 1) % #context.scoring_hand) + 1].base.value)
-                            G.hand.cards[i]:juice_up()
-                            play_sound("tarot1", 0.8, 0.4)
-                        end
-                        return true
-                    end,
-                })),
+                        trigger = "immediate",
+                        func = function()
+                            for i = 1, #G.hand.cards do
+                                SMODS.change_base(G.hand.cards[i], _, context.scoring_hand[((i - 1) % #context.scoring_hand) + 1].base.value)
+                                G.hand.cards[i]:juice_up()
+                                play_sound("tarot1", 0.8, 0.4)
+                            end
+                            return true
+                        end,
+                    })),
             }
         end
         if (context.joker_main and context.poker_hands ~= nil and next(context.poker_hands["Straight"])) or context.forcetrigger then
