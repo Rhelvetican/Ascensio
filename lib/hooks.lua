@@ -258,7 +258,7 @@ end
 local is_buying_stone  = false
 local is_selling_stone = false
 
-G.FUNCS.can_buy_stone = function (e)
+G.FUNCS.can_buy_stone = function(e)
     if to_big(G.GAME.dollars - G.GAME.bankrupt_at) >= to_big(e.config.ref_table.ability.buycost) and not is_buying_stone and not G.CONTROLLER.locked then
         e.config.colour = G.C.GREEN
         e.config.button = "buy_stone"
@@ -268,7 +268,7 @@ G.FUNCS.can_buy_stone = function (e)
     end
 end
 
-G.FUNCS.buy_stone = function (e)
+G.FUNCS.buy_stone = function(e)
     is_buying_stone = true
     local ref = e.config.ref_table
     ease_dollars(-ref.ability.buycost)
@@ -286,7 +286,7 @@ G.FUNCS.buy_stone = function (e)
     table.insert(G.playing_cards, stone)
 
     G.E_MANAGER:add_event(Event({
-            func = function ()
+            func = function()
                 stone:start_materialize({ G.C.SECONDARY_SET.Enhanced })
                 G.play:emplace(stone)
                 return true
@@ -294,7 +294,7 @@ G.FUNCS.buy_stone = function (e)
         }))
 
     G.E_MANAGER:add_event(Event({
-            func = function ()
+            func = function()
                 G.deck.config.card_limit = G.deck.config.card_limit + 1
                 return true
             end,
@@ -305,7 +305,7 @@ G.FUNCS.buy_stone = function (e)
     is_buying_stone = false
 end
 
-G.FUNCS.can_sell_stone = function (e)
+G.FUNCS.can_sell_stone = function(e)
     local has_stone = false
     if G and G.deck and G.deck.cards then
         for _, c in ipairs(G.deck.cards) do
@@ -321,10 +321,10 @@ G.FUNCS.can_sell_stone = function (e)
     end
 end
 
-G.FUNCS.sell_stone = function (e)
+G.FUNCS.sell_stone = function(e)
     is_selling_stone = true
     G.E_MANAGER:add_event(Event({
-            func = function ()
+            func = function()
                 if G and G.deck and G.deck.cards then
                     for _, c in ipairs(G.deck.cards) do
                         if SMODS.has_enhancement(c, "m_stone") then
@@ -342,7 +342,7 @@ end
 
 local calc = SMODS.calculate_individual_effect
 
-SMODS.calculate_individual_effect = function (effect, scored_card, key, amount, from_edition)
+SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
     local ret = calc(effect, scored_card, key, amount, from_edition)
 
     if ret then return ret end

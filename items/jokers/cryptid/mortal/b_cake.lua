@@ -26,13 +26,10 @@ SMODS.Joker({
                 -- G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
                 -- calculate_reroll_cost(true)
                 card_eval_status_text(card, "extra", nil, nil, nil, {
-                    card_eval_status_text(
-                        card, "extra", nil, nil, nil,
-                        {
-                            message = "-" .. lenient_bignum(card.ability.extra.reroll),
-                            colour = G.C.CHIPS,
-                        }
-                    ),
+                    card_eval_status_text(card, "extra", nil, nil, nil, {
+                        message = "-" .. lenient_bignum(card.ability.extra.reroll),
+                        colour = G.C.CHIPS,
+                    }),
                 })
                 return nil, true
             else

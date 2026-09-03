@@ -35,9 +35,7 @@ SMODS.Joker({
 
         if ctx.joker_main or ctx.forcetrigger then
             if G.GAME.current_round.hands_left == 0 or ctx.forcetrigger then
-                return {
-                    emult = card.ability.extra.emult * card.ability.extra.multiplier,
-                }
+                return { emult = card.ability.extra.emult * card.ability.extra.multiplier }
             end
 
             return { emult = card.ability.extra.emult }

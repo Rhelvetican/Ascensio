@@ -1,8 +1,8 @@
 ---@alias TalismanNumber number|table
----@alias fn fun(...): T
+---@alias fn fun(...: unknown): unknown
 
 -- Cache the function for performance and stuffs.
----@type fn<any>, fn<number>, fn<any>
+---@type fn, fn, fn
 local to_big, to_number, lenient_bignum = to_big, to_number, lenient_bignum
 
 -- Ensure the Number table exists.

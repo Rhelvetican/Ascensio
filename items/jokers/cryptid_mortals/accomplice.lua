@@ -111,13 +111,10 @@ SMODS.Joker({ --Commented out at the moment as it is also increasing hand size a
                 check = true
             end
             if check then
-                card_eval_status_text(
-                    context.blueprint_card or card2, "extra", nil, nil, nil,
-                    {
-                        message = localize("k_upgrade_ex"),
-                        colour = G.C.GREEN,
-                    }
-                )
+                card_eval_status_text(context.blueprint_card or card2, "extra", nil, nil, nil, {
+                    message = localize("k_upgrade_ex"),
+                    colour = G.C.GREEN,
+                })
             end
             return nil, true
         end

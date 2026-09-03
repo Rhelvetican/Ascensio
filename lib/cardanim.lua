@@ -8,7 +8,7 @@
 Coords = setmetatable({}, {
     ---@param tbl Coords
     ---@return Coords
-    __call = function (_, tbl) return setmetatable(tbl, { __index = Coords }) end,
+    __call = function(_, tbl) return setmetatable(tbl, { __index = Coords }) end,
 })
 
 ---@class Rect
@@ -20,7 +20,7 @@ Coords = setmetatable({}, {
 Rect = setmetatable({}, {
     ---@param tbl Rect
     ---@return Rect
-    __call = function (_, tbl) return setmetatable(tbl, { __index = Rect }) end,
+    __call = function(_, tbl) return setmetatable(tbl, { __index = Rect }) end,
 })
 
 ---@class CardAnimationFrames
@@ -59,16 +59,16 @@ local cardanim_cfg = {
         -- coords is the part of the card definition that has x-y coords on the atlas
         -- child is the child of the card center that has the "set_sprite_pos" method
         pos = {
-            coords = function (p_center) return p_center.pos end,
-            child = function (children) return children.center end,
+            coords = function(p_center) return p_center.pos end,
+            child = function(children) return children.center end,
         },
         soul_pos = {
-            coords = function (p_center) return p_center.soul_pos end,
-            child = function (children) return children.floating_sprite end,
+            coords = function(p_center) return p_center.soul_pos end,
+            child = function(children) return children.floating_sprite end,
         },
         soul_pos_extra = {
-            coords = function (p_center) return p_center.soul_pos and p_center.soul_pos.extra or nil end,
-            child = function (children) return children.floating_sprite2 end,
+            coords = function(p_center) return p_center.soul_pos and p_center.soul_pos.extra or nil end,
+            child = function(children) return children.floating_sprite2 end,
         },
     },
     -- [[ FRAMERATE GRANULARITY]]
@@ -99,7 +99,7 @@ end
 -- i.e. after all items are registered
 G.E_MANAGER:add_event(Event({
         blocking = false,
-        func = function ()
+        func = function()
             -- [[ ANIMATION REGISTRATION ]]
             cardanim_tbl.animation_details = {}
             local anim_details = cardanim_tbl.animation_details
@@ -184,7 +184,12 @@ G.E_MANAGER:add_event(Event({
 
                     local card_key = card.config.center.key
                     -- If the card has no animation, skip
-                    if not anim_details[card_key] or card.facing == "back" or not card.config.center.unlocked or not card.config.center.discovered then goto i_card_continue end
+                    if not anim_details[card_key] or card.facing == "back" or not card.config.center.unlocked or not card
+                            .config
+                            .center
+                            .discovered then
+                        goto i_card_continue
+                    end
 
                     -- Grab card center and its frames
                     local card_def       = G.P_CENTERS[card_key]
@@ -192,7 +197,11 @@ G.E_MANAGER:add_event(Event({
 
                     -- Update each layer, but only if frames are defined for that layer
                     for kw, part in pairs(cardanim_cfg.card_layers) do
-                        if frame_sequence[kw] and part.coords(card_def) then part.child(card.children):set_sprite_pos(part.coords(card_def)) end
+                        if frame_sequence[kw] and part.coords(card_def) then
+                            part
+                                .child(card.children)
+                                :set_sprite_pos(part.coords(card_def))
+                        end
                     end
 
                     ::i_card_continue::

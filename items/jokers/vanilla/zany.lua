@@ -1,14 +1,14 @@
 SMODS.Joker({
-    key = "zany",
-    rarity = "cry_exotic",
-    atlas = "v_atlas_1",
+    key              = "zany",
+    rarity           = "cry_exotic",
+    atlas            = "v_atlas_1",
     blueprint_compat = true,
-    demicoloncompat = true,
-    pos = { x = 3, y = 10 },
-    soul_pos = { x = 5, y = 10, extra = { x = 4, y = 10 } },
-    config = { extra = { Xmult = 1, Xmult_mod = 12, hand_type = "Three of a Kind" } },
-    cost = 50,
-    asc_credits = {
+    demicoloncompat  = true,
+    pos              = { x = 3, y = 10 },
+    soul_pos         = { x = 5, y = 10, extra = { x = 4, y = 10 } },
+    config           = { extra = { Xmult = 1, Xmult_mod = 12, hand_type = "Three of a Kind" } },
+    cost             = 50,
+    asc_credits      = {
         idea = {
             "bent",
         },
@@ -19,7 +19,7 @@ SMODS.Joker({
             "Somethingcom515",
         },
     },
-    loc_vars = function(self, info_queue, card)
+    loc_vars         = function(self, info_queue, card)
         return {
             vars = {
                 card.ability.extra.Xmult_mod,
@@ -28,7 +28,7 @@ SMODS.Joker({
             },
         }
     end,
-    calculate = function(self, card, context)
+    calculate        = function(self, card, context)
         if context.before or context.forcetrigger then
             if context.scoring_name == card.ability.extra.hand_type or context.forcetrigger then
                 SMODS.scale_card(card, {

@@ -18,8 +18,7 @@ SMODS.Joker({
     end,
     calculate = function(self, card, context)
         if not context.blueprint
-            and (context.post_trigger and context.other_joker ~= card
-                and Cryptid.isNonRollProbabilityContext(context.other_context)) then
+            and (context.post_trigger and context.other_joker ~= card and Cryptid.isNonRollProbabilityContext(context.other_context)) then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "mult",

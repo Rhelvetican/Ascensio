@@ -20,7 +20,7 @@ SMODS.Joker({
         },
     },
 
-    loc_vars = function(self, info_queue, card)
+    loc_vars = function(_, info_queue, card)
         if not card.edition or (card.edition and not card.edition.e_cry_mosaic) then info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_mosaic end
         info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
         return {
@@ -33,7 +33,7 @@ SMODS.Joker({
         }
     end,
 
-    calculate = function(self, card, context)
+    calculate = function(_, card, context)
         if context.repetition and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, "m_stone") then
             return { message = localize("k_again_ex"), repetitions = to_number(math.min(card.ability.immutable.recap, card.ability.extra.retrigger)) }
         end

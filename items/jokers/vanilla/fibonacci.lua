@@ -9,12 +9,10 @@ SMODS.Joker({
     soul_pos = { x = 8, y = 6, extra = { x = 7, y = 6 } },
     cost = 55,
     order = 31,
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = { lenient_bignum(card.ability.extra.mult), lenient_bignum(card.ability.extra.start_mult) },
-        }
+    loc_vars = function(_, _, card)
+        return { vars = { lenient_bignum(card.ability.extra.mult), lenient_bignum(card.ability.extra.start_mult) } }
     end,
-    calculate = function(self, card, context)
+    calculate = function(_, card, context)
         if (context.individual and context.cardarea == G.play) and not context.blueprint then
             local rank = context.other_card:get_id()
             if rank == 14 or rank == 2 or rank == 3 or rank == 5 or rank == 8 then

@@ -21,8 +21,7 @@ SMODS.Joker({
         -- took the code straight from circulus, no shame >:3
         if (context.joker_main
             and (G.GAME.current_round.hands_left >= card.ability.extra.hands_remaining
-                and G.GAME.current_round.hands_left < card.ability.extra.hands_remaining + 1))
-            or context.forcetrigger then
+                and G.GAME.current_round.hands_left < card.ability.extra.hands_remaining + 1)) or context.forcetrigger then
             local pi = math.pi
             if Cryptid.safe_get(card, "edition", "cry_oversat") then pi = 2 * pi end
             return {

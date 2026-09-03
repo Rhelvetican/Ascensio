@@ -82,6 +82,8 @@ SMODS.Joker({
                 -- Modifed VanillaRemade Stone Joker for the visual aspect
                 G.playing_card     = (G.playing_card and G.playing_card + 1) or 1
                 stone.playing_card = G.playing_card
+
+                ---@cast G.playing_cards balatro.Card[]
                 table.insert(G.playing_cards, stone)
                 G.E_MANAGER:add_event(Event({
                         func = function()

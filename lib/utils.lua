@@ -21,7 +21,7 @@ end
 ---@param cmp? fun(a: T, b: T): boolean Optional comparator function.
 ---@return boolean
 function table.contains(tbl, item, cmp)
-    cmp = cmp or function (a, b) return a == b end
+    cmp = cmp or function(a, b) return a == b end
 
     if not cmp then
         for _, tbl_item in ipairs(tbl) do
@@ -91,7 +91,7 @@ function table.safe_nav(tbl, key)
         buf = string.format("%s[%s]", buf, subkey)
     end
 
-    local ok, val = pcall(function ()
+    local ok, val = pcall(function()
         local chunk, err = load(buf)
         if err then
             return false, nil
@@ -209,7 +209,7 @@ function ease_dollars_mult(amount, instant) -- By Omega. Pretty much thunk's eas
     else
         G.E_MANAGER:add_event(Event({
                 trigger = "immediate",
-                func = function ()
+                func = function()
                     __inner(amount)
                     return true
                 end,
@@ -295,7 +295,7 @@ end
 Ascensio.Credit = setmetatable({}, {
     ---@param this AscensioCredits
     ---@return AscensioCredits
-    __call = function (_, this) return this end,
+    __call = function(_, this) return this end,
 })
 
 ---@class (partial) SMODS.Joker
