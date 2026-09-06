@@ -32,7 +32,7 @@ SMODS.Joker({
         return { vars = { lenient_bignum(card.ability.extra.chips), lenient_bignum(card.ability.extra.chip_mod) } }
     end,
     update = function(self, card, dt)
-        local deck_list = {
+        local deck_list               = {
             --Vanilla
             "b_red",
             "b_blue",
@@ -85,8 +85,8 @@ SMODS.Joker({
             end
         end
         card.ability.extra.chip_mod = math.max(lenient_bignum(card.ability.extra.gold_count), 1)
-        local time_elapsed = (love.timer.getTime() - AST.start) * lenient_bignum(card.ability.extra.chip_mod)
-        card.ability.extra.chips = (math.floor(time_elapsed / 1)) -- /1 means per second, /60 would mean per minute --/1 means per second, /60 would mean per minute
+        local time_elapsed          = (love.timer.getTime() - AST.start) * lenient_bignum(card.ability.extra.chip_mod)
+        card.ability.extra.chips    = (math.floor(time_elapsed / 1))                                                   -- /1 means per second, /60 would mean per minute --/1 means per second, /60 would mean per minute
     end,
     --Taken from old blueprint and Chad
     calculate = function(self, card, context)

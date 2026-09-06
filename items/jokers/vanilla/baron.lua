@@ -29,8 +29,7 @@ SMODS.Joker({
     end,
 
     calculate = function(_, card, context)
-        if (context.individual and context.cardarea == G.hand and not context.end_of_round and context.other_card:get_id() == 13)
-            or context.forcetrigger then
+        if (context.individual and context.cardarea == G.hand and not context.end_of_round and context.other_card:get_id() == 13) or context.forcetrigger then
             return {
                 emult = card
                     .ability

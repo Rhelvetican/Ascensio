@@ -20,11 +20,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.repetition then
             if context.cardarea == G.play then
-                return {
-                    message = localize("k_again_ex"),
-                    repetitions = to_number(math.min(card.ability.extra.rep, card.ability.extra.immutable.max_rep)),
-                    card = card,
-                }
+                return { message = localize("k_again_ex"), repetitions = to_number(math.min(card.ability.extra.rep, card.ability.extra.immutable.max_rep)), card = card }
             end
         elseif context.individual then
             if context.cardarea == G.play then

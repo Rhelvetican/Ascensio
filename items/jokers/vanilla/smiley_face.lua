@@ -31,10 +31,7 @@ SMODS.Joker({
         if context.repetition and context.cardarea == G.play and context.other_card:is_face() then
             card.ability.extra.immutable.redo = card.ability.extra.immutable.redo + 1
             if card.ability.extra.immutable.redo > 1 then
-                return {
-                    message = localize("k_again_ex"),
-                    repetitions = to_number(math.min(card.ability.extra.immutable.max_rep, card.ability.extra.immutable.redo - 1)),
-                }
+                return { message = localize("k_again_ex"), repetitions = to_number(math.min(card.ability.extra.immutable.max_rep, card.ability.extra.immutable.redo - 1)) }
             end
         end
 

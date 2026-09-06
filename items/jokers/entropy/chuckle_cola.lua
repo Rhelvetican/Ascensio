@@ -20,8 +20,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
             card.ability.extra.triggers      = card.ability.extra.triggers - 1
-            context.other_card.ability.bonus = (context.other_card.ability.bonus or 0)
-                + context.other_card:get_chip_bonus() * (card.ability.extra.xchip_mod - 1)
+            context.other_card.ability.bonus = (context.other_card.ability.bonus or 0) + context.other_card:get_chip_bonus() * (card.ability.extra.xchip_mod - 1)
             if card.ability.extra.triggers <= 0 and not context.blueprint then
                 SMODS.scale_card(card, {
                     ref_table = card.ability.extra,

@@ -30,8 +30,7 @@ SMODS.Joker({
             end
             local first_card  = SMODS.pseudorandom_probability(card, "Heartache", 1, card.ability.extra.odds, "Exotic Lusty Joker")
             local second_card = SMODS.pseudorandom_probability(card, "Cardiac Arrest", 1, card.ability.extra.odds, "Exotic Lusty Joker")
-            if table.contains(hearts, context.other_card) and (hearts[my_pos + 1] or hearts[my_pos - 1])
-                and first_card and my_pos == (0 or #context.scoring_hand) then elseif table.contains(hearts, context.other_card) and (hearts[my_pos
+            if table.contains(hearts, context.other_card) and (hearts[my_pos + 1] or hearts[my_pos - 1]) and first_card and my_pos == (0 or #context.scoring_hand) then elseif table.contains(hearts, context.other_card) and (hearts[my_pos
                 + 1] and hearts[my_pos - 1])
                 and (first_card and second_card) then
                 return { repetitions = to_number(math.min(card.ability.extra.immutable.max_rep, card.ability.extra.rep * 2)) }

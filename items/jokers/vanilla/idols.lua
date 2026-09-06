@@ -68,8 +68,7 @@ SMODS.Joker({
 
     calculate = function(_, card, context)
         if (context.individual and context.cardarea == G.play)
-            and ((context.other_card:get_id() == card.ability.immutable.id and context.other_card:is_suit(card.ability.immutable.suit))
-                or context.forcetrigger) then
+            and ((context.other_card:get_id() == card.ability.immutable.id and context.other_card:is_suit(card.ability.immutable.suit)) or context.forcetrigger) then
             local effect = pseudorandom_element(card.ability.immutable.effects, "what the statue hides" .. G.GAME.round_resets.ante)
             local result = {}
 

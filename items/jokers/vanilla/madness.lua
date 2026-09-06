@@ -57,12 +57,12 @@ SMODS.Joker({
                     })
 
                     G.E_MANAGER:add_event(Event({
-                            func = function()
-                                (context.blueprint_card or card):juice_up(0.8, 0.8)
-                                joker_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
-                                return true
-                            end,
-                        }))
+                        func = function()
+                            (context.blueprint_card or card):juice_up(0.8, 0.8)
+                            joker_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
+                            return true
+                        end,
+                    }))
                 end
             end
         end

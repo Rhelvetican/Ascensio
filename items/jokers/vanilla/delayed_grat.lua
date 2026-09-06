@@ -42,8 +42,7 @@ SMODS.Joker({
     end,
 
     calc_dollar_bonus = function(_, card)
-        return G.GAME.current_round.discards_used == 0 and G.GAME.current_round.discards_left > 0
-            and G.GAME.current_round.discards_left * card.ability.extra.dollars or nil
+        return G.GAME.current_round.discards_used == 0 and G.GAME.current_round.discards_left > 0 and G.GAME.current_round.discards_left * card.ability.extra.dollars or nil
     end,
 
     asc_credits = {

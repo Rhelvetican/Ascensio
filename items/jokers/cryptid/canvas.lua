@@ -25,16 +25,16 @@ SMODS.Joker({
         if context.ending_shop and not (context.blueprint or context.retrigger_joker_check or context.retrigger_joker) then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_plus_joker"), colour = G.C.FILTER })
             G.E_MANAGER:add_event(Event({
-                    trigger = "after",
-                    func = function()
-                        local joker = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_joker")
-                        joker:set_edition({ negative = true })
-                        joker:add_to_deck()
-                        G.jokers:emplace(joker)
-                        joker:start_materialize()
-                        return true
-                    end,
-                }))
+                trigger = "after",
+                func = function()
+                    local joker = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_joker")
+                    joker:set_edition({ negative = true })
+                    joker:add_to_deck()
+                    G.jokers:emplace(joker)
+                    joker:start_materialize()
+                    return true
+                end,
+            }))
         end
     end,
     asc_credits = {

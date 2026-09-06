@@ -33,11 +33,7 @@ SMODS.Joker({
             card.ability.extra.mult = card.ability.extra.mult + i ^ card.ability.extra.exp
         end
         if context.joker_main or context.forcetrigger then
-            return {
-                message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.mult } }),
-                Xmult_mod = lenient_bignum(card.ability.extra.mult),
-                colour = G.C.RED,
-            }
+            return { message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.mult } }), Xmult_mod = lenient_bignum(card.ability.extra.mult), colour = G.C.RED }
         end
         if context.skip_blind and not context.blueprint then
             return { message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.mult } }), colour = G.C.RED }

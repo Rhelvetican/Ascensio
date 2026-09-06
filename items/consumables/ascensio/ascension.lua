@@ -34,29 +34,29 @@ SMODS.Consumable({
 
             local _first_dissolve = false
             G.E_MANAGER:add_event(Event({
-                    trigger = "before",
-                    delay = 0.75,
-                    func = function()
-                        for _, v in pairs(deletable_jokers) do
-                            if v.config.center.rarity == "cry_exotic" then check_for_unlock({ type = "what_have_you_done" }) end
-
-                            v:start_dissolve(nil, _first_dissolve)
-                            _first_dissolve = true
-                        end
-                        return true
-                    end,
-                }))
-        end
-
-        G.E_MANAGER:add_event(Event({
-                trigger = "after",
-                delay = 0.4,
+                trigger = "before",
+                delay = 0.75,
                 func = function()
-                    play_sound("timpani")
-                    Ascensio.ascendJoker(ascendant)
+                    for _, v in pairs(deletable_jokers) do
+                        if v.config.center.rarity == "cry_exotic" then check_for_unlock({ type = "what_have_you_done" }) end
+
+                        v:start_dissolve(nil, _first_dissolve)
+                        _first_dissolve = true
+                    end
                     return true
                 end,
             }))
+        end
+
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.4,
+            func = function()
+                play_sound("timpani")
+                Ascensio.ascendJoker(ascendant)
+                return true
+            end,
+        }))
 
         delay(0.6)
     end,

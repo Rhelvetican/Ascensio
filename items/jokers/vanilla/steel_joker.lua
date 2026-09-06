@@ -53,8 +53,8 @@ SMODS.Joker({
 
     loc_vars = function(_, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_steel
-        local steels        = total_steel()
-        local exmult, xmult = card.ability.extra.extern_xmult, card.ability.extra.xmult
+        local steels                = total_steel()
+        local exmult, xmult         = card.ability.extra.extern_xmult, card.ability.extra.xmult
 
         return {
             vars = {

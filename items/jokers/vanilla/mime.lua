@@ -21,9 +21,7 @@ SMODS.Joker({
     },
     calculate = function(self, card, context)
         if context.repetition and (context.cardarea == G.hand or context.other_card.edition) then
-            return {
-                repetitions = card.ability.extra.retriggers * ((context.cardarea == G.hand and 1 or 0) + (context.other_card.edition and 1 or 0)),
-            }
+            return { repetitions = card.ability.extra.retriggers * ((context.cardarea == G.hand and 1 or 0) + (context.other_card.edition and 1 or 0)) }
         end
     end,
 })

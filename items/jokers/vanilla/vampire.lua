@@ -41,12 +41,12 @@ SMODS.Joker({
                     scored:set_ability("c_base", nil, true)
 
                     G.E_MANAGER:add_event(Event({
-                            func = function()
-                                scored:juice_up()
-                                scored.vampired = nil
-                                return true
-                            end,
-                        }))
+                        func = function()
+                            scored:juice_up()
+                            scored.vampired = nil
+                            return true
+                        end,
+                    }))
                 end
             end
 

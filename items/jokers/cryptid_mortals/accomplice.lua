@@ -78,13 +78,11 @@ SMODS.Joker({ --Commented out at the moment as it is also increasing hand size a
 			then
 				check = true
 			end]]
-            if other_joker and other_joker ~= card
-                and (other_joker.config.center.effect == "Type Mult" or other_joker.config.center.effect == "Cry Type Mult"
+            if other_joker and other_joker ~= card and (other_joker.config.center.effect == "Type Mult" or other_joker.config.center.effect == "Cry Type Mult"
                     or other_joker.config.center.effect == "Cry Type Chips" or other_joker.config.center.effect == "Cry Type Score"
-                    or other_joker.config.center.effect == "Boost Kidnapping"
-                    or (other_joker.config.center.name == "Sly Joker" or other_joker.config.center.name == "Wily Joker"
-                        or other_joker.config.center.name == "Clever Joker" or other_joker.config.center.name == "Devious Joker"
-                        or other_joker.config.center.name == "Crafty Joker")) and not (Card.no(other_joker, "immutable", true)) then
+                    or other_joker.config.center.effect == "Boost Kidnapping" or (other_joker.config.center.name == "Sly Joker" or other_joker.config.center.name == "Wily Joker"
+                        or other_joker.config.center.name == "Clever Joker" or other_joker.config.center.name == "Devious Joker" or other_joker.config.center.name == "Crafty Joker"))
+                and not (Card.no(other_joker, "immutable", true)) then
                 card.ability.blueprint_compat = "compatible"
             else
                 card.ability.blueprint_compat = "incompatible"
@@ -99,13 +97,12 @@ SMODS.Joker({ --Commented out at the moment as it is also increasing hand size a
                 Cryptid.manipulate(G.jokers.cards[1], { value = card2.ability.extra.scale_score, type = "+" })
                 check = true
             elseif card.config.center.effect == "Cry Type Chips"
-                or (card.config.center.name == "Sly Joker" or card.config.center.name == "Wily Joker" or card.config.center.name == "Clever Joker"
-                    or card.config.center.name == "Devious Joker" or card.config.center.name == "Crafty Joker")
+                or (card.config.center.name == "Sly Joker" or card.config.center.name == "Wily Joker" or card.config.center.name == "Clever Joker" or card.config.center.name == "Devious Joker"
+                    or card.config.center.name == "Crafty Joker")
                     and not Card.no(G.jokers.cards[1], "immutable", true) then
                 Cryptid.manipulate(G.jokers.cards[1], { value = card2.ability.extra.scale_chip, type = "+" })
                 check = true
-            elseif (card.config.center.effect == "Type Mult" or card.config.center.effect == "Cry Type Mult"
-                or card.config.center.effect == "Boost Kidnapping")
+            elseif (card.config.center.effect == "Type Mult" or card.config.center.effect == "Cry Type Mult" or card.config.center.effect == "Boost Kidnapping")
                 and not Card.no(G.jokers.cards[1], "immutable", true) then
                 Cryptid.manipulate(G.jokers.cards[1], { value = card2.ability.extra.scale_mult, type = "+" })
                 check = true

@@ -32,18 +32,18 @@ SMODS.Joker({
                 if base == 14 then base = 11 end
             end
 
-            local money = base * card.ability.extra.multiplier
+            local money          = base * card.ability.extra.multiplier
             G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + money
 
             return {
                 dollars = money,
                 func = function()
                     G.E_MANAGER:add_event(Event({
-                            func = function()
-                                G.GAME.dollar_buffer = 0
-                                return true
-                            end,
-                        }))
+                        func = function()
+                            G.GAME.dollar_buffer = 0
+                            return true
+                        end,
+                    }))
                 end,
             }
         end

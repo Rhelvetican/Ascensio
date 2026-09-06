@@ -84,12 +84,12 @@ SMODS.Joker({
                 stone.playing_card = G.playing_card
                 table.insert(G.playing_cards, stone)
                 G.E_MANAGER:add_event(Event({
-                        func = function()
-                            stone:start_materialize({ G.C.SECONDARY_SET.Enhanced })
-                            G.play:emplace(stone)
-                            return true
-                        end,
-                    }))
+                    func = function()
+                        stone:start_materialize({ G.C.SECONDARY_SET.Enhanced })
+                        G.play:emplace(stone)
+                        return true
+                    end,
+                }))
             end
             return {
                 message = "+" .. card.ability.extra.create .. " " .. localize("asc_mossaic_stone_cards"),
@@ -97,11 +97,11 @@ SMODS.Joker({
                 func = function()
                     for _ = 1, to_number(math.min(card.ability.extra.create, card.ability.immutable.cacap)) do
                         G.E_MANAGER:add_event(Event({
-                                func = function()
-                                    G.deck.config.card_limit = G.deck.config.card_limit + 1
-                                    return true
-                                end,
-                            }))
+                            func = function()
+                                G.deck.config.card_limit = G.deck.config.card_limit + 1
+                                return true
+                            end,
+                        }))
                         draw_card(G.play, G.deck, 90, "up")
                         SMODS.calculate_context({ playing_card_added = true, cards = stones })
                     end

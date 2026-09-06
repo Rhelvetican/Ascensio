@@ -51,16 +51,10 @@ SMODS.Joker({
         end
 
         if context.retrigger_joker_check and not context.retrigger_joker and context.other_card ~= self then
-            card.ability.extra.retriggers = math.min(
-                ((G.jokers.config.card_limit - #G.jokers.cards) + card.ability.extra.base_retriggers), card.ability.extra.immutable.max_retriggers
-            )
+            card.ability.extra.retriggers = math.min(((G.jokers.config.card_limit - #G.jokers.cards) + card.ability.extra.base_retriggers), card.ability.extra.immutable.max_retriggers)
 
             if context.other_card == G.jokers.cards[1] or context.other_card == G.jokers.cards[#G.jokers.cards] then
-                return {
-                    message = localize("k_again_ex"),
-                    repetitions = math.min(lenient_bignum(card.ability.extra.retriggers), card.ability.extra.immutable.max_retriggers),
-                    card = card,
-                }
+                return { message = localize("k_again_ex"), repetitions = math.min(lenient_bignum(card.ability.extra.retriggers), card.ability.extra.immutable.max_retriggers), card = card }
             else
                 return nil, true
             end

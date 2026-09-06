@@ -35,16 +35,16 @@ SMODS.Joker({
 
                 return {
                     G.E_MANAGER:add_event(Event({
-                            trigger = "immediate",
-                            func = function()
-                                for i = 1, #G.hand.cards do
-                                    _ = SMODS.change_base(G.hand.cards[i], nil, rank)
-                                    G.hand.cards[i]:juice_up()
-                                    play_sound("tarot1", 0.8, 0.4)
-                                end
-                                return true
-                            end,
-                        })),
+                        trigger = "immediate",
+                        func = function()
+                            for i = 1, #G.hand.cards do
+                                _ = SMODS.change_base(G.hand.cards[i], nil, rank)
+                                G.hand.cards[i]:juice_up()
+                                play_sound("tarot1", 0.8, 0.4)
+                            end
+                            return true
+                        end,
+                    })),
                 }
             end
         end

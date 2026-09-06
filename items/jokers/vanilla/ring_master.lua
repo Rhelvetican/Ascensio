@@ -34,7 +34,7 @@ SMODS.Joker({
             })
         end
 
-        if ctx.buying_card and not ctx.blueprint then
+        if ctx.buying_card and not ctx.blueprint and #(SMODS.find_card(ctx.card.config.card_key)) > 1 then
             SMODS.scale_card(card, {
                 ref_table    = card.ability.extra,
                 ref_value    = "emult",

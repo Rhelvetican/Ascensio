@@ -86,30 +86,28 @@ SMODS.Joker({
         -- and not position == #G.jokers.cards
         then
             local roundcreatejoker = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
-            G.GAME.joker_buffer = G.GAME.joker_buffer + roundcreatejoker
+            G.GAME.joker_buffer    = G.GAME.joker_buffer + roundcreatejoker
             G.E_MANAGER:add_event(Event({
-                    func = function()
-                        if roundcreatejoker > 0 then
-                            local _card
-                            if other_joker.config.center.rarity == 1 then
-                                _card = create_card("Joker", G.jokers, nil, 0, other_joker.edition and other_joker.edition.negative)
-                            elseif other_joker.config.center.rarity == 2 then
-                                _card = create_card("Joker", G.jokers, nil, 0.9, other_joker.edition and other_joker.edition.negative)
-                            elseif other_joker.config.center.rarity == 4 then
-                                _card = create_card("Joker", G.jokers, true, 4, other_joker.edition and other_joker.edition.negative)
-                            else
-                                _card = create_card(
-                                    "Joker", G.jokers, nil, other_joker.config.center.rarity, other_joker.edition and other_joker.edition.negative
-                                )
-                            end
-                            _card:add_to_deck()
-                            G.jokers:emplace(_card)
-                            _card:start_materialize()
-                            G.GAME.joker_buffer = 0
+                func = function()
+                    if roundcreatejoker > 0 then
+                        local _card
+                        if other_joker.config.center.rarity == 1 then
+                            _card = create_card("Joker", G.jokers, nil, 0, other_joker.edition and other_joker.edition.negative)
+                        elseif other_joker.config.center.rarity == 2 then
+                            _card = create_card("Joker", G.jokers, nil, 0.9, other_joker.edition and other_joker.edition.negative)
+                        elseif other_joker.config.center.rarity == 4 then
+                            _card = create_card("Joker", G.jokers, true, 4, other_joker.edition and other_joker.edition.negative)
+                        else
+                            _card = create_card("Joker", G.jokers, nil, other_joker.config.center.rarity, other_joker.edition and other_joker.edition.negative)
                         end
-                        return true
-                    end,
-                }))
+                        _card:add_to_deck()
+                        G.jokers:emplace(_card)
+                        _card:start_materialize()
+                        G.GAME.joker_buffer = 0
+                    end
+                    return true
+                end,
+            }))
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_duplicated_ex") })
             return nil, true
         end

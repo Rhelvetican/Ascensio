@@ -1,12 +1,4 @@
-local rarity_mapping = {
-    [1] = 1,
-    [2] = 2,
-    [3] = 3,
-    ["cry_epic"] = 4,
-    [4] = 5,
-    ["cry_exotic"] = 6,
-    ["entr_entropic"] = next(SMODS.find_mod("Entropy")) and 7 or nil,
-}
+local rarity_mapping = { [1] = 1, [2] = 2, [3] = 3, ["cry_epic"] = 4, [4] = 5, ["cry_exotic"] = 6, ["entr_entropic"] = next(SMODS.find_mod("Entropy")) and 7 or nil }
 
 local function pow(a, b)
     if type(a) == "number" and type(b) == "number" then return math.pow(a, b) end
@@ -89,11 +81,11 @@ SMODS.Joker({
 
             if not Talisman.config_file.disable_anims then
                 G.E_MANAGER:add_event(Event({
-                        func = function()
-                            context.other_joker:juice_up(0.5, 0.5)
-                            return true
-                        end,
-                    }))
+                    func = function()
+                        context.other_joker:juice_up(0.5, 0.5)
+                        return true
+                    end,
+                }))
             end
 
             return { emult = emult }
