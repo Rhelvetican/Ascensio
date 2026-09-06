@@ -1181,6 +1181,21 @@ return {
                 },
             },
 
+            j_asc_ring_master = {
+                name = "Aikoshen++",
+                text = {
+                    {
+                        "{C:attention}Jokers{} or {C:attention}Consumables{} may appear multiple times.",
+                    },
+                    {
+                        "Whenever a duplicated card is purchased",
+                        "gain {X:attention,C:white}X#1#{} of that card's cost",
+                        "as {X:asc_emult,C:white}^Mult{}",
+                        "{C:inactive}(Currently {X:asc_emult,C:white}^#2#{C:inactive} Mult)",
+                    },
+                },
+            },
+
             j_asc_blueprint = {
                 name = "Hyacintho Progressus",
                 text = {

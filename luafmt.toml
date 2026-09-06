@@ -4,8 +4,8 @@
 [layout]
     max_line_width     = 196
     table_expand       = "Auto"
-    call_args_expand   = "Auto"
-    func_params_expand = "Auto"
+    call_args_expand   = "Never"
+    func_params_expand = "Never"
 
 [output]
     trailing_table_separator = "Multiline"
