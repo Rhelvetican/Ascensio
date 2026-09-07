@@ -1,6 +1,6 @@
 ---@return number
 local function getCardsBelowFullDeck()
-    return G.GAME.starting_deck_size - #G.playing_cards
+    return G.GAME.starting_deck_size - #(G.playing_cards or {})
 end
 
 SMODS.Joker({
@@ -23,7 +23,7 @@ SMODS.Joker({
 
     calculate = function(_, card, ctx)
         if ctx.end_of_round or ctx.forcetrigger then
-            return SMODS.scale_card(card, {
+            SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "xmult",
                 scalar_value = "gain",

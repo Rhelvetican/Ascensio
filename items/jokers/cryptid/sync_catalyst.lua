@@ -64,7 +64,7 @@ SMODS.Joker({
             G.E_MANAGER:add_event(Event({
                 func = function()
                     local balans = (G.GAME.current_round.hands_left + G.GAME.current_round.discards_left) / 2
-                    ease_hands_played(-(G.GAME.current_round.hands_left - balans), nil, true)
+                    ease_hands_played(-(G.GAME.current_round.hands_left - balans))
                     ease_discard(-(G.GAME.current_round.discards_left - balans), nil, true)
 
                     card_eval_status_text(card, "extra", nil, nil, nil, {

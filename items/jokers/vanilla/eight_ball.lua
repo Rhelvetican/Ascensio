@@ -12,7 +12,7 @@ SMODS.Joker({
     config = { extra = { prob = { num = 1, denum = 2 }, xmult_gain = 8, xmult = 8 } },
 
     blueprint_compat = true,
-    demicoloncompat = true,
+    demicoloncompat  = true,
 
     loc_vars = function(_, _, card)
         return {
@@ -53,8 +53,8 @@ SMODS.Joker({
             }
         end
 
-        if ctx.using_consumeable and not ctx.blueprint and (ctx.consumeable.ability.set == "Tarot" or ctx.consumeable.ability.set == "Planet") then
-            return SMODS.scale_card(card, {
+        if ctx.forcetrigger or (ctx.using_consumeable and not ctx.blueprint and (ctx.consumeable.ability.set == "Tarot" or ctx.consumeable.ability.set == "Planet")) then
+            SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "xmult",
                 scalar_value = "xmult_gain",

@@ -1182,7 +1182,7 @@ return {
             },
 
             j_asc_ring_master = {
-                name = "Aikoshen++",
+                name = "Magister Catervae",
                 text = {
                     {
                         "{C:attention}Jokers{} or {C:attention}Consumables{} may appear multiple times.",

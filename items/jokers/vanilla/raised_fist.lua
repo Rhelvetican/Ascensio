@@ -1,15 +1,15 @@
 SMODS.Joker({
-    key = "raised_fist",
+    key    = "raised_fist",
     rarity = "cry_exotic",
-    atlas = "v_atlas_2",
+    atlas  = "v_atlas_2",
 
     blueprint_compat = true,
-    demicoloncompat = true,
+    demicoloncompat  = true,
 
-    pos = { x = 6, y = 0 },
+    pos      = { x = 6, y = 0 },
     soul_pos = { x = 8, y = 0, extra = { x = 7, y = 0 } },
 
-    cost = 50,
+    cost  = 50,
     order = 1,
 
     config = {

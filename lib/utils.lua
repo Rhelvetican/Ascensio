@@ -176,7 +176,7 @@ end
 ---@param instant boolean | any?
 function ease_dollars_mult(amount, instant) -- By Omega. Pretty much thunk's ease dollars but with mutiplication
     local function __inner(__inner_amount)
-        local one = 1
+        local one      = 1
         __inner_amount = __inner_amount or 1
         if __inner_amount > one then
             local ui   = G.HUD:get_UIE_by_ID("dollar_text_UI")
@@ -208,12 +208,12 @@ function ease_dollars_mult(amount, instant) -- By Omega. Pretty much thunk's eas
         __inner(amount)
     else
         G.E_MANAGER:add_event(Event({
-                trigger = "immediate",
-                func = function()
-                    __inner(amount)
-                    return true
-                end,
-            }))
+            trigger = "immediate",
+            func = function()
+                __inner(amount)
+                return true
+            end,
+        }))
     end
 end
 
@@ -227,8 +227,8 @@ function Ascensio.SelectionLimit.ease_playing_card(mod, stroverride)
     if SMODS.hand_limit_strings then
         G.GAME.starting_params.play_limit = (G.GAME.starting_params.play_limit or 5) + mod
         G.hand.config.highlighted_limit   = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
-        local str = stroverride or G.GAME.starting_params.play_limit or ""
-        SMODS.hand_limit_strings.play = G.GAME.starting_params.play_limit ~= 5 and localize("b_limit") .. str or ""
+        local str                         = stroverride or G.GAME.starting_params.play_limit or ""
+        SMODS.hand_limit_strings.play     = G.GAME.starting_params.play_limit ~= 5 and localize("b_limit") .. str or ""
     else
         G.hand.config.highlighted_limit = G.hand.config.highlighted_limit + mod
     end
@@ -239,8 +239,8 @@ end
 function Ascensio.SelectionLimit.ease_discard(mod, stroverride)
     G.GAME.starting_params.discard_limit = (G.GAME.starting_params.discard_limit or 5) + mod
     G.hand.config.highlighted_limit      = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
-    local str = stroverride or G.GAME.starting_params.discard_limit or ""
-    SMODS.hand_limit_strings.discard = G.GAME.starting_params.discard_limit ~= 5 and localize("b_limit") .. str or ""
+    local str                            = stroverride or G.GAME.starting_params.discard_limit or ""
+    SMODS.hand_limit_strings.discard     = G.GAME.starting_params.discard_limit ~= 5 and localize("b_limit") .. str or ""
 end
 
 ---@param to           integer
@@ -249,8 +249,8 @@ function Ascensio.SelectionLimit.set_playing_card(to, stroverride)
     if SMODS.hand_limit_strings then
         G.GAME.starting_params.play_limit = to
         G.hand.config.highlighted_limit   = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
-        local str = stroverride or G.GAME.starting_params.play_limit or ""
-        SMODS.hand_limit_strings.play = G.GAME.starting_params.play_limit ~= 5 and localize("b_limit") .. str or ""
+        local str                         = stroverride or G.GAME.starting_params.play_limit or ""
+        SMODS.hand_limit_strings.play     = G.GAME.starting_params.play_limit ~= 5 and localize("b_limit") .. str or ""
     else
         G.hand.config.highlighted_limit = to
     end
@@ -261,8 +261,8 @@ end
 function Ascensio.SelectionLimit.set_discard(to, stroverride)
     G.GAME.starting_params.discard_limit = to
     G.hand.config.highlighted_limit      = math.max(G.GAME.starting_params.discard_limit or 5, G.GAME.starting_params.play_limit or 5)
-    local str = stroverride or G.GAME.starting_params.discard_limit or ""
-    SMODS.hand_limit_strings.discard = G.GAME.starting_params.discard_limit ~= 5 and localize("b_limit") .. str or ""
+    local str                            = stroverride or G.GAME.starting_params.discard_limit or ""
+    SMODS.hand_limit_strings.discard     = G.GAME.starting_params.discard_limit ~= 5 and localize("b_limit") .. str or ""
 end
 
 ---@param mod          integer
