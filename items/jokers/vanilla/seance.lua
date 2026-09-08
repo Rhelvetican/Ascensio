@@ -5,6 +5,10 @@ SMODS.Atlas({
     py = 95,
 })
 
+local function __get_seed()
+    return G.TIMERS.REAL .. "_" .. G.SEED
+end
+
 SMODS.Joker({
     key = "seance",
     rarity = "cry_exotic",
@@ -33,8 +37,11 @@ SMODS.Joker({
         extra = {
             amount = 1,
             hand_type = "High Card",
-            pool = {},
+            hand_pool = {},
+            card_pool = {},
+
             odds = 2048,
+            odds_pity = 2,
 
             immutable = {
                 std_odds = 2048,
@@ -44,6 +51,13 @@ SMODS.Joker({
 
     loc_vars = function(_, info_queue, card)
         info_queue[#info_queue + 1] = { key = "asc_fixed", set = "Other" }
+
+        info_queue[#info_queue + 1] = { key = "c_black_hole", set = "Spectral" }
+        info_queue[#info_queue + 1] = { key = "c_soul", set = "Spectral" }
+
+        info_queue[#info_queue + 1] = { key = "c_cry_gateway", set = "Spectral" }
+        info_queue[#info_queue + 1] = { key = "c_asc_ascension", set = "Spectral" }
+
         return {
             vars = {
                 card.ability.extra.amount,
@@ -55,31 +69,49 @@ SMODS.Joker({
 
     add_to_deck = function(_, card, _)
         for _, v in pairs(G.P_CENTER_POOLS.Consumeables) do
-            if v.hidden and type(v.key) == "string" then table.insert(card.ability.extra.pool, v.key) end
+            if v.hidden and type(v.key) == "string" then table.insert(card.ability.extra.card_pool, v.key) end
         end
     end,
 
     calculate = function(_, card, context)
-        if (context.before and context.main_eval and context.scoring_name == card.ability.extra.hand_type) or context.forcetrigger then -- SMODS probability doesn't seem to actually prevent odds yet. As a result, I am using another method to fix until it fixes. Ha ha
-            if-- SMODS.pseudorandom_probability(card, "future knowledge", 1, card.ability.extra.odds, "Exotic Seance", true) then
-            math.random(1, card.ability.extra.odds) == 1 then
-                if not context.blueprint then card.ability.extra.odds = card.ability.extra.immutable.std_odds end
-                for _ = 1, card.ability.extra.amount do
-                    local speccard = pseudorandom_element(card.ability.extra.pool, "j_asc_seance" .. G.SEED)
+        if context.forcetrigger then
+            for _, card_key in ipairs(card.ability.extra.card_pool) do
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        delay(0.4)
+                        SMODS.add_card({ key = card_key, edition = "e_negative" })
+                        return true
+                    end,
+                }))
+            end
+        end
 
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            delay(0.4)
-                            SMODS.add_card({ key = speccard, edition = "e_negative" })
-                            return true
-                        end,
-                    }))
-                end
+        if (context.before and context.main_eval and context.scoring_name == card.ability.extra.hand_type) then
+            if (card.ability.extra.odds <= 1 or SMODS.pseudorandom_probability(card, __get_seed(), 1, card.ability.extra.odds)) then
+                -- Winning path
+                local _, prize = pseudorandom_element(card.ability.extra.card_pool, __get_seed())
 
-                return { message = localize("k_plus_spectral"), colour = G.C.SECONDARY_SET.Spectral }
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        delay(0.4)
+                        SMODS.add_card({ key = prize, edition = "e_negative" })
+                        return true
+                    end,
+                }))
+
+                card.ability.extra.odds = card.ability.extra.immutable.std_odds
+                return { message = localize("k_reset"), colour = G.C.DARK_EDITION }
             else
-                if not context.blueprint then card.ability.extra.odds = card.ability.extra.odds / 2 end
-                return { message = localize("asc_seance_msg"), colour = G.C.DARK_EDITION }
+                -- Pity path
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "odds",
+                    scalar_value = "odds_pity",
+
+                    operation = function(tbl, vl, init, change)
+                        tbl[vl] = init / change
+                    end,
+                })
             end
         end
 
@@ -90,7 +122,7 @@ SMODS.Joker({
                 if SMODS.is_poker_hand_visible(k) and k ~= card.ability.extra.hand_type then table.insert(hands, k) end
             end
 
-            card.ability.extra.hand_type = pseudorandom_element(hands, "seed_seance" .. G.SEED)
+            card.ability.extra.hand_type = pseudorandom_element(hands, G.TIMERS.REAL .. "<>" .. G.SEED)
             return { message = localize("k_reset"), colour = G.C.DARK_EDITION }
         end
     end,
@@ -98,9 +130,11 @@ SMODS.Joker({
     set_ability = function(_, card, _, _)
         -- Taken from vanilla remade to do list
         local poker_hands = {}
+
         for handname, _ in pairs(G.GAME.hands) do
             if SMODS.is_poker_hand_visible(handname) and handname ~= card.ability.extra.hand_type then poker_hands[#poker_hands + 1] = handname end
         end
+
         card.ability.extra.hand_type = pseudorandom_element(poker_hands, "the_future_is_now" .. G.SEED)
     end,
 

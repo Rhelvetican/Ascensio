@@ -1,6 +1,7 @@
 SMODS.Atlas({
-    key = "sync_catalyst",
+    key  = "sync_catalyst",
     path = "jokers/cryptid/sync_catalyst.png",
+
     px = 71,
     py = 95,
 })
@@ -11,13 +12,14 @@ local function balance_sound()
 end
 
 SMODS.Joker({
-    key = "sync_catalyst",
+    key   = "sync_catalyst",
     atlas = "sync_catalyst",
 
-    pos = { x = 0, y = 0 },
+    pos      = { x = 0, y = 0 },
     soul_pos = { x = 0, y = 6, extra = { x = 0, y = 1 } },
+
     rarity = "cry_exotic",
-    cost = 50,
+    cost   = 50,
 
     blueprint_compat = false,
     demicoloncompat = true,
@@ -33,10 +35,9 @@ SMODS.Joker({
 
     config = {
         extra = {
-            emult = 1,
+            emult  = 1,
             echips = 1,
-
-            gain = 0.5,
+            gain   = 0.5,
         },
     },
 
@@ -96,7 +97,7 @@ SMODS.Joker({
         idea = {
             "Rhelvetican",
         },
-        art = {
+        art  = {
             "Tatteredlurker",
         },
         code = {
