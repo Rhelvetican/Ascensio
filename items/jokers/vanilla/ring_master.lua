@@ -13,7 +13,7 @@ SMODS.Joker({
     config = {
         extra = {
             emult = 1,
-            emult_multiplier = 0.05,
+            emult_multiplier = 0.2,
         },
     },
 

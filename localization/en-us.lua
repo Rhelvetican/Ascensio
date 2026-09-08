@@ -274,7 +274,7 @@ return {
                 name = "Scinditur In Duos",
                 text = {
                     {
-                        "{X:dark_edition,C:edition}^^#1#{} Mult if hand contains",
+                        "{X:asc_emult,C:asc_echips}^^#1#{} Mult if hand contains",
                         "{C:attention}#2#{} or fewer cards",
                     },
                 },
@@ -310,9 +310,9 @@ return {
             j_asc_wee = {
                 name = "Scurra Microscopica",
                 text = {
-                    "This Joker gains {X:dark_edition,C:edition}^^#2#{} {C:chips}Chips{}",
+                    "This Joker gains {X:asc_emult,C:asc_echips}^^#2#{} {C:chips}Chips{}",
                     "when each played {C:attention}2{} is scored",
-                    "{C:inactive}(Currently{} {X:dark_edition,C:edition}^^#1#{}{C:inactive} Chips){}",
+                    "{C:inactive}(Currently{} {X:asc_emult,C:asc_echips}^^#1#{}{C:inactive} Chips){}",
                 },
             },
 
@@ -767,10 +767,10 @@ return {
             j_asc_square = {
                 name = "Dimensio Quattuor",
                 text = {
-                    "This Joker gains {X:dark_edition,C:edition}^^#1#{} Chips",
+                    "This Joker gains {X:asc_emult,C:asc_echips}^^#1#{} Chips",
                     "if played hand has",
                     "exactly {C:attention}4{} cards",
-                    "{C:inactive}(Currently {X:dark_edition,C:edition}^^#2#{} {C:inactive}Chips)",
+                    "{C:inactive}(Currently {X:asc_emult,C:asc_echips}^^#2#{} {C:inactive}Chips)",
                 },
             },
 
@@ -1083,9 +1083,9 @@ return {
                         "{C:inactive}(Currently #3#){}",
                     },
                     {
-                        "This Joker gains {X:dark_edition,C:edition}^^#2#{} Chips",
+                        "This Joker gains {X:asc_emult,C:asc_echips}^^#2#{} Chips",
                         "whenever you {C:attention}lose{} a blind",
-                        "{C:inactive}(Currently{} {X:dark_edition,C:edition}^^#4#{}{C:inactive}){}",
+                        "{C:inactive}(Currently{} {X:asc_emult,C:asc_echips}^^#4#{}{C:inactive}){}",
                     },
                 },
             },
@@ -1149,7 +1149,7 @@ return {
                     {
                         "{C:attention}Wild{} Cards cannot",
                         "be {C:attention}debuffed{} and give",
-                        "{X:dark_edition,C:edition}^#1#{} Mult when scored",
+                        "{X:asc_emult,C:white}^#1#{} Mult when scored",
                     },
                 },
             },
@@ -1188,9 +1188,8 @@ return {
                         "{C:attention}Jokers{} or {C:attention}Consumables{} may appear multiple times.",
                     },
                     {
-                        "Whenever a duplicated card is purchased",
-                        "gain {X:attention,C:white}X#1#{} of that card's cost",
-                        "as {X:asc_emult,C:white}^Mult{}",
+                        "Whenever a {C:attention}duplicated{} card is {C:attention}purchased{}",
+                        "gain {X:attention,C:white}X#1#{} of that card's cost as {X:asc_emult,C:white}^Mult{}",
                         "{C:inactive}(Currently {X:asc_emult,C:white}^#2#{C:inactive} Mult)",
                     },
                 },
@@ -1405,16 +1404,16 @@ return {
                 name = "Proavus Sanguinis",
                 text = {
                     {
-                        "Gains {X:dark_edition,C:edition}^^#2#{} Mult per",
+                        "Gains {X:asc_emult,C:asc_echips}^^#2#{} Mult per",
                         "scored {C:attention}Enhanced{} card and",
                         "removes card {C:attention}Enhancement{}",
-                        "{C:inactive}(Currently{} {X:dark_edition,C:edition}^^#1#{} {C:inactive}Mult){}",
+                        "{C:inactive}(Currently{} {X:asc_emult,C:asc_echips}^^#1#{} {C:inactive}Mult){}",
                     },
                     {
-                        "Decreases {X:dark_edition,C:edition}^^Mult{} by {X:dark_edition,C:edition}^^#3#{}",
+                        "Decreases {X:asc_emult,C:asc_echips}^^Mult{} by {X:asc_emult,C:asc_echips}^^#3#{}",
                         "each hand without a",
                         "scoring {C:attention}Enhanced{} card",
-                        "{C:inactive}(Can't go below {X:dark_edition,C:edition}^^1{}{C:inactive}){}",
+                        "{C:inactive}(Can't go below {X:asc_emult,C:asc_echips}^^1{}{C:inactive}){}",
                     },
                 },
             },
