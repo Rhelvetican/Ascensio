@@ -20,7 +20,7 @@ SMODS.Joker({
 
     calculate = function(_, card, ctx)
         if ctx.before then
-            return SMODS.scale_card(card, {
+            SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "emult",
                 scalar_value = "emult_gain",

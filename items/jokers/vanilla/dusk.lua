@@ -28,7 +28,7 @@ SMODS.Joker({
         if ctx.blind_defeated then
             card.ability.extra.hands = 0
 
-            return SMODS.scale_card(card, {
+            SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "hands",
                 scalar_value = "gain",
