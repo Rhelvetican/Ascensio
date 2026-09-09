@@ -1393,7 +1393,7 @@ return {
                     },
                     {
                         "When the above probability {C:attention}fails{},",
-                        "{C:attention}double{} the chance of creating",
+                        "{C:attention}X#4#{} the chance of creating",
                         "{C:attention}#1#{} {C:dark_edition}Negative Rare{} consumable",
                         "Otherwise, {C:attention}reset the probabilites{}",
                     },
