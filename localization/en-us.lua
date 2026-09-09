@@ -376,10 +376,14 @@ return {
             j_asc_mystic_summit = {
                 name = "Fabulosa Radices",
                 text = {
-                    "{X:asc_emult,C:white}^#1#{} Mult",
-                    "Gains {X:asc_emult,C:white}^#2#{} Mult at",
-                    "end of round when {C:attention}0{}",
-                    "discards remaining",
+                    {
+                        "{X:asc_emult,C:white}^#1#{} Mult",
+                    },
+                    {
+                        "Gains {X:asc_emult,C:white}^#2#{} Mult at",
+                        "end of round when {C:attention}0{}",
+                        "discards remaining",
+                    },
                 },
             },
 
@@ -390,7 +394,7 @@ return {
                         "Creates {C:attention}#2#{} {C:dark_edition}Mosaic{}",
                         "{C:attention}Stone{} cards when",
                         "{C:attention}Blind{} is selected",
-                        "{C:inactive}(Max {C:attention}#4#{C:inactive} cards)",
+                        "{C:inactive,s:0.8}(Max {C:attention,s:0.8}#4#{C:inactive,s:0.8} cards created at once)",
                     },
                     {
                         "Retrigger played {C:attention}Stone{}",
@@ -529,7 +533,7 @@ return {
                     },
                     {
                         "Earn {C:money}$#4#{} per {C:red}discard{}",
-                        "if no discards are used by end of the round",
+                        "if no {C:red}discards{} are used {C:attention}during round",
                     },
                 },
             },
