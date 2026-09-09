@@ -7,7 +7,7 @@ return {
                     "{C:cry_exotic,E:1,s:1.6}Exoticify your Jokers!{}",
                     "{s:1.3}Adds {C:cry_exotic,E:1,s:1.3}Exotic{s:1.3} forms to normal Jokers",
                     "{s:1.3}and vice versa",
-                    "{s:1.2} {}",
+                    "{s:1.2} ",
                     "{s:1.4,C:attention}Special thanks to:{}",
                     "{s:0.5} ",
                     "{X:asc_tattered,C:black,s:1.2}Tatteredlurker{}     {X:asc_slipstream,C:black,s:1.2}Lil_Mr._Slipstream{}", -- I know B: should be used, but it isnt working
@@ -28,6 +28,7 @@ return {
                 },
             },
         },
+
         Blind = {},
         Edition = {},
         Enhanced = {},
