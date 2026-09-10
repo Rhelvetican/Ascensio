@@ -310,3 +310,5 @@ function Ascensio.isInRange(num, range)
 
     return num >= range.min and num <= range.max
 end
+
+Ascensio.JSON = require("json")

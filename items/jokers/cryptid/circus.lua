@@ -1,5 +1,3 @@
-local rarity_mapping = { [1] = 1, [2] = 2, [3] = 3, ["cry_epic"] = 4, [4] = 5, ["cry_exotic"] = 6, ["entr_entropic"] = next(SMODS.find_mod("Entropy")) and 7 or nil }
-
 local function pow(a, b)
     if type(a) == "number" and type(b) == "number" then return math.pow(a, b) end
 
@@ -13,12 +11,15 @@ local function add(a, b)
 end
 
 SMODS.Joker({
-    key = "circus",
+    key   = "circus",
     order = 4,
-    pos = { x = 0, y = 4 },
+
+    pos      = { x = 0, y = 4 },
     soul_pos = { x = 2, y = 4, extra = { x = 1, y = 4 } },
+
     rarity = "cry_exotic",
-    cost = 50,
+    cost   = 50,
+
     blueprint_compat = true,
     atlas = "c_atlas_1",
 
@@ -26,6 +27,12 @@ SMODS.Joker({
         extra = { base = 1.2, base_gain = 0.1, bignum = false },
         immutable = {},
     },
+
+    set_ability = function(_, card)
+        card.ability.mapping = { 1, 2, 3, cry_epic = 4, 5, cry_exotic = 6, entr_entropic = next(SMODS.find_mod("entr")) and 7 }
+
+        card.ability.extra.mult_tbl = {}
+    end,
 
     loc_vars = function(_, _, card)
         if type(card.ability.extra.base) == "number" and card.ability.extra.base > 1e40 then
@@ -40,7 +47,7 @@ SMODS.Joker({
 
         local mult_tbl = {}
 
-        for _, idx in pairs(rarity_mapping) do
+        for _, idx in pairs(card.ability.mapping) do
             mult_tbl[#mult_tbl + 1] = pow(card.ability.extra.base, idx)
         end
 

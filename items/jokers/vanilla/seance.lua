@@ -87,13 +87,13 @@ SMODS.Joker({
     calculate = function(_, card, context)
         if context.forcetrigger then
             for _, card_key in ipairs(card.ability.extra.card_pool) do
-                G.E_MANAGER:add_event(Event({
+                Ascensio.addEvent({
                     func = function()
                         delay(0.4)
                         SMODS.add_card({ key = card_key, set = "Spectral", edition = "e_negative" })
                         return true
                     end,
-                }))
+                })
             end
         end
 
@@ -102,15 +102,14 @@ SMODS.Joker({
                 -- Winning path
                 for _ = 1, card.ability.extra.amount do
                     local _, prize = pseudorandom_element(card.ability.extra.card_pool, __get_seed())
-                    assert(type(prize) == "string")
 
-                    G.E_MANAGER:add_event(Event({
+                    Ascensio.addEvent({
                         func = function()
                             delay(0.4)
                             SMODS.add_card({ key = prize, set = "Spectral", edition = "e_negative" })
                             return true
                         end,
-                    }))
+                    })
                 end
 
                 card.ability.extra.odds = card.ability.extra.immutable.std_odds

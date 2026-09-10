@@ -972,25 +972,25 @@ return {
                         "one of the following effects:",
                     },
                     {
-                        "If the {C:attention}card{} is a {C:spades}Spades{}",
+                        "If the {C:attention}card{} is a {C:spades}Spade{}",
                         "gain {X:asc_echips,C:white}^Chips{} based on card's rank",
                         "{C:inactive}(Currently{} {X:asc_echips,C:white}^#1#{} {C:inactive}Chips){}",
                         "{C:inactive,s:0.75}(J = 1.1, Q = 1.2, K = 1.3, A = 1.4){}",
                     },
                     {
-                        "If the {C:attention}card{} is a {C:hearts}Hearts{}",
+                        "If the {C:attention}card{} is a {C:hearts}Heart{}",
                         "gain {X:asc_emult,C:white}^Mult{} based on card's rank",
                         "{C:inactive}(Currently{} {X:asc_emult,C:white}^#2#{} {C:inactive}Mult){}",
                         "{C:inactive,s:0.75}(J = 1.1, Q = 1.2, K = 1.3, A = 1.4){}",
                     },
                     {
-                        "If the {C:attention}card{} is a {C:clubs}Clubs{}",
+                        "If the {C:attention}card{} is a {C:clubs}Club{}",
                         "all cards {C:attention}held in hand{}",
                         "gain {X:chips,C:white}XChips{} based on card's rank",
                         "{C:inactive,s:0.75}(J = 11, Q = 12, K = 13, A = 14){}",
                     },
                     {
-                        "If the {C:attention}card{} is a {C:diamonds}Diamonds{}",
+                        "If the {C:attention}card{} is a {C:diamonds}Diamond{}",
                         "increase {C:money}money earned{}",
                         "at the {C:attention}end of round{}",
                         "{C:inactive}(Currently{} {X:money,C:white}+$#3#{} {C:inactive}){}",
@@ -1971,6 +1971,7 @@ return {
                 text = {
                     "{C:red,E:2}Obliterate all sense of balance off Balatro{}",
                     "{X:dark_edition,C:white}#1#44{} all values on screen",
+                    "{C:inactive,S:0.5}It doesn't do shit.{}",
                 },
             },
         },

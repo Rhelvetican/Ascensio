@@ -1,3 +1,4 @@
+---@diagnostic disable: global-in-non-module
 -- This was taken and modifed straight from entropy
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
 
@@ -270,7 +271,7 @@ end
 
 G.FUNCS.buy_stone = function(e)
     is_buying_stone = true
-    local ref = e.config.ref_table
+    local ref       = e.config.ref_table
     ease_dollars(-ref.ability.buycost)
 
     local stone = SMODS.create_card({
@@ -283,23 +284,27 @@ G.FUNCS.buy_stone = function(e)
     stone:set_edition("e_cry_mosaic", nil, true)
     G.playing_card     = (G.playing_card and G.playing_card + 1) or 1
     stone.playing_card = G.playing_card
+
+    ---@cast G.playing_cards balatro.Card[]
     table.insert(G.playing_cards, stone)
 
     G.E_MANAGER:add_event(Event({
-            func = function()
-                stone:start_materialize({ G.C.SECONDARY_SET.Enhanced })
-                G.play:emplace(stone)
-                return true
-            end,
-        }))
+        func = function()
+            stone:start_materialize({ G.C.SECONDARY_SET.Enhanced })
+            G.play:emplace(stone)
+            return true
+        end,
+    }))
 
     G.E_MANAGER:add_event(Event({
-            func = function()
-                G.deck.config.card_limit = G.deck.config.card_limit + 1
-                return true
-            end,
-        }))
+        func = function()
+            G.deck.config.card_limit = G.deck.config.card_limit + 1
+            return true
+        end,
+    }))
 
+    ---@cast G.play balatro.CardArea
+    ---@cast G.deck balatro.CardArea
     draw_card(G.play, G.deck, 90, "up")
     SMODS.calculate_context({ playing_card_added = true, cards = { stone } })
     is_buying_stone = false
@@ -324,20 +329,20 @@ end
 G.FUNCS.sell_stone = function(e)
     is_selling_stone = true
     G.E_MANAGER:add_event(Event({
-            func = function()
-                if G and G.deck and G.deck.cards then
-                    for _, c in ipairs(G.deck.cards) do
-                        if SMODS.has_enhancement(c, "m_stone") then
-                            SMODS.destroy_cards(c)
-                            local c1 = e.config.ref_table
-                            ease_dollars(e.config.ref_table.ability.sellcost)
-                            is_selling_stone = false
-                            return true
-                        end
+        func = function()
+            if G and G.deck and G.deck.cards then
+                for _, c in ipairs(G.deck.cards) do
+                    if SMODS.has_enhancement(c, "m_stone") then
+                        SMODS.destroy_cards(c)
+                        local c1 = e.config.ref_table
+                        ease_dollars(e.config.ref_table.ability.sellcost)
+                        is_selling_stone = false
+                        return true
                     end
                 end
-            end,
-        }))
+            end
+        end,
+    }))
 end
 
 local calc = SMODS.calculate_individual_effect
@@ -379,11 +384,11 @@ function end_round()
                         card.ability.samsara = true
                     else
                         if Ascensio.isAscendable(card) then
-                            local ascref = Ascensio.ascendJoker(card)
+                            local ascref           = Ascensio.ascendJoker(card)
                             ascref.ability.samsara = true
                         else
                             if Ascensio.Descensions[card] then
-                                local desref = Ascensio.descendJoker(card)
+                                local desref           = Ascensio.descendJoker(card)
                                 desref.ability.samsara = true
                                 desref:set_debuff(true)
                             end

@@ -148,6 +148,8 @@ function Ascensio.register(o)
     ascensioRegisterInternal(processed)
 end
 
+local dumped = {}
+
 ---@class AscensionInternal
 ---@field source         Source          Where is the source of the Mortal version of the Joker. Defaults to `Source.Vanilla`.
 ---@field from           string          The key of the Mortal joker.
@@ -160,14 +162,20 @@ local AscensionInternal = setmetatable({}, {
     ---@param asc AscensionInternal
     ---@return AscensionInternal
     __call = function(_, asc)
+        dumped[asc.source] = dumped[asc.source] or {}
+
         local source_file = asc.source_file or get_source_file(asc.to_exotic)
         if source_file ~= "skip" then Ascensio.loadFile("items/jokers/" .. asc.source .. source_file .. ".lua") end
 
         Ascensio.Ascensionable[asc.from]    = asc.to_exotic
         Ascensio.Descensions[asc.to_exotic] = asc.from
 
+        dumped[asc.source][asc.from] = { exotic = asc.to_exotic }
+
         if Entropy then
             if Ascensio.Apothable and asc.to_entropic ~= nil then
+                dumped[asc.source][asc.from].entropic = asc.to_entropic
+
                 local entr_source_file = asc.entropic_file or get_source_file(asc.to_exotic)
                 if entr_source_file ~= "skip" then Ascensio.loadFile("items/jokers/" .. asc.source .. "entr/" .. entr_source_file .. "_entr.lua") end
 
@@ -541,7 +549,7 @@ function SMODS.create_mod_badges(obj, badges)
     end
 end
 
-if next(SMODS.find_mod("Entropy")) then
+if next(SMODS.find_mod("entr")) then
     --- Ascēnsiō X Entropy Tag
     local smcmb3 = SMODS.create_mod_badges
     ---@param obj    SMODS.GameObject | table
@@ -745,3 +753,8 @@ SMODS.current_mod.config_tab = function()
         },
     }
 end
+
+local f = assert(io.open("./dumped.json", "w"))
+f:write(Ascensio.JSON.encode(dumped))
+f:flush()
+f:close()
