@@ -260,6 +260,7 @@ AscensionInternal({ source = Source.Vanilla, from = "j_lucky_cat", to_exotic = "
 AscensionInternal({ source = Source.Vanilla, from = "j_baseball", to_exotic = "j_asc_baseball_card" })
 AscensionInternal({ source = Source.Vanilla, from = "j_bull", to_exotic = "j_asc_bull" })
 AscensionInternal({ source = Source.Vanilla, from = "j_trading", to_exotic = "j_asc_trading" })
+AscensionInternal({ source = Source.Vanilla, from = "j_flash", to_exotic = "j_asc_flash" })
 AscensionInternal({ source = Source.Vanilla, from = "j_ancient", to_exotic = "j_asc_ancient" })
 AscensionInternal({ source = Source.Vanilla, from = "j_selzer", to_exotic = "j_asc_seltzer" }) -- Sic! Don't correct!
 AscensionInternal({ source = Source.Vanilla, from = "j_castle", to_exotic = "j_asc_castle" })

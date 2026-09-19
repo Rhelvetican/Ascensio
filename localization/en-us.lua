@@ -999,15 +999,23 @@ return {
                 },
             },
 
+            j_asc_flash = {
+                name = "Codicillus Tritus",
+                text = {
+                    "Gains {C:attention}reroll cost{} as {X:mult,C:white}XMult{}",
+                    "when you {C:attention}reroll{} in {C:dollar}shop{}",
+                    "{C:inactive,s:0.75}(Minimum increment is 1){}",
+                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult){}",
+                },
+            },
+
             j_asc_ancient = {
                 name = "Hereditas Oblita",
                 text = {
-                    {
-                        "Each played card with {V:1}#1#{} suit",
-                        "gives {X:asc_emult,C:white}^#2#{} Mult when scored",
-                        "and increases amount by {X:asc_emult,C:white}^#3#{}",
-                        "{C:inactive}(Suit changes at end of round)",
-                    },
+                    "Each played card with {V:1}#1#{} suit",
+                    "gives {X:asc_emult,C:white}^#2#{} Mult when scored",
+                    "and increases amount by {X:asc_emult,C:white}^#3#{}",
+                    "{C:inactive}(Suit changes at end of round)",
                 },
             },
 
@@ -1770,7 +1778,7 @@ return {
             j_asc_jimbo_entr = {
                 name = "Gelotopoios",
                 text = {
-                    { "Set scoring operation to", "{X:dark_edition,C:white}Exponentiation{}" },
+                    { "Set {C:attention}scoring operator{} to {X:dark_edition,C:white}^{}" },
                     { "{C:mult}+4{} Mult" },
                 },
             },
